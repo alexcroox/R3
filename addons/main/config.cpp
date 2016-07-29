@@ -7,7 +7,7 @@ class CfgPatches {
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"cba_common"};
         author[] = {"Titan"};
-        authorUrl = "http://google.com";
+        authorUrl = "https://github.com/alexcroox/Titan_AAR";
         VERSION_CONFIG;
     };
 };

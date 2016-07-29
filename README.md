@@ -4,13 +4,17 @@
 
 <p align="center">
     <a href="https://github.com/alexcroox/Titan_AAR/releases/latest">
-        <img src="https://img.shields.io/badge/Version-0.0.1-blue.svg?style=flat-square" alt="Project Version">
+        <img src="https://img.shields.io/badge/Version-0.0.1-blue.svg" alt="Project Version">
     </a>
+    
     <a href="https://github.com/acemod/arma-project-template/issues">
-        <img src="https://img.shields.io/github/issues/alexcroox/Titan_AAR.svg?style=flat-square" alt="Issues">
+        <img src="https://img.shields.io/github/issues/alexcroox/Titan_AAR.svg" alt="Issues">
     </a>
+
+    <img src="https://travis-ci.org/alexcroox/Titan_AAR.svg?branch=master&style=flat-square" alt="Issues">
+
     <a href="https://raw.githubusercontent.com/alexcroox/Titan_AAR/master/LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-red.svg?style=flat-square" alt="Project License">
+        <img src="https://img.shields.io/badge/license-MIT-red.svg" alt="Project License">
     </a>
 </p>
 

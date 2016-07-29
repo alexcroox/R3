@@ -1,7 +1,7 @@
 name = "AAR";
 picture = "logo_aar_ca.paa";
 actionName = "GitHub";
-action = "https://github.com/";
+action = "https://github.com/alexcroox/Titan_AAR";
 description = "Project Template";
 logo = "logo_aar_ca.paa";
 logoOver = "logo_aar_ca.paa";
