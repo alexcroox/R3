@@ -4,3 +4,4 @@ if!(isServer) exitWith { ERROR_WITH_TITLE("AAR - ERROR", "Addon must be run serv
 
 // Setup database and don't continue if it fails
 call FUNC(dbInit);
+call FUNC(dbCreateReplayEntry);
