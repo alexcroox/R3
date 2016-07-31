@@ -34,4 +34,4 @@ This is a heavy work in progress, don't expect anything to work at this stage.
 
 ### Special thanks
 
-Thanks to [NRF1] Crazy for building the original AAR Arma side as part of the old 5th Rifles mission framework.
+Thanks to [NRF1] Crazy for working with me on the original AAR as part of the old 5th Rifles mission framework. Much of his original SQF inspired this dedicated addon.
