@@ -38,49 +38,49 @@ _attackerFaction = _attacker call FUNC(calcSideInt);
 _attackerDistance = round (getPos _victim distance getPos _attacker);
 
 if (vehicle _attacker == _attacker) then {
-	_attackerUid = getPlayerUID _attacker;
+    _attackerUid = getPlayerUID _attacker;
 } else {
-	_attackerUid = getPlayerUID gunner vehicle _attacker;
+    _attackerUid = getPlayerUID gunner vehicle _attacker;
 };
 
 if(vehicle _attacker == _attacker) then {
-	_attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
+    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
 } else {
-	_attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName")
+    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName")
 };
 
 // Form JSON for saving
 _data = format['
-	{
-		"victim": {
-			"unit": "%1",
-			"id": "%2",
-			"pos": %3,
-			"type": "%4",
-			"faction": "%5"
-		},
-		"attacker": {
-			"unit": "%6",
-			"id": "%7",
-			"pos": %8,
-			"type": "%9",
-			"faction": "%10",
-			"weapon": "%11",
-			"distance": %12
-		}
-	}',
-	_victim,
-	_victimUid,
-	_victimPos,
-	_victimType,
-	_victimFaction,
-	_attacker,
-	_attackerUid,
-	_attackerPos,
-	_attackerType,
-	_attackerFaction,
-	_attackerWeapon,
-	_attackerDistance
+    {
+        "victim": {
+            "unit": "%1",
+            "id": "%2",
+            "pos": %3,
+            "type": "%4",
+            "faction": "%5"
+        },
+        "attacker": {
+            "unit": "%6",
+            "id": "%7",
+            "pos": %8,
+            "type": "%9",
+            "faction": "%10",
+            "weapon": "%11",
+            "distance": %12
+        }
+    }',
+    _victim,
+    _victimUid,
+    _victimPos,
+    _victimType,
+    _victimFaction,
+    _attacker,
+    _attackerUid,
+    _attackerPos,
+    _attackerType,
+    _attackerFaction,
+    _attackerWeapon,
+    _attackerDistance
 ];
 
 // Save details to db

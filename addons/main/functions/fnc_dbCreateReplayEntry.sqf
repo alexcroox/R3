@@ -31,15 +31,15 @@ waitUntil {
 
     _replayId = call compile ("extDB3" callExtension _query);
 
-	diag_log format["check %1", _replayId];
-	diag_log _replayId select 1;
+    diag_log format["check %1", _replayId];
+    diag_log _replayId select 1;
 
-	if !((_replayId select 0) isEqualTo 3) then {
+    if !((_replayId select 0) isEqualTo 3) then {
 
-		GVAR(replayId) = _replayId select 1;
-		TRUE;
-	} else {
-		FALSE;
+        GVAR(replayId) = _replayId select 1;
+        TRUE;
+    } else {
+        FALSE;
 	}
 };
 
