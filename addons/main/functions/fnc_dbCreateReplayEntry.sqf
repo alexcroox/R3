@@ -20,21 +20,31 @@ _functionLogName = "AAR > dbCreateReplayEntry";
 _query = str formatText["2:SQL:INSERT INTO replays (missionName, map, dateStarted) VALUES ('%1', '%2', NOW())", missionName, worldName];
 _setupReplay = call compile ("extDB3" callExtension _query);
 
-diag_log _setupReplay;
+//diag_log _setupReplay;
 
 if !((_setupReplay select 0) isEqualTo 2) exitWith { DBUG("Failed to setup replay ID", _functionLogName); };
 
-_query = str formatText["5:%1", _setupReplay select 1];
+_query = str formatText["4:%1", _setupReplay select 1];
 
+// We need to wait for the query to return, if it hasn't returned yet we will receive [3] (wait)
 waitUntil {
 
 	_replayId = call compile ("extDB3" callExtension _query);
 
-	diag_log _replayId select 0;
+	diag_log format["check %1", _replayId];
+	diag_log _replayId select 1;
 
-	((_replayId select 0) isEqualTo 1);
+	if !((_replayId select 0) isEqualTo 3) then {
+
+		GVAR(replayId) = _replayId select 1;
+		TRUE;
+	} else {
+		FALSE;
+	}
 };
 
-diag_log _replayId;
+// Raise event here?
 
-DBUG("Replay db entry setup", _functionLogName);
+DBUG(format[ARR_2("Replay db entry setup %1", GVAR(replayId))], _functionLogName);
+
+TRUE;
