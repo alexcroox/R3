@@ -29,7 +29,7 @@ _query = str formatText["4:%1", _setupReplay select 1];
 // We need to wait for the query to return, if it hasn't returned yet we will receive [3] (wait)
 waitUntil {
 
-	_replayId = call compile ("extDB3" callExtension _query);
+    _replayId = call compile ("extDB3" callExtension _query);
 
 	diag_log format["check %1", _replayId];
 	diag_log _replayId select 1;

@@ -51,7 +51,7 @@ if(vehicle _attacker == _attacker) then {
 
 // Form JSON for saving
 _data = format['
-	{ 
+	{
 		"victim": {
 			"unit": "%1",
 			"id": "%2",

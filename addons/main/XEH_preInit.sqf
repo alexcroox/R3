@@ -8,7 +8,7 @@ GVAR(databaseSettingName) = "aarDb";
 
 // We need this variable to persist through mission reloads
 if (isNil {uiNamespace getVariable QGVAR(databaseRandomLockKey)}) then {
-	uiNamespace setVariable [QGVAR(databaseRandomLockKey), floor(random 100)];
+    uiNamespace setVariable [QGVAR(databaseRandomLockKey), floor(random 100)];
 };
 
 GVAR(replayId) = 0;
