@@ -3,8 +3,8 @@
  * Event fired when unit killed
  *
  * Arguments:
- * 0: killed <OBJECT>
- * 1: killer <OBJECT>
+ * 0: victim <OBJECT>
+ * 1: attacker <OBJECT>
  *
  * Return Value:
  * None
@@ -18,7 +18,7 @@
 #include "script_component.hpp"
 _functionLogName = "AAR > eventKilled";
 
-private ["_killed", "_killer"];
+private ["_victim", "_attacker"];
 _victim = param [0, ObjNull, [ObjNull]];
 _attacker = param [1, ObjNull, [ObjNull]];
 
