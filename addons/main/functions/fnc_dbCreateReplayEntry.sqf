@@ -44,7 +44,6 @@ waitUntil {
 };
 
 // Raise event here?
+["dbSetup"] call CBA_fnc_localEvent;
 
 DBUG(format[ARR_2("Replay db entry setup %1", GVAR(replayId))], _functionLogName);
-
-TRUE;

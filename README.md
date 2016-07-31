@@ -27,3 +27,11 @@
 # Arma 3 After Action Replay Addon
 
 Server Side addon for capturing unit movement to a database for After Action Replays on a website. 
+
+### WIP
+
+This is a heavy work in progress, don't expect anything to work at this stage.
+
+### Special thanks
+
+Thanks to [NRF1] Crazy for building the original AAR Arma side as part of the old 5th Rifles mission framework.

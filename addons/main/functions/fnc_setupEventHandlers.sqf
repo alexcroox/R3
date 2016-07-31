@@ -18,3 +18,8 @@
 _functionLogName = "AAR > setupEventHandlers";
 
 DBUG("Setting up event handlers", _functionLogName);
+
+addMissionEventHandler ["PlayerConnected", FUNC(eventPlayerConnect)];
+addMissionEventHandler ["PlayerDisconnected", FUNC(eventPlayerDisconnect)];
+addMissionEventHandler ["EntityKilled", FUNC(eventKilled)];
+addMissionEventHandler ["Ended", FUNC(eventMissionEnd)];
