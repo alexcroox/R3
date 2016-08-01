@@ -22,7 +22,7 @@
 
 # Arma 3 After Action Replay Addon
 
-Server Side addon for capturing unit movement to a database for After Action Replays on a website. 
+Server Side addon for capturing unit movement and behaviour to a database for After Action Replays on a website. 
 
 ### WIP
 
