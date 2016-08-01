@@ -1,8 +1,4 @@
 <p align="center">
-    <img src="https://cl.ly/goZ4/d" height="200">
-</p>
-
-<p align="center">
     <a href="https://github.com/alexcroox/Titan_AAR/releases/latest">
         <img src="https://img.shields.io/badge/Version-0.0.1-blue.svg" alt="Project Version">
     </a>    
