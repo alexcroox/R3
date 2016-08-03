@@ -57,14 +57,14 @@ _data = format['
             "id": "%2",
             "pos": %3,
             "type": "%4",
-            "faction": "%5"
+            "faction": %5
         },
         "attacker": {
             "unit": "%6",
             "id": "%7",
             "pos": %8,
             "type": "%9",
-            "faction": "%10",
+            "faction": %10,
             "weapon": "%11",
             "distance": %12
         }

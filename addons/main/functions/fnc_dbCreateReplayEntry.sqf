@@ -17,10 +17,10 @@
 #include "script_component.hpp"
 _functionLogName = "AAR > dbCreateReplayEntry";
 
-_query = str formatText["2:SQL:INSERT INTO replays (missionName, map, dateStarted) VALUES ('%1', '%2', NOW())", missionName, worldName];
+_query = str formatText["2:SQL:INSERT INTO replays (missionName, map, dateStarted) VALUES ('%1', '%2', NOW()); SELECT LAST_INSERT_ID();", missionName, worldName];
 _setupReplay = call compile ("extDB3" callExtension _query);
 
-//diag_log _setupReplay;
+diag_log _setupReplay;
 
 if !((_setupReplay select 0) isEqualTo 2) exitWith { DBUG("Failed to setup replay ID", _functionLogName); };
 
@@ -31,8 +31,7 @@ waitUntil {
 
     _replayId = call compile ("extDB3" callExtension _query);
 
-    diag_log format["check %1", _replayId];
-    diag_log _replayId select 1;
+    diag_log format["check %1 - %2", _query, _replayId];
 
     if !((_replayId select 0) isEqualTo 3) then {
 

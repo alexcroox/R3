@@ -11,7 +11,14 @@ if (isNil {uiNamespace getVariable QGVAR(databaseRandomLockKey)}) then {
     uiNamespace setVariable [QGVAR(databaseRandomLockKey), floor(random 100)];
 };
 
+GVAR(logEvents) = true;
 GVAR(replayId) = 0;
 GVAR(messageQueue) = [];
+
+// Frequency of unit movement logging
+GVAR(insertFrequencyInfantry) = 5;
+GVAR(insertFrequencyGroundVehicle) = 3;
+GVAR(insertFrequencyAirVehicle) = 1;
+GVAR(maxUnitCountPerEvent) = 50;
 
 ADDON = true;

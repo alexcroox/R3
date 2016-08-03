@@ -23,3 +23,6 @@ addMissionEventHandler ["PlayerConnected", FUNC(eventPlayerConnect)];
 addMissionEventHandler ["PlayerDisconnected", FUNC(eventPlayerDisconnect)];
 addMissionEventHandler ["EntityKilled", FUNC(eventKilled)];
 addMissionEventHandler ["Ended", FUNC(eventMissionEnd)];
+
+// Start event saving buffer
+[] spawn FUNC(eventBuffer);

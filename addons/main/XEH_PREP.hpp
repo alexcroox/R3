@@ -7,3 +7,6 @@ PREP(eventMissionEnd);
 PREP(eventPlayerConnect);
 PREP(eventPlayerDisconnect);
 PREP(calcSideInt);
+PREP(eventBuffer);
+PREP(trackInfantry);
+PREP(trackVehicles);
