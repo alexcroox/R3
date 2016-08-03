@@ -66,7 +66,8 @@ _movementData = "";
 
         _unitCount = _unitCount + 1;
 
-        if (_unitCount == 50) then {
+        // If we've reached our limit for the number of units in a single db entry lets flush and continue
+        if (_unitCount == GVAR(maxUnitCountPerEvent)) then {
 
             // Save details to db
             GVAR(messageQueue) pushBack [0, "positions_infantry", _movementData, time];
