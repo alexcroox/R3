@@ -36,7 +36,7 @@ if ((_addDatabase select 0) isEqualTo 0) exitWith { DBUG("Failed to connect to d
 
 DBUG("Connected to database successfully", _functionLogName);
 
-_addDbProtocol = call compile ("extDB3" callExtension format["9:ADD_DATABASE_PROTOCOL:%1:SQL:SQL", GVAR(databaseSettingName)]);
+_addDbProtocol = call compile ("extDB3" callExtension format["9:ADD_DATABASE_PROTOCOL:%1:SQL_CUSTOM:SQL:aar.ini", GVAR(databaseSettingName)]);
 
 if ((_addDbProtocol select 0) isEqualTo 0) exitWith { DBUG("Failed to set database protocol", _functionLogName); };
 

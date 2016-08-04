@@ -50,7 +50,7 @@ if(vehicle _attacker == _attacker) then {
 };
 
 // Form JSON for saving
-_data = format['
+_json = format['
     {
         "victim": {
             "unit": "%1",
@@ -84,6 +84,6 @@ _data = format['
 ];
 
 // Save details to db
-GVAR(eventSavingQueue) pushBack [_victimUid, "unit_killed", _data, time];
+GVAR(eventSavingQueue) pushBack [_victimUid, "unit_killed", _json, time];
 
-DBUG("Unit killed and saved to db", _functionLogName);
+//DBUG("Unit killed and saved to db", _functionLogName);

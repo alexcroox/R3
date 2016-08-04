@@ -17,30 +17,44 @@
 #include "script_component.hpp"
 _functionLogName = "AAR > dbCreateReplayEntry";
 
-_query = str formatText["2:SQL:INSERT INTO replays (missionName, map, dateStarted) VALUES ('%1', '%2', NOW()); SELECT LAST_INSERT_ID();", missionName, worldName];
+_query = format["2:SQL:replayInsert:%1:%2", missionName, worldName];
 _setupReplay = call compile ("extDB3" callExtension _query);
 
-diag_log _setupReplay;
+uisleep (random .03);
 
-if !((_setupReplay select 0) isEqualTo 2) exitWith { DBUG("Failed to setup replay ID", _functionLogName); };
-
-_query = str formatText["4:%1", _setupReplay select 1];
+_key = _setupReplay select 1;
+_queryResult = "";
+_dbWaitLoop = true;
 
 // We need to wait for the query to return, if it hasn't returned yet we will receive [3] (wait)
-waitUntil {
+while {_dbWaitLoop} do {
 
-    _replayId = call compile ("extDB3" callExtension _query);
+    _queryResult = "extDB3" callExtension format["4:%1", _key];
 
-    diag_log format["check %1 - %2", _query, _replayId];
+    if (_queryResult isEqualTo "[5]") then {
 
-    if !((_replayId select 0) isEqualTo 3) then {
-
-        GVAR(replayId) = _replayId select 1;
-        TRUE;
+        // extDB3 returned that result is Multi-Part Message
+        _queryResult = "";
+        while {true} do {
+            _pipe = "extDB3" callExtension format["5:%1", _key];
+            if (_pipe isEqualTo "") exitWith { _dbWaitLoop = false };
+            _queryResult = _queryResult + _pipe;
+        };
     } else {
-        FALSE;
-    }
+
+        if (_queryResult isEqualTo "[3]") then {
+            uisleep 0.1;
+        } else {
+            _dbWaitLoop = false;
+        };
+    };
 };
+
+_queryResult = call compile _queryResult;
+
+if ((_queryResult select 0) isEqualTo 0) exitWith { DBUG(format[ARR_2("Failed to get replay insert Id %1", _queryResult)], _functionLogName); };
+
+GVAR(replayId) = (_queryResult select 1) select 0;
 
 // Raise event here?
 ["dbSetup"] call CBA_fnc_localEvent;

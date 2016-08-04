@@ -24,7 +24,9 @@ _movementData = "";
 
 // Loop through all units on the map
 {
-    if (_unitCount < GVAR(maxUnitCountPerEvent) && vehicle _x == _x) then {
+    [_x] call FUNC(addInfantryEventHandlers);
+
+    if (vehicle _x == _x) then {
 
         _unitUid = getPlayerUID _x;
         _unitPos = getPos _x;
@@ -32,7 +34,7 @@ _movementData = "";
         _unitIcon = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "icon");
         _unitFaction = _x call FUNC(calcSideInt);
         _unitGroupId = groupID group _x;
-        _unitIsLeader = (if((leader group _x) == _x) then {TRUE} else {FALSE});
+        _unitIsLeader = (if((leader group _x) == _x) then { true } else { false });
 
         // Form JSON for saving
         // It sucks we have to use such abbreviated keys but we need to save as much space as pos!
