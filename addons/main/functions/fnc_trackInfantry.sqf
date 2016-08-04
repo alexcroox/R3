@@ -70,7 +70,7 @@ _movementData = "";
         if (_unitCount == GVAR(maxUnitCountPerEvent)) then {
 
             // Save details to db
-            GVAR(messageQueue) pushBack [0, "positions_infantry", _movementData, time];
+            GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementData, time];
 
             _unitCount = 0;
             _movementData = "";
@@ -80,5 +80,5 @@ _movementData = "";
 
 // Do we still have outstanding unit movements we need to save?
 if !(_movementData == "") then {
-    GVAR(messageQueue) pushBack [0, "positions_infantry", _movementData, time];
+    GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementData, time];
 };

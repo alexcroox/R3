@@ -6,11 +6,7 @@
     <a href="https://travis-ci.org/alexcroox/Titan_AAR">    
         <img src="https://travis-ci.org/alexcroox/Titan_AAR.svg?branch=master&style=flat-square" alt="Travis build testing">
     </a>
-
-    <a href="https://github.com/acemod/arma-project-template/issues">
-        <img src="https://img.shields.io/github/issues/alexcroox/Titan_AAR.svg" alt="Issues">
-    </a>
-
+    
     <a href="https://raw.githubusercontent.com/alexcroox/Titan_AAR/master/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-red.svg" alt="Project License">
     </a>

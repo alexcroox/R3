@@ -13,7 +13,7 @@ if (isNil {uiNamespace getVariable QGVAR(databaseRandomLockKey)}) then {
 
 GVAR(logEvents) = true;
 GVAR(replayId) = 0;
-GVAR(messageQueue) = [];
+GVAR(eventSavingQueue) = [];
 
 // Frequency of unit movement logging
 GVAR(insertFrequencyInfantry) = 5;

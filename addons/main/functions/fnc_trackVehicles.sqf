@@ -123,5 +123,5 @@ _movementData = "";
 } forEach vehicles;
 
 if (_movementData != "") then {
-    GVAR(messageQueue) pushBack [0, "positions_vehicles", _movementData, time];
+    GVAR(eventSavingQueue) pushBack [0, "positions_vehicles", _movementData, time];
 };

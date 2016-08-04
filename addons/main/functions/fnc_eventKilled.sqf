@@ -84,6 +84,6 @@ _data = format['
 ];
 
 // Save details to db
-GVAR(messageQueue) pushBack [_victimUid, "unit_killed", _data, time];
+GVAR(eventSavingQueue) pushBack [_victimUid, "unit_killed", _data, time];
 
 DBUG("Unit killed and saved to db", _functionLogName);

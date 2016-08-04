@@ -39,17 +39,18 @@ while { GVAR(logEvents) } do {
         _timeSinceLastAirVehicleInsert = time;
     };
 
-    if(count GVAR(messageQueue) > 0) then {
+    // Do we have any events to process?
+    if(count GVAR(eventSavingQueue) > 0) then {
 
         // Get the next event.
-        _event = (GVAR(messageQueue) select 0);
+        _event = (GVAR(eventSavingQueue) select 0);
 
-        // Check an event is selected.
+        // Check an event is selected
         if !(isNil "_event") then {
 
             _event params ["_playerId", "_eventType", "_eventData", "_missionTime"];
 
-            // Commit the event to the database.
+            // Commit the event to the database
             _query = str formatText["1:SQL:
                 INSERT INTO
                     events
@@ -61,12 +62,12 @@ while { GVAR(logEvents) } do {
             _saveEvent = call compile ("extDB3" callExtension _query);
 
             // Clear down the selected event from the global variable.
-            GVAR(messageQueue) set [0,0];
-            GVAR(messageQueue) = GVAR(messageQueue) - [0];
+            GVAR(eventSavingQueue) set [0,0];
+            GVAR(eventSavingQueue) = GVAR(eventSavingQueue) - [0];
         };
 
         _event = Nil;
     };
 
-    sleep ( 0.5 / (if(count GVAR(messageQueue) > 1) then { count GVAR(messageQueue) } else {1}) );
+    sleep ( 0.5 / (if(count GVAR(eventSavingQueue) > 1) then { count GVAR(eventSavingQueue) } else {1}) );
 };
