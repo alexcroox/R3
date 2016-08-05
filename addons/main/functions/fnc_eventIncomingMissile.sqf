@@ -68,6 +68,6 @@ _json = format['
 // Add it to our event buffer for saving
 GVAR(eventSavingQueue) pushBack [_victimUid, "incoming_missile", _json, time];
 
-DBUG(format[ARR_2("Incoming missile: %1", _victim)], _functionLogName);
+//DBUG(format[ARR_2("Incoming missile: %1", _victim)], _functionLogName);
 
 

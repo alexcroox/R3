@@ -17,7 +17,7 @@
 #include "script_component.hpp"
 _functionLogName = "AAR > dbCreateReplayEntry";
 
-_query = format["2:SQL:replayInsert:%1:%2", missionName, worldName];
+_query = format["2:SQL:replayInsert:%1:%2:%3", missionName, worldName, daytime];
 _setupReplay = call compile ("extDB3" callExtension _query);
 
 uisleep (random .03);

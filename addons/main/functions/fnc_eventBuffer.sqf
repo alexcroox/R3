@@ -53,13 +53,14 @@ while { GVAR(logEvents) } do {
 
             _event params ["_playerId", "_eventType", "_eventData", "_missionTime"];
 
-            _singleLineEventData = (_eventData splitString toString [9, 13, 10] joinString "") call CBA_fnc_trim;
-
             // Commit the event to the database
-            _query = format["1:SQL:eventInsert:%1:%2:%3:%4:%5",
-                GVAR(replayId), _playerId, _eventType, '{"victim": {"unit": "O Bravo 2-1:1","id": ""},"attacker": {"unit": "B Alpha 2-3:2","id": "","pos": [2124.22,4615.02,0.00107193],"weapon": "Titan MPRL (Sand)","ammoType": "Missile"}}"', _missionTime];
-
-            diag_log _singleLineEventData;
+            _query = str formatText["1:SQLRAW:
+                INSERT INTO
+                    events
+                (replayId, playerId, type, value, missionTime, added)
+                    VALUES
+                ('%1', '%2', '%3', '%4', %5, NOW())",
+                GVAR(replayId), _playerId, _eventType, _eventData call CBA_fnc_trim, _missionTime];
 
             _saveEvent = call compile ("extDB3" callExtension _query);
 

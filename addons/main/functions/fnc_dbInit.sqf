@@ -40,5 +40,7 @@ _addDbProtocol = call compile ("extDB3" callExtension format["9:ADD_DATABASE_PRO
 
 if ((_addDbProtocol select 0) isEqualTo 0) exitWith { DBUG("Failed to set database protocol", _functionLogName); };
 
+_addDbProtocol = call compile ("extDB3" callExtension format["9:ADD_DATABASE_PROTOCOL:%1:SQL:SQLRAW", GVAR(databaseSettingName)]);
+
 // Lock the extension so no further SYSTEM commands can be issued
 "extDB3" callExtension format["9:LOCK:%1", GVAR(databaseRandomLockKey)];
