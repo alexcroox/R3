@@ -9,18 +9,19 @@
  * None
  *
  * Example:
- * call FUNC(addInfantryEventHandlers);
+ * [_unit] call FUNC(addInfantryEventHandlers);
  *
  * Public: No
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > addInfantryEventHandlers";
+private _functionLogName = "AAR > addInfantryEventHandlers";
 
-private ["_unit"];
-_unit = param [0, objNull];
+params [
+    ["_unit", objNull]
+];
 
-_isSetupAlready = _unit getVariable ["eventsSetup", false];
+private _isSetupAlready = _unit getVariable ["eventsSetup", false];
 
 if !(_isSetupAlready) then {
 

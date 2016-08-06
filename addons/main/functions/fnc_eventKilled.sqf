@@ -10,47 +10,48 @@
  * None
  *
  * Example:
- * call FUNC(eventKilled);
+ * [_victim, _attacker] call FUNC(eventKilled);
  *
  * Public: No
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > eventKilled";
+private _functionLogName = "AAR > eventKilled";
 
-private ["_victim", "_attacker"];
-_victim = param [0, ObjNull, [ObjNull]];
-_attacker = param [1, ObjNull, [ObjNull]];
+params [
+    ["_victim", objNull],
+    ["_attacker", objNull]
+];
 
 // We only want to log ai or players being killed, not fences being run over!
 if ( (_attacker isEqualTo ObjNull) or !(getObjectType _victim isEqualTo 8) ) exitWith {};
 
 // Victim details
-_victimUid = getPlayerUID _victim;
-_victimPos = getPos _victim;
-_victimType = getText (configFile >> "CfgVehicles" >> (typeOf _victim) >> "DisplayName");
-_victimFaction = _victim call FUNC(calcSideInt);
+private _victimUid = getPlayerUID _victim;
+private _victimPos = getPos _victim;
+private _victimType = getText (configFile >> "CfgVehicles" >> (typeOf _victim) >> "DisplayName");
+private _victimFaction = _victim call FUNC(calcSideInt);
 
 // Attacker details
-_attackerPos = getPos _attacker;
-_attackerType = getText (configFile >> "CfgVehicles" >> (typeOf _attacker) >> "DisplayName");
-_attackerFaction = _attacker call FUNC(calcSideInt);
-_attackerDistance = round (getPos _victim distance getPos _attacker);
+private _attackerPos = getPos _attacker;
+private _attackerType = getText (configFile >> "CfgVehicles" >> (typeOf _attacker) >> "DisplayName");
+private _attackerFaction = _attacker call FUNC(calcSideInt);
+private _attackerDistance = round (getPos _victim distance getPos _attacker);
 
 if (vehicle _attacker == _attacker) then {
-    _attackerUid = getPlayerUID _attacker;
+    private _attackerUid = getPlayerUID _attacker;
 } else {
-    _attackerUid = getPlayerUID gunner vehicle _attacker;
+    private _attackerUid = getPlayerUID gunner vehicle _attacker;
 };
 
 if(vehicle _attacker == _attacker) then {
-    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
+    private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
 } else {
-    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName")
+    private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName")
 };
 
 // Form JSON for saving
-_json = format['
+private _json = format['
     {
         "victim": {
             "unit": "%1",

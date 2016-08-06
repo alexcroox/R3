@@ -10,7 +10,7 @@
  * _sideInt <INTEGER>
  *
  * Example:
- * _unit call FUNC(calcSideInt);
+ * [_unit] call FUNC(calcSideInt);
  *
  * Public: No
  */

@@ -15,7 +15,7 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > addMissionEventHandlers";
+private _functionLogName = "AAR > addMissionEventHandlers";
 
 DBUG("Setting up mission event handlers", _functionLogName);
 

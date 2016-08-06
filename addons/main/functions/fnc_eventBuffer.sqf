@@ -15,13 +15,13 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > eventBuffer";
+private _functionLogName = "AAR > eventBuffer";
 
 DBUG("Starting event saving buffer", _functionLogName);
 
-_timeSinceLastInfantryInsert = time;
-_timeSinceLastGroundVehicleInsert = time;
-_timeSinceLastAirVehicleInsert = time;
+private _timeSinceLastInfantryInsert = time;
+private _timeSinceLastGroundVehicleInsert = time;
+private _timeSinceLastAirVehicleInsert = time;
 
 while { GVAR(logEvents) } do {
 
@@ -46,7 +46,7 @@ while { GVAR(logEvents) } do {
     if(count GVAR(eventSavingQueue) > 0) then {
 
         // Get the next event.
-        _event = (GVAR(eventSavingQueue) select 0);
+        private _event = (GVAR(eventSavingQueue) select 0);
 
         // Check an event is selected
         if !(isNil "_event") then {
@@ -54,7 +54,7 @@ while { GVAR(logEvents) } do {
             _event params ["_playerId", "_eventType", "_eventData", "_missionTime"];
 
             // Commit the event to the database
-            _query = str formatText["1:SQLRAW:
+            private _query = str formatText["1:SQLRAW:
                 INSERT INTO
                     events
                 (replayId, playerId, type, value, missionTime, added)
@@ -62,7 +62,7 @@ while { GVAR(logEvents) } do {
                 ('%1', '%2', '%3', '%4', %5, NOW())",
                 GVAR(replayId), _playerId, _eventType, _eventData call CBA_fnc_trim, _missionTime];
 
-            _saveEvent = call compile ("extDB3" callExtension _query);
+            call compile ("extDB3" callExtension _query);
 
             // Clear down the selected event from the global variable.
             GVAR(eventSavingQueue) set [0,0];

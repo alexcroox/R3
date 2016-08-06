@@ -15,12 +15,13 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > trackVehicles";
+private _functionLogName = "AAR > trackVehicles";
 
-private ["_trackVehicleType"];
-_trackVehicleType = param [0, "ground"];
+params [
+    ["_trackVehicleType", "ground"]
+];
 
-_movementData = "";
+private _movementData = "";
 
 // Loop through all vehicles on the map
 {
@@ -35,12 +36,12 @@ _movementData = "";
         // Are we tracking air vehicles and does this vehicle fly?
         if ( _trackVehicleType == "air" && !(_x isKindOf "Helicopter" || _x isKindOf "Plane") ) exitWith {};
 
-        _vehicleUid = getPlayerUID _x;
-        _vehiclePos = getPos _x;
-        _vehicleDirection = round getDir _x;
-        _vehicleClass = typeOf _x;
+        private _vehicleUid = getPlayerUID _x;
+        private _vehiclePos = getPos _x;
+        private _vehicleDirection = round getDir _x;
+        private _vehicleClass = typeOf _x;
 
-        _vehicleIcon = (
+        private _vehicleIcon = (
             _x call {
 
                 if (_this isKindOf "Car_F") exitWith { "iconCar" };
@@ -53,11 +54,11 @@ _movementData = "";
             }
         );
 
-        _vehicleFaction = _x call FUNC(calcSideInt);
-        _vehicleGroupId = groupID group _x;
-        _vehicleCrew = (
+        private _vehicleFaction = _x call FUNC(calcSideInt);
+        private _vehicleGroupId = groupID group _x;
+        private _vehicleCrew = (
             _x call {
-                _crew = [];
+                private _crew = [];
                 {
                     if(isPlayer _x) then {
                         if(_this getCargoIndex _x == -1) then {
@@ -68,9 +69,9 @@ _movementData = "";
                 _crew
             }
         );
-        _vehicleCargo = (
+        private _vehicleCargo = (
             _x call {
-                _cargo = [];
+                private _cargo = [];
                 {
                     if(isPlayer _x) then {
                         if(_this getCargoIndex _x >= 0) then {
@@ -84,7 +85,7 @@ _movementData = "";
 
         // Form JSON for saving
         // It sucks we have to use such abbreviated keys but we need to save as much space as pos!
-        _singleVehicleMovementData = format['
+        private _singleVehicleMovementData = format['
             {
                 "%1": {
                     "id": "%2",
@@ -111,7 +112,7 @@ _movementData = "";
         ];
 
         // We don't want leading commas in our JSON
-        _seperator = if (_movementData == "") then { "" } else { "," };
+        private _seperator = if (_movementData == "") then { "" } else { "," };
 
         // Combine this unit's data with our current running movements data
         _movementData = [[_movementData, _singleVehicleMovementData], _seperator] call CBA_fnc_join;

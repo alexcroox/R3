@@ -9,18 +9,19 @@
  * None
  *
  * Example:
- * call FUNC(addVehicleEventHandlers);
+ * [_vehicle] call FUNC(addVehicleEventHandlers);
  *
  * Public: No
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > addVehicleEventHandlers";
+private _functionLogName = "AAR > addVehicleEventHandlers";
 
-private ["_vehicle"];
-_vehicle = param [0, objNull];
+params [
+    ["_vehicle", objNull]
+];
 
-_isSetupAlready = _vehicle getVariable ["eventsSetup", false];
+private _isSetupAlready = _vehicle getVariable ["eventsSetup", false];
 
 if !(_isSetupAlready) then {
 

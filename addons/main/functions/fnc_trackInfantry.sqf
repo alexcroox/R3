@@ -15,12 +15,12 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > movementsInfantry";
+private _functionLogName = "AAR > movementsInfantry";
 
 // We have a string length limit with our database extension so we need to break up
 // large amounts of units into multiple calls
-_unitCount = 0;
-_movementData = "";
+private _unitCount = 0;
+private _movementData = "";
 
 // Loop through all units on the map
 {
@@ -28,17 +28,17 @@ _movementData = "";
 
     if (vehicle _x == _x) then {
 
-        _unitUid = getPlayerUID _x;
-        _unitPos = getPos _x;
-        _unitDirection = round getDir _x;
-        _unitIcon = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "icon");
-        _unitFaction = _x call FUNC(calcSideInt);
-        _unitGroupId = groupID group _x;
-        _unitIsLeader = (if((leader group _x) == _x) then { true } else { false });
+        private _unitUid = getPlayerUID _x;
+        private _unitPos = getPos _x;
+        private _unitDirection = round getDir _x;
+        private _unitIcon = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "icon");
+        private _unitFaction = _x call FUNC(calcSideInt);
+        private _unitGroupId = groupID group _x;
+        private _unitIsLeader = (if((leader group _x) == _x) then { true } else { false });
 
         // Form JSON for saving
         // It sucks we have to use such abbreviated keys but we need to save as much space as pos!
-        _singleUnitMovementData = format['
+        private _singleUnitMovementData = format['
             {
                 "%1": {
                     "id": "%2",
@@ -61,7 +61,7 @@ _movementData = "";
         ];
 
         // We don't want leading commas in our JSON
-        _seperator = if (_movementData == "") then { "" } else { "," };
+        private _seperator = if (_movementData == "") then { "" } else { "," };
 
         // Combine this unit's data with our current running movements data
         _movementData = [[_movementData, _singleUnitMovementData], _seperator] call CBA_fnc_join;

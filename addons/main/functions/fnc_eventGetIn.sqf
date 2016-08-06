@@ -18,16 +18,17 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > eventGetIn";
+private _functionLogName = "AAR > eventGetIn";
 
-private ["_unit"];
-_unit = param [0, objNull];
+params [
+    ["_unit", objNull]
+];
 
 if (_unit isEqualTo objNull) exitWith { DBUG(format[ARR_2("Invalid unit, ignoring get in event %1", _unit)], _functionLogName); };
 
-_uid = getPlayerUID _unit;
+private _uid = getPlayerUID _unit;
 
-_json = format['
+private _json = format['
     {
         "%1": {
             "id": "%2"

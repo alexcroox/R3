@@ -15,6 +15,6 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > eventMissionEnd";
+private _functionLogName = "AAR > eventMissionEnd";
 
 DBUG("Mission ended", _functionLogName);

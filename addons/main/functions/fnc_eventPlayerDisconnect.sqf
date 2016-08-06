@@ -13,26 +13,27 @@
  * None
  *
  * Example:
- * call FUNC(eventPlayerDisconnect);
+ * [id, uid, name, jip, owner] call FUNC(eventPlayerDisconnect);
  *
  * Public: No
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > eventPlayerDisconnect";
+private _functionLogName = "AAR > eventPlayerDisconnect";
 
-private ["_id", "_uid", "_name", "_jip"];
-_id = param [0, objNull];
-_uid = param [1, ""];
-_name = param [2, "Unknown"];
-_jip = param [3, false];
+params [
+    ["_id", objNull],
+    ["_uid", ""],
+    ["_name", "Unknown"],
+    ["_jip", false]
+];
 
 if (_uid == "") exitWith { DBUG(format[ARR_2("No player UID, ignoring disconnect event %1", _id)], _functionLogName); };
 
 // We only want to show notifications for JIP players
 if (_jip) then {
 
-    _json = format['
+    private _json = format['
         {
             "%1": {
                 "id": "%2"

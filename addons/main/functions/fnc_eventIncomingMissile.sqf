@@ -11,28 +11,29 @@
  * None
  *
  * Example:
- * call FUNC(eventIncomingMissile);
+ * [_unit, _ammo, _whoFired] call FUNC(eventIncomingMissile);
  *
  * Public: No
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > eventIncomingMissile";
+private _functionLogName = "AAR > eventIncomingMissile";
 
-private ["_victim", "_ammo", "_attacker"];
-_victim = param [0, objNull];
-_ammo = param [1, ""];
-_attacker = param [2, objNull];
+params [
+    ["_victim", objNull],
+    ["_ammo", ""],
+    ["_attacker", objNull]
+];
 
 if (_victim isEqualTo objNull) exitWith { DBUG(format[ARR_2("No unit, ignoring missile event %1", _ammo)], _functionLogName); };
 
-_victimUid = getPlayerUID _victim;
-_attackerUid = getPlayerUID _attacker;
-_attackerPos = getPos _attacker;
-_attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName");
-_attackerAmmoType = (
+private _victimUid = getPlayerUID _victim;
+private _attackerUid = getPlayerUID _attacker;
+private _attackerPos = getPos _attacker;
+private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName");
+private _attackerAmmoType = (
     _ammo call {
-        _type = getText (configFile >> "CfgAmmo" >> _this >> "simulation");
+        private _type = getText (configFile >> "CfgAmmo" >> _this >> "simulation");
         _type = switch (_type) do {
             case "shotRocket" : {"Rocket"};
             case "shotMissile" : {"Missile"};
@@ -42,7 +43,7 @@ _attackerAmmoType = (
 );
 
 // Form JSON for saving
-_json = format['
+private _json = format['
     {
         "victim": {
             "unit": "%1",

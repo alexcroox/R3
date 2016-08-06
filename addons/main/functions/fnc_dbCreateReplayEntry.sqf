@@ -15,16 +15,16 @@
  */
 
 #include "script_component.hpp"
-_functionLogName = "AAR > dbCreateReplayEntry";
+private _functionLogName = "AAR > dbCreateReplayEntry";
 
-_query = format["2:SQL:replayInsert:%1:%2:%3", missionName, worldName, daytime];
-_setupReplay = call compile ("extDB3" callExtension _query);
+private _query = format["2:SQL:replayInsert:%1:%2:%3", missionName, worldName, daytime];
+private _setupReplay = call compile ("extDB3" callExtension _query);
 
 uisleep (random .03);
 
-_key = _setupReplay select 1;
-_queryResult = "";
-_dbWaitLoop = true;
+private _key = _setupReplay select 1;
+private _queryResult = "";
+private _dbWaitLoop = true;
 
 // We need to wait for the query to return, if it hasn't returned yet we will receive [3] (wait)
 while {_dbWaitLoop} do {
