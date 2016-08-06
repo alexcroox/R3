@@ -6,7 +6,7 @@
 #define MAJOR 0
 #define MINOR 0
 #define PATCHLVL 0
-#define BUILD 1
+#define BUILD 2
 
 #define VERSION MAJOR.MINOR.PATCHLVL.BUILD
 #define VERSION_AR MAJOR,MINOR,PATCHLVL,BUILD
@@ -14,4 +14,4 @@
 #define AAR_TAG AAR
 
 // MINIMAL required version for the Mod. Components can specify others..
-#define REQUIRED_VERSION 1.56
+#define REQUIRED_VERSION 0.0.1
