@@ -1,13 +1,13 @@
 <p align="center">
-    <a href="https://github.com/alexcroox/Titan_AAR/releases/latest">
+    <a href="https://github.com/alexcroox/R3/releases/latest">
         <img src="https://img.shields.io/badge/Version-0.0.1-blue.svg" alt="Project Version">
     </a>    
 
-    <a href="https://travis-ci.org/alexcroox/Titan_AAR">    
-        <img src="https://travis-ci.org/alexcroox/Titan_AAR.svg?branch=master&style=flat-square" alt="Travis build testing">
+    <a href="https://travis-ci.org/alexcroox/R3">    
+        <img src="https://travis-ci.org/alexcroox/R3.svg?branch=master&style=flat-square" alt="Travis build testing">
     </a>
     
-    <a href="https://raw.githubusercontent.com/alexcroox/Titan_AAR/master/LICENSE">
+    <a href="https://raw.githubusercontent.com/alexcroox/R3/master/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-red.svg" alt="Project License">
     </a>
 </p>
@@ -23,6 +23,8 @@ Server Side addon for capturing unit movement and behaviour to a database for Af
 ### WIP
 
 This is a heavy work in progress, don't expect anything to work at this stage.
+
+Being built along side the [web component](https://github.com/alexcroox/R3-Web).
 
 ### Special thanks
 
