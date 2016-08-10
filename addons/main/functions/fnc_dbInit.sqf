@@ -18,7 +18,7 @@
 private _functionLogName = "AAR > dbInit";
 
 // Reset and complete any outstanding actions (if mission restarted)
-"extDB3" callExtension format["9:UNLOCK:%1", GVAR(databaseRandomLockKey)];
+"extDB3" callExtension format["9:UNLOCK:%1", '123'];
 "extDB3" callExtension "9:RESET";
 
 // Check our extDB3 version, if it fails its not loaded and we should halt here
@@ -43,4 +43,6 @@ if ((_addDbProtocol select 0) isEqualTo 0) exitWith { DBUG("Failed to set databa
 _addDbProtocol = call compile ("extDB3" callExtension format["9:ADD_DATABASE_PROTOCOL:%1:SQL:SQLRAW", GVAR(databaseSettingName)]);
 
 // Lock the extension so no further SYSTEM commands can be issued
-"extDB3" callExtension format["9:LOCK:%1", GVAR(databaseRandomLockKey)];
+"extDB3" callExtension format["9:LOCK:%1", '123'];
+
+["dbSetup"] call CBA_fnc_localEvent;

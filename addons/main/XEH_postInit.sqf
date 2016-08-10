@@ -2,12 +2,22 @@
 
 if !(isServer) exitWith { ERROR_WITH_TITLE("AAR - ERROR", "Addon must be run server side only!"); };
 
-// Setup database and don't continue if it fails
-call FUNC(dbInit);
-[] spawn FUNC(dbCreateReplayEntry);
+/*
+  Setup database and don't continue if it fails.
+  Moved this to spawn and event handlers as it occasionally crashed the game
+  while waiting for db to respond
+*/
+[] spawn FUNC(dbInit);
+
+// Wait until our database is created before inserting new replay entry
+["dbSetup", {
+
+    [] spawn FUNC(dbCreateReplayEntry);
+
+}] call CBA_fnc_addEventHandler;
 
 // Capture when dbCreateReplayEntry has finished
-["dbSetup", {
+["replaySetup", {
 
     // Start event saving buffer
     [] spawn FUNC(eventBuffer);

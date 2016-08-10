@@ -56,7 +56,6 @@ if ((_queryResult select 0) isEqualTo 0) exitWith { DBUG(format[ARR_2("Failed to
 
 GVAR(replayId) = (_queryResult select 1) select 0;
 
-// Raise event here?
-["dbSetup"] call CBA_fnc_localEvent;
+["replaySetup"] call CBA_fnc_localEvent;
 
 DBUG(format[ARR_2("Replay db entry setup %1", GVAR(replayId))], _functionLogName);

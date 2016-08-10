@@ -11,6 +11,8 @@ if (isNil {uiNamespace getVariable QGVAR(databaseRandomLockKey)}) then {
     uiNamespace setVariable [QGVAR(databaseRandomLockKey), floor(random 100)];
 };
 
+diag_log uiNamespace getVariable QGVAR(databaseRandomLockKey);
+
 GVAR(logEvents) = true;
 GVAR(replayId) = 0;
 GVAR(eventSavingQueue) = [];

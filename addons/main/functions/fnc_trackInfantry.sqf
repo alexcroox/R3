@@ -42,7 +42,7 @@ private _movementData = "";
             {
                 "%1": {
                     "id": "%2",
-                    "pos": "%3",
+                    "pos": %3,
                     "dir": %4,
                     "ico": "%5",
                     "fac": "%6",
