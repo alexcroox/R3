@@ -95,8 +95,8 @@ private _movementData = "";
                 "ico": "%6",
                 "fac": "%7",
                 "grp": "%8",
-                "crw": "%9",
-                "cgo": "%10"
+                "crw": %9,
+                "cgo": %10
             }',
             _x,
             _vehicleUid,
@@ -119,5 +119,6 @@ private _movementData = "";
 } forEach vehicles;
 
 if (_movementData != "") then {
-    GVAR(eventSavingQueue) pushBack [0, "positions_vehicles", _movementData, time];
+    private _movementDataJsonArray = format["[%1]", _movementData];
+    GVAR(eventSavingQueue) pushBack [0, "positions_vehicles", _movementDataJsonArray, time];
 };

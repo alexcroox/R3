@@ -71,7 +71,8 @@ private _movementData = "";
         if (_unitCount == GVAR(maxUnitCountPerEvent)) then {
 
             // Save details to db
-            GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementData, time];
+            private _movementDataJsonArray = format["[%1]", _movementData];
+            GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementDataJsonArray, time];
 
             _unitCount = 0;
             _movementData = "";
@@ -81,5 +82,6 @@ private _movementData = "";
 
 // Do we still have outstanding unit movements we need to save?
 if !(_movementData == "") then {
-    GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementData, time];
+    private _movementDataJsonArray = format["[%1]", _movementData];
+    GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementDataJsonArray, time];
 };
