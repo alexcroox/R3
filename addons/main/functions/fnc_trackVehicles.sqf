@@ -87,17 +87,16 @@ private _movementData = "";
         // It sucks we have to use such abbreviated keys but we need to save as much space as pos!
         private _singleVehicleMovementData = format['
             {
-                "%1": {
-                    "id": "%2",
-                    "pos": %3,
-                    "dir": %4,
-                    "cls": "%5",
-                    "ico": "%6",
-                    "fac": "%7",
-                    "grp": "%8",
-                    "crw": "%9",
-                    "cgo": "%10"
-                }
+                "unit": "%1",
+                "id": "%2",
+                "pos": %3,
+                "dir": %4,
+                "cls": "%5",
+                "ico": "%6",
+                "fac": "%7",
+                "grp": "%8",
+                "crw": "%9",
+                "cgo": "%10"
             }',
             _x,
             _vehicleUid,

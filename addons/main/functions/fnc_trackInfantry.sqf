@@ -40,15 +40,14 @@ private _movementData = "";
         // It sucks we have to use such abbreviated keys but we need to save as much space as pos!
         private _singleUnitMovementData = format['
             {
-                "%1": {
-                    "id": "%2",
-                    "pos": %3,
-                    "dir": %4,
-                    "ico": "%5",
-                    "fac": "%6",
-                    "grp": "%7",
-                    "ldr": "%8"
-                }
+                "unit": "%1",
+                "id": "%2",
+                "pos": %3,
+                "dir": %4,
+                "ico": "%5",
+                "fac": "%6",
+                "grp": "%7",
+                "ldr": "%8"
             }',
             _x,
             _unitUid,

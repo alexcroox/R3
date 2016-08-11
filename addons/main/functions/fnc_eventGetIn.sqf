@@ -30,9 +30,8 @@ private _uid = getPlayerUID _unit;
 
 private _json = format['
     {
-        "%1": {
-            "id": "%2"
-        }
+        "unit": "%1",
+        "id": "%2"
     }',
     _unit,
     _uid
