@@ -21,6 +21,6 @@ GVAR(eventSavingQueue) = [];
 GVAR(insertFrequencyInfantry) = 5;
 GVAR(insertFrequencyGroundVehicle) = 3;
 GVAR(insertFrequencyAirVehicle) = 1;
-GVAR(maxUnitCountPerEvent) = 50;
+GVAR(maxUnitCountPerEvent) = 30;
 
 ADDON = true;

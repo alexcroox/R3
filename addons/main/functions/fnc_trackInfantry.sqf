@@ -81,7 +81,7 @@ private _movementData = "";
 } forEach allUnits;
 
 // Do we still have outstanding unit movements we need to save?
-if !(_movementData == "") then {
+if (_movementData != "") then {
     private _movementDataJsonArray = format["[%1]", _movementData];
     GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementDataJsonArray, time];
 };
