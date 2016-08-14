@@ -44,11 +44,10 @@ private _movementData = "";
         private _vehicleDirection = round getDir _x;
         private _vehicleClass = typeOf _x;
 
+        // We want the iconpathname (without the .paa and without the full path) just the name of the icon
         private _vehicleIconPathRaw = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "icon");
         private _splitIconPath = _vehicleIconPathRaw splitString "\.";
-
         private _vehicleIconName = _vehicleIconPathRaw;
-
         if (count _splitIconPath > 2) then {
             _vehicleIconName = _splitIconPath select (count _splitIconPath - 2);
         };
@@ -83,6 +82,7 @@ private _movementData = "";
                 if (_this isKindOf "StaticWeapon") exitWith { "iconStaticWeapon" };
                 if (_this isKindOf "StaticGrenadeLauncher") exitWith { "iconStaticGL" };
 
+                if (_this isKindOf "Steerable_Parachute_F" || _this isKindOf "NonSteerable_Parachute_F") exitWith { "iconParachute" };
                 if (_this isKindOf "Boat_F") exitWith { "iconBoat" };
                 if (_this isKindOf "Truck_F") exitWith { "iconTruck" };
                 if (_this isKindOf "Tank" || _this isKindOf "Tank_F") exitWith { "iconTank" };
