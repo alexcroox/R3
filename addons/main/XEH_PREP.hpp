@@ -1,6 +1,7 @@
 // FUNCTION PREPS
 PREP(dbInit);
 PREP(dbCreateReplayEntry);
+PREP(dbSavePlayer);
 PREP(addMissionEventHandlers);
 PREP(addInfantryEventHandlers);
 PREP(addVehicleEventHandlers);

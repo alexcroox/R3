@@ -16,6 +16,7 @@ diag_log uiNamespace getVariable QGVAR(databaseRandomLockKey);
 GVAR(logEvents) = true;
 GVAR(replayId) = 0;
 GVAR(eventSavingQueue) = [];
+GVAR(playerSavedIds) = [];
 
 // Frequency of unit movement logging
 GVAR(insertFrequencyInfantry) = 5;

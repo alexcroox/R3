@@ -36,10 +36,12 @@ if (_jip) then {
     private _json = format['
         {
             "unit": "%1",
-            "id": "%2"
+            "id": "%2",
+            "name": "%3"
         }',
         _id,
-        _uid
+        _uid,
+        name _name
     ];
 
     // Add it to our event buffer for saving

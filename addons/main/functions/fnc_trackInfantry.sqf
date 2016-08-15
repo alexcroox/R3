@@ -36,6 +36,9 @@ private _movementData = "";
         private _unitGroupId = groupID group _x;
         private _unitIsLeader = (if((leader group _x) == _x) then { true } else { false });
 
+        // Save player to db
+        [_unitUid, name _x] spawn FUNC(dbSavePlayer);
+
         // Form JSON for saving
         // It sucks we have to use such abbreviated keys but we need to save as much space as pos!
         private _singleUnitMovementData = format['
