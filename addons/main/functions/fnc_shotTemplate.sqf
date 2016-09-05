@@ -7,7 +7,7 @@
  * 1: attacker <OBJECT>
  *
  * Return Value:
- * see last line?
+ * [_victimUid, _json]
  *
  * Example:
  * [_victim, _attacker] call FUNC(shotTemplate);
@@ -15,12 +15,12 @@
  * Public: No
  */
 
+#include "script_component.hpp"
+
 params [
     ["_victim", objNull],
     ["_attacker", objNull]
 ];
-
-diag_log format["shot %1", _victim];
 
 // Victim details
 private _victimUid = getPlayerUID _victim;
