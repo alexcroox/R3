@@ -10,6 +10,8 @@ PREP(eventMissionEnd);
 PREP(eventPlayerConnect);
 PREP(eventPlayerDisconnect);
 PREP(eventGetIn);
+PREP(eventUnconscious);
+PREP(shotTemplate);
 PREP(eventIncomingMissile);
 PREP(calcSideInt);
 PREP(eventBuffer);

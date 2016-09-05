@@ -20,4 +20,4 @@ if (side group _this == WEST) exitWith {1};
 if (side group _this == INDEPENDENT) exitWith {2};
 if (side group _this == CIVILIAN) exitWith {3};
 
-0;
+0
