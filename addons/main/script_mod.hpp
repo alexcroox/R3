@@ -4,9 +4,9 @@
 #define PREFIX aar
 
 #define MAJOR 0
-#define MINOR 0
+#define MINOR 1
 #define PATCHLVL 0
-#define BUILD 2
+#define BUILD 1
 
 #define VERSION MAJOR.MINOR.PATCHLVL.BUILD
 #define VERSION_AR MAJOR,MINOR,PATCHLVL,BUILD

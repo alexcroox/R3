@@ -7,7 +7,7 @@ import subprocess
 ######## GLOBALS #########
 MAINPREFIX = "z"
 PREFIX = "aar_"
-ignorePbo = "extDB3.pbo";
+ignorePbo = "extDB3.pbo"
 ##########################
 
 def mod_time(path):

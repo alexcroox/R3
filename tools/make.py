@@ -30,7 +30,7 @@
 
 ###############################################################################
 
-__version__ = "0.7"
+__version__ = "0.1.0"
 
 import sys
 
@@ -59,7 +59,7 @@ if sys.platform == "win32":
 
 ######## GLOBALS #########
 project = "@aar"
-project_version = "3.0.0"
+project_version = "0.1.0"
 arma3tools_path = ""
 work_drive = ""
 module_root = ""
@@ -73,8 +73,8 @@ dssignfile = ""
 prefix = "aar"
 pbo_name_prefix = "aar_"
 signature_blacklist = []
+ignorePbo = "extDB3.pbo"
 importantFiles = ["mod.cpp", "README.md", "AUTHORS.txt", "LICENSE", "logo_aar_ca.paa", "extdb3-conf.ini"]
-extrasFiles = ["sql_custom", 'addons/extDB3.pbo']
 versionFiles = ["README.md", "mod.cpp"]
 
 ciBuild = False # Used for CI builds
@@ -351,29 +351,27 @@ def copy_important_files(source_dir,destination_dir):
         print_error("COPYING IMPORTANT FILES.")
         raise
 
-    # Copy extrasFiles
+    # Copy extdb custom_sql folder and file
     try:
-        source_extras_dir = os.path.join(source_dir, "extras")
-        destination_extras_dir = os.path.join(destination_dir, "extras")
-        print_blue("\nSearching for extras files in {}".format(source_extras_dir))
-        print("Source_dir: {}".format(source_extras_dir))
-        print("Destination_dir: {}".format(destination_extras_dir))
+        source_sql_custom_dir = os.path.join(source_dir, "sql_custom")
+        destination_sql_custom_dir = os.path.join(destination_dir, "sql_custom")
+        print_blue("\nSearching for sql_custom files in {}".format(source_sql_custom_dir))
+        print("Source_dir: {}".format(source_sql_custom_dir))
+        print("Destination_dir: {}".format(destination_sql_custom_dir))
 
-        if os.path.exists(destination_extras_dir):
-            shutil.rmtree(destination_extras_dir, True)
-        os.mkdir(destination_extras_dir)
+        if os.path.exists(destination_sql_custom_dir):
+            shutil.rmtree(destination_sql_custom_dir, True)
+        os.mkdir(destination_sql_custom_dir)
 
-        for file in extrasFiles:
-            filePath = os.path.join(source_extras_dir, file)
-            if os.path.exists(filePath):
-                if os.path.isdir(filePath):
-                    print_green("Copying directory => {}".format(filePath))
-                    shutil.copytree(filePath, os.path.join(destination_extras_dir,file))
-                else:
-                    print_green("Copying file => {}".format(filePath))
-                    shutil.copyfile(filePath, os.path.join(destination_extras_dir,file))
+        filePath = os.path.join(source_sql_custom_dir, "aar.ini")
+        shutil.copyfile(filePath, os.path.join(destination_sql_custom_dir,"aar.ini"))
+
+        source_addons_dir = os.path.join(source_dir, "addons");
+        destination_addons_dir = os.path.join(destination_dir, "addons")
+        filePath = os.path.join(source_addons_dir, "extDB3.pbo")
+        shutil.copyfile(filePath, os.path.join(destination_addons_dir,"extDB3.pbo"))
     except:
-        print_error("COPYING EXTRAS FILES.")
+        print_error("COPYING SQL CUSTOM FILES.")
         raise
 
     #copy all extension dlls
@@ -516,6 +514,8 @@ def build_signature_file(file_name):
 
 def check_for_obsolete_pbos(addonspath, file):
     module = file[len(pbo_name_prefix):-4]
+    if file == ignorePbo:
+        return False
     if not os.path.exists(os.path.join(addonspath, module)):
         return True
     return False
@@ -768,7 +768,7 @@ def version_stamp_pboprefix(module,commitID):
 
 def main(argv):
     """Build an Arma addon suite in a directory from rules in a make.cfg file."""
-    print_blue("\nmake.py for Arma, modified for Advanced Combat Environment v{}".format(__version__))
+    print_blue("\nmake.py for Arma, modified for AAR v{}".format(__version__))
 
     global project_version
     global arma3tools_path
