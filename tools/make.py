@@ -73,7 +73,8 @@ dssignfile = ""
 prefix = "aar"
 pbo_name_prefix = "aar_"
 signature_blacklist = []
-importantFiles = ["mod.cpp", "README.md", "AUTHORS.txt", "LICENSE", "logo_aar_ca.paa"]
+importantFiles = ["mod.cpp", "README.md", "AUTHORS.txt", "LICENSE", "logo_aar_ca.paa", "extdb3-conf.ini"]
+extrasFiles = ["sql_custom", 'addons/extDB3.pbo']
 versionFiles = ["README.md", "mod.cpp"]
 
 ciBuild = False # Used for CI builds
@@ -348,6 +349,31 @@ def copy_important_files(source_dir,destination_dir):
             shutil.copyfile(os.path.join(source_dir,filePath),os.path.join(destination_dir,file))
     except:
         print_error("COPYING IMPORTANT FILES.")
+        raise
+
+    # Copy extrasFiles
+    try:
+        source_extras_dir = os.path.join(source_dir, "extras")
+        destination_extras_dir = os.path.join(destination_dir, "extras")
+        print_blue("\nSearching for extras files in {}".format(source_extras_dir))
+        print("Source_dir: {}".format(source_extras_dir))
+        print("Destination_dir: {}".format(destination_extras_dir))
+
+        if os.path.exists(destination_extras_dir):
+            shutil.rmtree(destination_extras_dir, True)
+        os.mkdir(destination_extras_dir)
+
+        for file in extrasFiles:
+            filePath = os.path.join(source_extras_dir, file)
+            if os.path.exists(filePath):
+                if os.path.isdir(filePath):
+                    print_green("Copying directory => {}".format(filePath))
+                    shutil.copytree(filePath, os.path.join(destination_extras_dir,file))
+                else:
+                    print_green("Copying file => {}".format(filePath))
+                    shutil.copyfile(filePath, os.path.join(destination_extras_dir,file))
+    except:
+        print_error("COPYING EXTRAS FILES.")
         raise
 
     #copy all extension dlls

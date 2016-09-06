@@ -7,6 +7,7 @@ import subprocess
 ######## GLOBALS #########
 MAINPREFIX = "z"
 PREFIX = "aar_"
+ignorePbo = "extDB3.pbo";
 ##########################
 
 def mod_time(path):
@@ -25,6 +26,8 @@ def check_for_changes(addonspath, module):
 
 def check_for_obsolete_pbos(addonspath, file):
     module = file[len(PREFIX):-4]
+    if file == ignorePbo:
+        return False
     if not os.path.exists(os.path.join(addonspath, module)):
         return True
     return False
