@@ -40,6 +40,4 @@ private _json = format['
 // Add it to our event buffer for saving
 GVAR(eventSavingQueue) pushBack [_uid, "get_in", _json, time];
 
-DBUG(format[ARR_2("Unit get in: %1", _unit)], _functionLogName);
-
 

@@ -45,7 +45,7 @@ if (_jip) then {
     // Add it to our event buffer for saving
     GVAR(eventSavingQueue) pushBack [_uid, "player_disconnected", _json, time];
 
-    DBUG(format[ARR_2("Player disconnected: %1", _name)], _functionLogName);
+    //DBUG(format[ARR_2("Player disconnected: %1", _name)], _functionLogName);
 };
 
 
