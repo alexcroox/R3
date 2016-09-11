@@ -6,6 +6,7 @@ PREP(addMissionEventHandlers);
 PREP(addInfantryEventHandlers);
 PREP(addVehicleEventHandlers);
 PREP(eventKilled);
+PREP(eventRespawned);
 PREP(eventMissionEnd);
 PREP(eventPlayerConnect);
 PREP(eventPlayerDisconnect);

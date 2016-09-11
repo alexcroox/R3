@@ -22,4 +22,5 @@ DBUG("Setting up mission event handlers", _functionLogName);
 addMissionEventHandler ["PlayerConnected", FUNC(eventPlayerConnect)];
 addMissionEventHandler ["PlayerDisconnected", FUNC(eventPlayerDisconnect)];
 addMissionEventHandler ["EntityKilled", FUNC(eventKilled)];
+addMissionEventHandler ["EntityRespawned", FUNC(eventRespawned)];
 addMissionEventHandler ["Ended", FUNC(eventMissionEnd)];

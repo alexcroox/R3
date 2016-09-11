@@ -29,7 +29,7 @@ if !(_isSetupAlready) then {
 
     _unit addEventHandler ["GetInMan", FUNC(eventGetIn)];
 
-    // Only add ACE3 event handlers if ACE is loaded server and client side
+    // Only add ACE3 event handlers if ACE is loaded server side
     if (!isNull (configFile >> "CfgPatches" >> "ace_main")) then {
         ["ace_unconscious", FUNC(eventUnconscious)] call CBA_fnc_addEventHandler;
     };
