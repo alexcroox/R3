@@ -41,7 +41,7 @@ if (_jip) then {
         }',
         _id,
         _uid,
-        name _name
+        _name
     ];
 
     // Add it to our event buffer for saving
