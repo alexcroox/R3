@@ -1,10 +1,15 @@
 // FUNCTION PREPS
 PREP(dbInit);
 PREP(dbCreateReplayEntry);
+
 PREP(dbSavePlayer);
+
 PREP(addMissionEventHandlers);
 PREP(addInfantryEventHandlers);
 PREP(addVehicleEventHandlers);
+
+PREP(eventBuffer);
+
 PREP(eventKilled);
 PREP(eventRespawned);
 PREP(eventMissionEnd);
@@ -14,7 +19,8 @@ PREP(eventGetIn);
 PREP(eventUnconscious);
 PREP(shotTemplate);
 PREP(eventIncomingMissile);
+PREP(eventHit);
+
 PREP(calcSideInt);
-PREP(eventBuffer);
 PREP(trackInfantry);
 PREP(trackVehicles);

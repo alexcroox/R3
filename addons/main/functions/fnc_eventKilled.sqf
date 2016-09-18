@@ -26,13 +26,8 @@ params [
 // We only want to log ai or players being killed, not fences being run over!
 if ( (_attacker isEqualTo ObjNull) or !(getObjectType _victim isEqualTo 8) ) exitWith {};
 
-// Only add ACE3 event handlers if ACE is loaded server side
-if (!isNull (configFile >> "CfgPatches" >> "ace_main")) then {
-
-    // We need to get the attacker reliably
-    _attacker = if (isNull _attacker) then {
-        _victim getVariable ["ace_medical_lastDamageSource", _attacker];
-    } else { _attacker };
+if (_victim == _attacker) then {
+    _attacker = _victim getVariable ["lastAttacker", _victim];
 };
 
 private _formatedShotData = [_victim, _attacker] call FUNC(shotTemplate);

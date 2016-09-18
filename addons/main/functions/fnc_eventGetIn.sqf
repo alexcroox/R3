@@ -3,9 +3,9 @@
  * Event fired when unit gets in a vehicle
  *
  * Arguments:
- * 0: unit: Object - Unit the event handler is assigned to
+ * 0: vehicle: Object - Vehicle the unit entered
  * 1: position: String - Can be either "driver", "gunner" or "cargo"
- * 2: vehicle: Object - Vehicle the unit entered
+ * 2: unit: Object - Unit the event handler is assigned to
  * 3: turret: Array - turret path
  *
  * Return Value:
@@ -21,6 +21,8 @@
 private _functionLogName = "AAR > eventGetIn";
 
 params [
+    ["_vehicle", objNull],
+    ["_position", "driver"],
     ["_unit", objNull]
 ];
 

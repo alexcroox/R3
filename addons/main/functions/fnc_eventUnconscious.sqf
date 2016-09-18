@@ -23,7 +23,12 @@ params [
     ["_state", FALSE]
 ];
 
-private _attacker = _unit getVariable ["ace_medical_lastDamageSource", objNull];
+// Let's debounce multiple unconscious events firing for this unit
+private _lastUnconsciousTime = _unit getVariable ["lastUnconscious", 0];
+
+if (_lastUnconsciousTime > (time - 10)) exitWith {};
+
+private _attacker = _unit getVariable ["lastAttacker", _unit];
 
 private _formatedShotData = [_unit, _attacker] call FUNC(shotTemplate);
 
@@ -33,6 +38,11 @@ private _json = _formatedShotData select 1;
 private _eventType = switch(_state) do {
     case TRUE : { "unit_unconscious" };
     case FALSE : { "unit_awake" };
+};
+
+if (_state) then {
+
+    _unit setVariable ["lastUnconscious", time, false];
 };
 
 // Save details to db
