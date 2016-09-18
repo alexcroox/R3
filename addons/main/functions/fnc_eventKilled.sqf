@@ -23,6 +23,9 @@ params [
     ["_attacker", objNull]
 ];
 
+// Handle respawnOnStart
+if (_victim == objNull) exitWith {};
+
 // We only want to log ai or players being killed, not fences being run over!
 if ( (_attacker isEqualTo ObjNull) or !(getObjectType _victim isEqualTo 8) ) exitWith {};
 
