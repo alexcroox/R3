@@ -40,10 +40,7 @@ private _eventType = switch(_state) do {
     case FALSE : { "unit_awake" };
 };
 
-if (_state) then {
-
-    _unit setVariable ["lastUnconscious", time, false];
-};
+_unit setVariable ["lastUnconscious", time, false];
 
 // Save details to db
 GVAR(eventSavingQueue) pushBack [_victimUid, _eventType, _json, time];

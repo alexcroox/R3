@@ -27,6 +27,7 @@ if !(_isSetupAlready) then {
 
     // Let's remove the existing EHs incase eventsSetup variable lies to us
     _vehicle removeAllEventHandlers "GetIn";
+    _vehicle removeAllEventHandlers "IncomingMissile";
 
     _vehicle setVariable ["eventsSetup", true, false];
 

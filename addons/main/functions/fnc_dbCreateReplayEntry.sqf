@@ -17,7 +17,7 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > dbCreateReplayEntry";
 
-private _query = format["2:SQL:replayInsert:%1:%2:%3:%4", missionName, worldName, daytime, VERSION];
+private _query = format["2:SQL:replayInsert:%1:%2:%3:%4", missionName, worldName, daytime, QUOTE(VERSION)];
 private _setupReplay = call compile ("extDB3" callExtension _query);
 
 uisleep (random .03);

@@ -30,7 +30,7 @@
 
 ###############################################################################
 
-__version__ = "0.1.0"
+__version__ = "0.1.5"
 
 import sys
 
@@ -59,7 +59,7 @@ if sys.platform == "win32":
 
 ######## GLOBALS #########
 project = "@aar"
-project_version = "0.1.0"
+project_version = "0.1.5"
 arma3tools_path = ""
 work_drive = ""
 module_root = ""
