@@ -23,7 +23,7 @@ private _movementData = "";
 {
     [_x] call FUNC(addInfantryEventHandlers);
 
-    if (vehicle _x == _x) then {
+    if (vehicle _x == _x && !(_x isKindOf "Logic")) then {
 
         private _unitUid = getPlayerUID _x;
         private _unitPos = getPos _x;
