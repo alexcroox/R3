@@ -22,6 +22,7 @@ DBUG("Starting track loop", _functionLogName);
 private _timeSinceLastInfantryInsert = time;
 private _timeSinceLastGroundVehicleInsert = time;
 private _timeSinceLastAirVehicleInsert = time;
+private _timeSinceLastMarkerInsert = time;
 
 while { GVAR(logEvents) } do {
 
@@ -40,6 +41,11 @@ while { GVAR(logEvents) } do {
     if (time >= _timeSinceLastAirVehicleInsert + GVAR(insertFrequencyAirVehicle)) then {
         ["air"] call FUNC(trackVehicles);
         _timeSinceLastAirVehicleInsert = time;
+    };
+
+    if (time >= _timeSinceLastMarkerInsert + GVAR(insertFrequencyMarkers)) then {
+        call FUNC(trackMarkers);
+        _timeSinceLastMarkerInsert = time;
     };
 
     sleep (0.2);
