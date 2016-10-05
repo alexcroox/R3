@@ -17,7 +17,7 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > dbInit";
 
-private _connect = call compile ("R3DBConnector" callExtension format["%1", "dbConnect"]);
+private _connect = call compile ("R3DBConnector" callExtension format["%1", "connect"]);
 
 if ((_connect select 0) isEqualTo 0) exitWith {
 

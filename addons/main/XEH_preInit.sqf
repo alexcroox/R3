@@ -6,6 +6,7 @@ ADDON = false;
 
 GVAR(logEvents) = true;
 GVAR(replayId) = 0;
+GVAR(extensionSeparator) = "¤¤¤";
 GVAR(eventSavingQueue) = [];
 GVAR(playerSavedIds) = [];
 

@@ -11,7 +11,7 @@
  * none
  *
  * Example:
- * ["event", _data] call FUNC(dbInsertEvent);
+ * ["positions_vehicles", _json] call FUNC(dbInsertEvent);
  *
  * Public: No
  */
@@ -25,7 +25,6 @@ params [
     ["_playerId", 0]
 ];
 
-private _query = format["%1¤¤¤%2¤¤¤%3¤¤¤%4¤¤¤%5¤¤¤%6", "event", GVAR(replayId), _playerId, _type, _data call CBA_fnc_trim, time];
-
 // Send the query to the extension
+private _query = [["event", GVAR(replayId), _playerId, _type, _data call CBA_fnc_trim, time], GVAR(extensionSeparator)] call CBA_fnc_join;
 call compile ("R3DBConnector" callExtension _query);
