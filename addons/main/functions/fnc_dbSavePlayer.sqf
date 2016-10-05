@@ -28,7 +28,8 @@ if (_uid == "" || _uid in GVAR(playerSavedIds)) exitWith {};
 
 GVAR(playerSavedIds) pushBack _uid;
 
-private _query = format["2:SQL:playerInsert:%1:%2", _uid, _name];
-private _savePlayer = call compile ("extDB3" callExtension _query);
+// Send the query to the extension
+private _query = format["%1¤¤¤%2¤¤¤%3", "playerUpdate", _uid, _name];
+call compile ("R3DBConnector" callExtension _query);
 
-diag_log format["Saved player to db: %1", _name];
+DBUG(format[ARR_2("Saved player to db: %1", _name)], _functionLogName);

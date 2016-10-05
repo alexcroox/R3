@@ -42,5 +42,5 @@ private _eventType = switch(_state) do {
 
 _unit setVariable ["lastUnconscious", time, false];
 
-// Save details to db
-GVAR(eventSavingQueue) pushBack [_victimUid, _eventType, _json, time];
+// Send the json to our extension for saving to the db
+[_eventType, _json, _victimUid] call FUNC(dbInsertEvent);

@@ -38,7 +38,7 @@ private _formatedShotData = [_victim, _attacker] call FUNC(shotTemplate);
 private _victimUid = _formatedShotData select 0;
 private _json = _formatedShotData select 1;
 
-// Save details to db
-GVAR(eventSavingQueue) pushBack [_victimUid, "unit_killed", _json, time];
+// Send the json to our extension for saving to the db
+["unit_killed", _json, _victimUid] call FUNC(dbInsertEvent);
 
 //DBUG("Unit killed and saved to db", _functionLogName);
