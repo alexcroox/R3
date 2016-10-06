@@ -6,6 +6,7 @@ ADDON = false;
 
 GVAR(logEvents) = true;
 GVAR(replayId) = 0;
+GVAR(extensionName) = "r3_extension";
 GVAR(extensionSeparator) = "&^`";
 GVAR(playerSavedIds) = [];
 

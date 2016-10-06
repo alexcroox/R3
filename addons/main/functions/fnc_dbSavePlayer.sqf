@@ -30,6 +30,6 @@ GVAR(playerSavedIds) pushBack _uid;
 
 // Send the query to the extension
 private _query = [["player", _uid, _name], GVAR(extensionSeparator)] call CBA_fnc_join;
-call compile ("R3DBConnector" callExtension _query);
+call compile (GVAR(extensionName) callExtension _query);
 
 DBUG(format[ARR_2("Saved player to db: %1", _name)], _functionLogName);
