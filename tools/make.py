@@ -74,7 +74,7 @@ prefix = "aar"
 pbo_name_prefix = "aar_"
 signature_blacklist = []
 ignorePbo = "extDB3.pbo"
-importantFiles = ["mod.cpp", "README.md", "AUTHORS.txt", "LICENSE", "logo_aar_ca.paa", "extdb3-conf.ini"]
+importantFiles = ["mod.cpp", "README.md", "LICENSE", "logo_aar_ca.paa"]
 versionFiles = ["README.md", "mod.cpp"]
 
 ciBuild = False # Used for CI builds
@@ -351,28 +351,6 @@ def copy_important_files(source_dir,destination_dir):
         print_error("COPYING IMPORTANT FILES.")
         raise
 
-    # Copy extdb custom_sql folder and file
-    try:
-        source_sql_custom_dir = os.path.join(source_dir, "sql_custom")
-        destination_sql_custom_dir = os.path.join(destination_dir, "sql_custom")
-        print_blue("\nSearching for sql_custom files in {}".format(source_sql_custom_dir))
-        print("Source_dir: {}".format(source_sql_custom_dir))
-        print("Destination_dir: {}".format(destination_sql_custom_dir))
-
-        if os.path.exists(destination_sql_custom_dir):
-            shutil.rmtree(destination_sql_custom_dir, True)
-        os.mkdir(destination_sql_custom_dir)
-
-        filePath = os.path.join(source_sql_custom_dir, "aar.ini")
-        shutil.copyfile(filePath, os.path.join(destination_sql_custom_dir,"aar.ini"))
-
-        source_addons_dir = os.path.join(source_dir, "addons");
-        destination_addons_dir = os.path.join(destination_dir, "addons")
-        filePath = os.path.join(source_addons_dir, "extDB3.pbo")
-        shutil.copyfile(filePath, os.path.join(destination_addons_dir,"extDB3.pbo"))
-    except:
-        print_error("COPYING SQL CUSTOM FILES.")
-        raise
 
     #copy all extension dlls
     try:
