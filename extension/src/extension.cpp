@@ -84,7 +84,10 @@ namespace {
         std::string configFilePath(fmt::format("{}{}{}", extensionFolder, Poco::Path::separator(), CONFIG_FILE));
         Poco::File file(configFilePath);
         if (!file.exists()) {
-            configError += fmt::format("Config file is missing from '{}'!", configFilePath);
+            std::string message = fmt::format("Config file is missing from '{}'!", configFilePath);
+            configError += message;
+            log::initialze(extensionFolder, "info");
+            log::logger->error(message);
             return false;
         }
         Poco::AutoPtr<Poco::Util::PropertyFileConfiguration> config(new Poco::Util::PropertyFileConfiguration(configFilePath));
