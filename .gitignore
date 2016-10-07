@@ -7,3 +7,6 @@ texHeaders.bin
 *.biprivatekey
 Thumbs.db
 !addons/extDB3.pbo
+!extension/build/CMakeLists.txt
+extension/build/*
+extension/include/spdlog
