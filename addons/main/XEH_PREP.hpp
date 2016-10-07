@@ -6,6 +6,7 @@ PREP(dbSavePlayer);
 
 PREP(addMissionEventHandlers);
 PREP(addInfantryEventHandlers);
+PREP(addInfantryACEEventHandlers);
 PREP(addVehicleEventHandlers);
 
 PREP(eventKilled);
@@ -14,6 +15,7 @@ PREP(eventMissionEnd);
 PREP(eventPlayerConnect);
 PREP(eventPlayerDisconnect);
 PREP(eventGetIn);
+PREP(eventGetOut);
 PREP(eventUnconscious);
 PREP(shotTemplate);
 PREP(eventIncomingMissile);

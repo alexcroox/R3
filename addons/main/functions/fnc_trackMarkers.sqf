@@ -38,7 +38,7 @@ private _markerData = "";
     private _singleMarkerData = format['
         {
             "name": "%1",
-            "pos": %2
+            "pos": %2,
             "type": "%3",
             "text": "%4",
             "dir": "%5",
@@ -46,7 +46,7 @@ private _markerData = "";
             "size": %7,
             "color": "%8",
             "brush": "%9",
-            "alpha": "%10",
+            "alpha": "%10"
         }',
         _markerName,
         _markerPosition,

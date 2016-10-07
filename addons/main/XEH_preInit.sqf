@@ -7,7 +7,7 @@ ADDON = false;
 GVAR(logEvents) = true;
 GVAR(replayId) = 0;
 GVAR(extensionName) = "r3_extension";
-GVAR(extensionSeparator) = "&^`";
+GVAR(extensionSeparator) = "";
 GVAR(playerSavedIds) = [];
 
 // Frequency of unit movement logging (seconds)

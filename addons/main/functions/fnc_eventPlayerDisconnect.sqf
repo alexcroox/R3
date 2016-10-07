@@ -30,22 +30,19 @@ params [
 
 if (_uid == "") exitWith { DBUG(format[ARR_2("No player UID, ignoring disconnect event %1", _id)], _functionLogName); };
 
-// We only want to show notifications for JIP players
-if (_jip) then {
 
-    private _json = format['
-        {
-            "unit": "%1",
-            "id": "%2"
-        }',
-        _id,
-        _uid
-    ];
+private _json = format['
+    {
+        "unit": "%1",
+        "id": "%2"
+    }',
+    _id,
+    _uid
+];
 
-    // Send the json to our extension for saving to the db
-    ["player_disconnected", _json, _uid] call FUNC(dbInsertEvent);
+// Send the json to our extension for saving to the db
+["player_disconnected", _json, _uid] call FUNC(dbInsertEvent);
 
-    //DBUG(format[ARR_2("Player disconnected: %1", _name)], _functionLogName);
-};
+//DBUG(format[ARR_2("Player disconnected: %1", _name)], _functionLogName);
 
 

@@ -34,16 +34,16 @@ private _attackerType = getText (configFile >> "CfgVehicles" >> (typeOf _attacke
 private _attackerFaction = _attacker call FUNC(calcSideInt);
 private _attackerDistance = round (getPos _victim distance getPos _attacker);
 
+private _attackerUid = getPlayerUID gunner vehicle _attacker;
+
 if (vehicle _attacker == _attacker) then {
-    private _attackerUid = getPlayerUID _attacker;
-} else {
-    private _attackerUid = getPlayerUID gunner vehicle _attacker;
+    _attackerUid = getPlayerUID _attacker;
 };
 
+private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName");
+
 if(vehicle _attacker == _attacker) then {
-    private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
-} else {
-    private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName")
+    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
 };
 
 // Form JSON for saving
