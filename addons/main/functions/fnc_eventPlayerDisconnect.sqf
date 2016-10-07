@@ -42,8 +42,8 @@ if (_jip) then {
         _uid
     ];
 
-    // Add it to our event buffer for saving
-    GVAR(eventSavingQueue) pushBack [_uid, "player_disconnected", _json, time];
+    // Send the json to our extension for saving to the db
+    ["player_disconnected", _json, _uid] call FUNC(dbInsertEvent);
 
     //DBUG(format[ARR_2("Player disconnected: %1", _name)], _functionLogName);
 };

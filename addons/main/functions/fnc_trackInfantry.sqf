@@ -17,16 +17,13 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > movementsInfantry";
 
-// We have a string length limit with our database extension so we need to break up
-// large amounts of units into multiple calls
-private _unitCount = 0;
 private _movementData = "";
 
 // Loop through all units on the map
 {
     [_x] call FUNC(addInfantryEventHandlers);
 
-    if (vehicle _x == _x) then {
+    if (vehicle _x == _x && !(_x isKindOf "Logic")) then {
 
         private _unitUid = getPlayerUID _x;
         private _unitPos = getPos _x;
@@ -68,24 +65,12 @@ private _movementData = "";
 
         // Combine this unit's data with our current running movements data
         _movementData = [[_movementData, _singleUnitMovementData], _seperator] call CBA_fnc_join;
-
-        _unitCount = _unitCount + 1;
-
-        // If we've reached our limit for the number of units in a single db entry lets flush and continue
-        if (_unitCount == GVAR(maxUnitCountPerEvent)) then {
-
-            // Save details to db
-            private _movementDataJsonArray = format["[%1]", _movementData];
-            GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementDataJsonArray, time];
-
-            _unitCount = 0;
-            _movementData = "";
-        };
     };
 } forEach allUnits;
 
-// Do we still have outstanding unit movements we need to save?
+// Send the json to our extension for saving to the db
 if (_movementData != "") then {
+
     private _movementDataJsonArray = format["[%1]", _movementData];
-    GVAR(eventSavingQueue) pushBack [0, "positions_infantry", _movementDataJsonArray, time];
+    ["positions_infantry", _movementDataJsonArray] call FUNC(dbInsertEvent);
 };

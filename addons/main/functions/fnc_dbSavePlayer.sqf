@@ -28,7 +28,8 @@ if (_uid == "" || _uid in GVAR(playerSavedIds)) exitWith {};
 
 GVAR(playerSavedIds) pushBack _uid;
 
-private _query = format["2:SQL:playerInsert:%1:%2", _uid, _name];
-private _savePlayer = call compile ("extDB3" callExtension _query);
+// Send the query to the extension
+private _query = [["player", _uid, _name], GVAR(extensionSeparator)] call CBA_fnc_join;
+call compile (GVAR(extensionName) callExtension _query);
 
-diag_log format["Saved player to db: %1", _name];
+DBUG(format[ARR_2("Saved player to db: %1", _name)], _functionLogName);

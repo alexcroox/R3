@@ -66,9 +66,7 @@ private _json = format['
     _attackerAmmoType
 ];
 
-// Add it to our event buffer for saving
-GVAR(eventSavingQueue) pushBack [_victimUid, "incoming_missile", _json, time];
-
-//DBUG(format[ARR_2("Incoming missile: %1", _victim)], _functionLogName);
+// Send the json to our extension for saving to the db
+["incoming_missile", _json, _victimUid] call FUNC(dbInsertEvent);
 
 

@@ -39,7 +39,7 @@ private _json = format['
     _uid
 ];
 
-// Add it to our event buffer for saving
-GVAR(eventSavingQueue) pushBack [_uid, "get_in", _json, time];
+// Send the json to our extension for saving to the db
+["get_in", _json, _uid] call FUNC(dbInsertEvent);
 
 
