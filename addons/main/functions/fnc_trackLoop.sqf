@@ -24,28 +24,44 @@ private _timeSinceLastGroundVehicleInsert = time;
 private _timeSinceLastAirVehicleInsert = time;
 private _timeSinceLastMarkerInsert = time;
 
-while { GVAR(logEvents) } do {
+while { true } do {
 
-    // We save unit positions at different frequencies depending on their vehicle
+    if (GVAR(logEvents)) then {
 
-    if (time >= _timeSinceLastInfantryInsert + GVAR(insertFrequencyInfantry)) then {
-        call FUNC(trackInfantry);
-        _timeSinceLastInfantryInsert = time;
-    };
+        // We only want to log movements if there are players in the map
+        private _playerCount = 0;
 
-    if (time >= _timeSinceLastGroundVehicleInsert + GVAR(insertFrequencyGroundVehicle)) then {
-        ["ground"] call FUNC(trackVehicles);
-        _timeSinceLastGroundVehicleInsert = time;
-    };
+        {
+            if (isPlayer _x) then {
+                _playerCount = _playerCount + 1;
+            };
 
-    if (time >= _timeSinceLastAirVehicleInsert + GVAR(insertFrequencyAirVehicle)) then {
-        ["air"] call FUNC(trackVehicles);
-        _timeSinceLastAirVehicleInsert = time;
-    };
+        } forEach playableUnits;
 
-    if (time >= _timeSinceLastMarkerInsert + GVAR(insertFrequencyMarkers)) then {
-        call FUNC(trackMarkers);
-        _timeSinceLastMarkerInsert = time;
+        if (_playerCount > 0) then {
+
+            // We save unit positions at different frequencies depending on their vehicle
+
+            if (time >= _timeSinceLastInfantryInsert + GVAR(insertFrequencyInfantry)) then {
+                call FUNC(trackInfantry);
+                _timeSinceLastInfantryInsert = time;
+            };
+
+            if (time >= _timeSinceLastGroundVehicleInsert + GVAR(insertFrequencyGroundVehicle)) then {
+                ["ground"] call FUNC(trackVehicles);
+                _timeSinceLastGroundVehicleInsert = time;
+            };
+
+            if (time >= _timeSinceLastAirVehicleInsert + GVAR(insertFrequencyAirVehicle)) then {
+                ["air"] call FUNC(trackVehicles);
+                _timeSinceLastAirVehicleInsert = time;
+            };
+
+            if (time >= _timeSinceLastMarkerInsert + GVAR(insertFrequencyMarkers)) then {
+                call FUNC(trackMarkers);
+                _timeSinceLastMarkerInsert = time;
+            };
+        };
     };
 
     sleep (0.2);

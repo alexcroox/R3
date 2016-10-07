@@ -25,10 +25,10 @@ private _movementData = "";
 
 // Loop through all vehicles on the map
 {
+    [_x] call FUNC(addVehicleEventHandlers);
+
     // Is there anyone inside the vehicle? We don't want to track empty vehicles
     if (count crew _x > 0) then {
-
-        [_x] call FUNC(addVehicleEventHandlers);
 
         // Are we asking for ground vehicles and does this vehicle drive?
         if ( _trackVehicleType == "ground" && !(_x isKindOf "Car" || _x isKindOf "Tank" || _x isKindOf "Boat_F") ) exitWith {};
