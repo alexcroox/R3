@@ -14,7 +14,7 @@ namespace sql {
 
 namespace {
     std::string host, database, user, password;
-    int port;
+    uint32_t port;
     size_t timeout;
     Poco::Data::Session* session;
     std::mutex sessionMutex;
@@ -55,7 +55,7 @@ namespace {
         return Poco::Nullable<std::string>();
     }
 
-    bool initialize(const std::string& host_, int port_, const std::string& database_, const std::string& user_, const std::string& password_, size_t timeout_) {
+    bool initialize(const std::string& host_, uint32_t port_, const std::string& database_, const std::string& user_, const std::string& password_, size_t timeout_) {
         host = host_;
         port = port_;
         database = database_;
