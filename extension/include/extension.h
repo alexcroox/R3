@@ -10,7 +10,6 @@
 namespace r3 {
 
     const std::string REQUEST_COMMAND_POISON = "poison";
-    const std::string REQUEST_PARAM_SEPARATOR = "`";
 
     const std::string RESPONSE_TYPE_ERROR = "error";
     const std::string RESPONSE_TYPE_OK = "ok";

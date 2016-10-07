@@ -19,6 +19,7 @@ namespace {
 
     Queue<Request> requests;
     std::thread sqlThread;
+    std::string requestParamSeparator;
 }
 
     void respond(char* output, const std::string& type, const std::string& data) {
@@ -50,6 +51,7 @@ namespace {
     bool initialize() {
         std::string extensionFolder(getExtensionFolder());
         Poco::AutoPtr<Poco::Util::PropertyFileConfiguration> config(new Poco::Util::PropertyFileConfiguration(fmt::format("{}\\{}", extensionFolder, "config.properties")));
+        requestParamSeparator = config->getString("r3.sqf.separator");
         std::string host = config->getString("r3.db.host");
         int port = config->getInt("r3.db.port");
         std::string database = config->getString("r3.db.database");
@@ -73,12 +75,16 @@ namespace {
 
     void call(char* output, int outputSize, const char* function) {
         Request request{ "" };
-        split(std::string(function), REQUEST_PARAM_SEPARATOR, request.params);
+        split(std::string(function), requestParamSeparator, request.params);
         if (!request.params.empty()) {
             request.command = request.params[0];
         }
         if (request.command == "version") {
             respond(output, RESPONSE_TYPE_OK, fmt::format("\"{}\"", R3_EXTENSION_VERSION));
+            return;
+        }
+        else if (request.command == "separator") {
+            respond(output, RESPONSE_TYPE_OK, fmt::format("\"{}\"", requestParamSeparator));
             return;
         }
         else if (request.command == "connect") {
