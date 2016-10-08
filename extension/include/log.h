@@ -9,8 +9,6 @@ namespace log {
 
     bool initialze(const std::string& extensionFolder, const std::string& logLevel);
     void finalize();
-    std::string getLogFileName();
-    spdlog::level::level_enum getLogLevel(const std::string& logLevel);
 
 } // namespace log
 } // namespace r3
