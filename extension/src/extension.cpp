@@ -135,6 +135,10 @@ namespace {
             return;
         }
         else if (request.command == "connect") {
+            if (sql::isConnected()) {
+                respond(output, RESPONSE_TYPE_OK, "true");
+                return;
+            }
             std::string message = sql::connect();
             if (message.empty()) {
                 sqlThread = std::thread(sql::run);
