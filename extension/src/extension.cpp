@@ -1,6 +1,7 @@
 #include "extension.h"
 
 #include <fstream>
+#include <regex>
 #include "shlobj.h"
 
 #include "log.h"
@@ -32,12 +33,9 @@ namespace {
         output[message.length()] = '\0';
     }
 
-    std::vector<std::string>& split(const std::string &s, const std::string& delim, std::vector<std::string> &elems) {
-        Poco::StringTokenizer tokenizer(s, delim, Poco::StringTokenizer::TOK_TRIM);
-        for (auto token : tokenizer) {
-            elems.push_back(token);
-        }
-        return elems;
+    void split(const std::string &str, const std::string& separator, std::vector<std::string> &elems) {
+        std::regex separatorRegex(separator);
+        elems = { std::sregex_token_iterator(str.begin(), str.end(), separatorRegex, -1), std::sregex_token_iterator() };
     }
 
     std::string getExtensionFolder() {
