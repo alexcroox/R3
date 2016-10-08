@@ -23,26 +23,14 @@ private _functionLogName = "AAR > eventPlayerDisconnect";
 
 params [
     ["_id", objNull],
-    ["_uid", ""],
-    ["_name", "Unknown"],
-    ["_jip", false]
+    ["_uid", ""]
 ];
 
 if (_uid == "") exitWith { DBUG(format[ARR_2("No player UID, ignoring disconnect event %1", _id)], _functionLogName); };
 
-
-private _json = format['
-    {
-        "unit": "%1",
-        "id": "%2"
-    }',
-    _id,
-    _uid
-];
+private _json = format['{"id": "%1"}', _uid];
 
 // Send the json to our extension for saving to the db
 ["player_disconnected", _json, _uid] call FUNC(dbInsertEvent);
 
 //DBUG(format[ARR_2("Player disconnected: %1", _name)], _functionLogName);
-
-

@@ -22,9 +22,12 @@ private _markerData = "";
 // Loop through all markers on the map
 {
 
+    private _markerType = markerType _x;
+
+    if (_markerType == "Empty") exitWith {};
+
     private _markerName = _x;
     private _markerPosition = markerPos _x;
-    private _markerType = markerType _x;
     private _markerText = markerText _x;
     private _markerDirection = markerDir _x;
     private _markerShape = markerShape _x;

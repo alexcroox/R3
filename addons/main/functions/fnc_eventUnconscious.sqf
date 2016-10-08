@@ -23,6 +23,8 @@ params [
     ["_state", FALSE]
 ];
 
+if (GVAR(noPlayers)) exitWith {};
+
 // Let's debounce multiple unconscious events firing for this unit
 private _lastUnconsciousTime = _unit getVariable ["lastUnconscious", 0];
 

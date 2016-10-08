@@ -22,8 +22,8 @@ private _seperator = call compile (GVAR(extensionName) callExtension "separator"
 
 if ((_seperator select 0) isEqualTo "error") exitWith {
 
-    ERROR_WITH_TITLE("AAR Init Error", "The AAR tool (R3) failed to start, the extension failed to load or is missing");
-    DBUG("Failed to init", _functionLogName);
+    ERROR_SYSTEM_CHAT("The AAR tool (R3) failed to start, the extension failed to load or is missing");
+    DBUG(format[ARR_2("Failed to init: %1", _seperator select 1)], _functionLogName);
 };
 
 GVAR(extensionSeparator) = _seperator select 1;
@@ -34,8 +34,8 @@ private _connect = call compile (GVAR(extensionName) callExtension "connect");
 
 if ((_connect select 0) isEqualTo "error") exitWith {
 
-    ERROR_WITH_TITLE("AAR Connect Error", "The AAR tool (R3) failed to connect to your database, this mission will not be captured");
-    DBUG("Failed to connect to db", _functionLogName);
+    ERROR_SYSTEM_CHAT("The AAR tool (R3) failed to connect to your database, this mission will not be captured");
+    DBUG(format[ARR_2("Failed to connect to db: %1", _connect select 1)], _functionLogName);
 };
 
 ["dbSetup"] call CBA_fnc_localEvent;

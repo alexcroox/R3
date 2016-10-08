@@ -35,11 +35,9 @@ if (_jip) then {
 
     private _json = format['
         {
-            "unit": "%1",
-            "id": "%2",
-            "name": "%3"
+            "id": "%1",
+            "name": "%2"
         }',
-        _id,
         _uid,
         _name
     ];

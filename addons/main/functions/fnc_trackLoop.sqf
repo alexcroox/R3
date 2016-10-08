@@ -40,6 +40,8 @@ while { true } do {
 
         if (_playerCount > 0) then {
 
+            GVAR(noPlayers) = false;
+
             // We save unit positions at different frequencies depending on their vehicle
 
             if (time >= _timeSinceLastInfantryInsert + GVAR(insertFrequencyInfantry)) then {
@@ -61,6 +63,8 @@ while { true } do {
                 call FUNC(trackMarkers);
                 _timeSinceLastMarkerInsert = time;
             };
+        } else {
+            GVAR(noPlayers) = true;
         };
     };
 

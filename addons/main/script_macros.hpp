@@ -7,6 +7,8 @@
    #define DBUG(title, message) [ title, message, [false, true] ] call CBA_fnc_debug
 #endif
 
+#define ERROR_SYSTEM_CHAT(message) message remoteExec ["systemchat"];
+
 // Taken from ACE3 manually to avoid it being a dependancy
 
 // Default versioning level

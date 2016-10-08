@@ -26,6 +26,8 @@ params [
     ["_unit", objNull]
 ];
 
+if (GVAR(noPlayers)) exitWith {};
+
 if (_unit isEqualTo objNull) exitWith { DBUG(format[ARR_2("Invalid unit, ignoring get in event %1", _unit)], _functionLogName); };
 
 private _uid = getPlayerUID _unit;

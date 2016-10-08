@@ -5,6 +5,7 @@ ADDON = false;
 #include "XEH_PREP.hpp"
 
 GVAR(logEvents) = true;
+GVAR(noPlayers) = false;
 GVAR(replayId) = 0;
 GVAR(extensionName) = "r3_extension";
 GVAR(extensionSeparator) = "";
