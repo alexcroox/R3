@@ -21,6 +21,9 @@ params [
     ["_trackVehicleType", "ground"]
 ];
 
+// We have a string length limit with our database extension so we need to break up
+// large amounts of units into multiple calls
+private _unitCount = 0;
 private _movementData = "";
 
 // Loop through all vehicles on the map
@@ -155,6 +158,19 @@ private _movementData = "";
 
         // Combine this unit's data with our current running movements data
         _movementData = [[_movementData, _singleVehicleMovementData], _seperator] call CBA_fnc_join;
+
+        _unitCount = _unitCount + 1;
+
+        // If we've reached our limit for the number of units in a single db entry lets flush and continue
+        if (_unitCount == GVAR(maxUnitCountPerEvent)) then {
+
+            // Save details to db
+            private _movementDataJsonArray = format["[%1]", _movementData];
+            ["positions_vehicles", _movementDataJsonArray] call FUNC(dbInsertEvent);
+
+            _unitCount = 0;
+            _movementData = "";
+        };
     };
 } forEach vehicles;
 

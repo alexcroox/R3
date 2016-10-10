@@ -30,5 +30,7 @@ Being built along side the [web component](https://github.com/alexcroox/R3-Web).
 
 ACE3 dev team for providing [coding guidelines](http://ace3mod.com/wiki/development/coding-guidelines.html) and the [project template](https://github.com/acemod/arma-project-template) this was created from.
 
-[NRF1] Crazy for working with me on the original AAR as part of the old 5th Rifles mission framework. Much of his original SQF inspired this dedicated addon.
+[ARK] Kami for building the custom extension
+[ARK] Chairbourne for providing CUP source for the vehicle icons
+[NRF1] Crazy for working with me on the original AAR as part of the old 5th Rifles mission framework.
 
