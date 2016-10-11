@@ -3,8 +3,8 @@
 #define MAINPREFIX z
 #define PREFIX aar
 
-#define MAJOR 0
-#define MINOR 7
+#define MAJOR 1
+#define MINOR 0
 #define PATCHLVL 0
 #define BUILD 0
 

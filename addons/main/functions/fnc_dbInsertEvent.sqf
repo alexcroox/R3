@@ -26,5 +26,5 @@ params [
 ];
 
 // Send the query to the extension
-private _query = [["event", GVAR(replayId), _playerId, _type, _data call CBA_fnc_trim, time], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [["event", GVAR(replayId), _playerId, _type, _data, time], GVAR(extensionSeparator)] call CBA_fnc_join;
 call compile (GVAR(extensionName) callExtension _query);
