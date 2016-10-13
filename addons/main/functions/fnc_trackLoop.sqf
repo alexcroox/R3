@@ -24,6 +24,9 @@ private _timeSinceLastGroundVehicleInsert = time;
 private _timeSinceLastAirVehicleInsert = time;
 private _timeSinceLastMarkerInsert = time;
 
+// Just log markers once
+call FUNC(trackMarkers);
+
 while { true } do {
 
     if (GVAR(logEvents)) then {
@@ -59,10 +62,6 @@ while { true } do {
                 _timeSinceLastAirVehicleInsert = time;
             };
 
-            if (time >= _timeSinceLastMarkerInsert + GVAR(insertFrequencyMarkers)) then {
-                call FUNC(trackMarkers);
-                _timeSinceLastMarkerInsert = time;
-            };
         } else {
             GVAR(noPlayers) = true;
         };
