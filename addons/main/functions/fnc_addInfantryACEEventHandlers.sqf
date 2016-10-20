@@ -24,6 +24,4 @@ params [
 // Only add ACE3 event handlers if ACE is loaded server side
 if (!isNull (configFile >> "CfgPatches" >> "ace_main")) then {
     ["ace_unconscious", FUNC(eventUnconscious)] call CBA_fnc_addEventHandler;
-
-    diag_log format["Added ACE EH to %1", _unit];
 };

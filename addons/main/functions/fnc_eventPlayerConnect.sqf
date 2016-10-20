@@ -28,7 +28,7 @@ params [
     ["_jip", false]
 ];
 
-if (_uid == "") exitWith { DBUG(format[ARR_2("No player UID, ignoring connect event %1", _id)], _functionLogName); };
+if (_uid == "") exitWith {};
 
 // We only want to show notifications for JIP players
 if (_jip) then {
