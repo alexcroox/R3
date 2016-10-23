@@ -54,7 +54,7 @@ private _markerData = "";
         _markerName,
         _markerPosition,
         _markerType,
-        _markerText,
+        _markerText call CBA_fnc_trim,
         _markerDirection,
         _markerShape,
         _markerSize,
