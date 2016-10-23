@@ -22,15 +22,14 @@ params [
 ];
 
 private _isSetupAlready = _vehicle getVariable ["eventsSetup", false];
+private _doNotTrack = _vehicle getVariable ["r3_do_not_track", false];
 
-if !(_isSetupAlready) then {
+if !(_isSetupAlready && !_doNotTrack) then {
 
     _vehicle setVariable ["eventsSetup", true, false];
 
     _vehicle addEventHandler ["GetIn", FUNC(eventGetIn)];
     _vehicle addEventHandler ["GetOut", FUNC(eventGetOut)];
 
-    if(_vehicle isKindOf "Air") then {
-        _vehicle addEventHandler ["IncomingMissile", FUNC(eventIncomingMissile)];
-    };
+    _vehicle addEventHandler ["IncomingMissile", FUNC(eventIncomingMissile)];
 };
