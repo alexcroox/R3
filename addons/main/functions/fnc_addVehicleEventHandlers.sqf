@@ -22,9 +22,8 @@ params [
 ];
 
 private _isSetupAlready = _vehicle getVariable ["eventsSetup", false];
-private _doNotTrack = _vehicle getVariable ["r3_do_not_track", false];
 
-if !(_isSetupAlready && !_doNotTrack) then {
+if !(_isSetupAlready) then {
 
     _vehicle setVariable ["eventsSetup", true, false];
 

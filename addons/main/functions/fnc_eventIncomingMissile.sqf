@@ -27,7 +27,7 @@ params [
 
 if (GVAR(noPlayers)) exitWith {};
 
-if (_victim isEqualTo objNull) exitWith { DBUG(format[ARR_2("No unit, ignoring missile event %1", _ammo)], _functionLogName); };
+if (_victim isEqualTo objNull) exitWith {};
 
 private _victimUid = getPlayerUID _victim;
 private _attackerUid = getPlayerUID _attacker;

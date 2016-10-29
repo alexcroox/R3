@@ -26,7 +26,7 @@ params [
     ["_uid", ""]
 ];
 
-if (_uid == "") exitWith { DBUG(format[ARR_2("No player UID, ignoring disconnect event %1", _id)], _functionLogName); };
+if (_uid == "") exitWith {};
 
 private _json = format['{"id": "%1"}', _uid];
 
