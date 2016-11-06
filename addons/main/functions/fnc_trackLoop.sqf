@@ -24,11 +24,10 @@ private _timeSinceLastGroundVehicleInsert = time;
 private _timeSinceLastAirVehicleInsert = time;
 private _timeSinceLastMarkerInsert = time;
 
-// Just log markers once
+// Just log markers once (for now)
 call FUNC(trackMarkers);
 
-while { true } do {
-
+[{
     if (GVAR(logEvents)) then {
 
         // We only want to log movements if there are players in the map
@@ -66,6 +65,4 @@ while { true } do {
             GVAR(noPlayers) = true;
         };
     };
-
-    sleep (0.2);
-};
+}, 0.2] call CBA_fnc_addPerFrameHandler;
