@@ -30,7 +30,7 @@ Being built along side the [web component](https://github.com/alexcroox/R3-Web).
 3. Create a MySQL database with [this structure](https://github.com/alexcroox/R3-Web/blob/master/db-template.sql)
 4. Enter your db details into `config.properties`
 5. Add @R3 to your server startup mod list
-
+6. Host the [web component, follow instructions here](https://github.com/alexcroox/R3-Web)
 
 
 ### Special thanks
