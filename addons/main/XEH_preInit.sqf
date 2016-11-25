@@ -18,4 +18,9 @@ GVAR(insertFrequencyGroundVehicle) = 1;
 GVAR(insertFrequencyAirVehicle) = 1;
 GVAR(insertFrequencyMarkers) = 10;
 
+GVAR(timeSinceLastInfantryInsert) = 0;
+GVAR(timeSinceLastGroundVehicleInsert) = 0;
+GVAR(timeSinceLastAirVehicleInsert) = 0;
+GVAR(timeSinceLastMarkerInsert) = 0;
+
 ADDON = true;
