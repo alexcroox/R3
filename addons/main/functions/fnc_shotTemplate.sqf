@@ -46,6 +46,9 @@ if(vehicle _attacker == _attacker) then {
     _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
 };
 
+// Remove any rogue double quotes that mess with json
+private _attackerWeapon = _attackerWeapon splitString '"' joinString "";
+
 // Form JSON for saving
 private _json = format['
     {
