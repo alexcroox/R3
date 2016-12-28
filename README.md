@@ -21,7 +21,7 @@
 
 Server Side addon for capturing unit movement and behaviour to a database for After Action Replays on a website. 
 
-Being built along side the [web component](https://github.com/alexcroox/R3-Web).
+Being built along side the [web component](https://github.com/alexcroox/R3-Web) and [tile generation component](https://github.com/alexcroox/R3-Tile-Generator)
 
 ### Install
 
