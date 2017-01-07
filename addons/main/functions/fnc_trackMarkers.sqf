@@ -17,9 +17,6 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > trackMarkers";
 
-// We have a string length limit with our database extension so we need to break up
-// large amounts of markers into multiple calls
-private _markerCount = 0;
 private _markerData = "";
 
 // Loop through all markers on the map
@@ -71,19 +68,6 @@ private _markerData = "";
 
     // Combine this marker's data with our current running marker data
     _markerData = [[_markerData, _singleMarkerData], _seperator] call CBA_fnc_join;
-
-    _markerCount = _markerCount + 1;
-
-    // If we've reached our limit for the number of units in a single db entry lets flush and continue
-    if (_markerCount == GVAR(maxMarkerCountPerEvent)) then {
-
-        // Save details to db
-        private _markerDataJsonArray = format["[%1]", _markerData];
-        ["markers", _markerDataJsonArray] call FUNC(dbInsertEvent);
-
-        _markerCount = 0;
-        _markerData = "";
-    };
 
 } forEach allMapMarkers;
 

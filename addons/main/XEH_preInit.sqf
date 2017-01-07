@@ -11,7 +11,6 @@ GVAR(extensionName) = "r3_extension";
 GVAR(extensionSeparator) = "";
 GVAR(playerSavedIds) = [];
 GVAR(maxUnitCountPerEvent) = 25;
-GVAR(maxMarkerCountPerEvent) = 10;
 
 // Frequency of unit movement logging (seconds)
 GVAR(insertFrequencyInfantry) = 1;

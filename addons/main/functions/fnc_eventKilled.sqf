@@ -23,7 +23,7 @@ params [
     ["_attacker", objNull]
 ];
 
-if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
+if (GVAR(noPlayers)) exitWith {};
 
 // Handle respawnOnStart
 if (_victim == objNull) exitWith {};

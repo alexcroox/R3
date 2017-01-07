@@ -24,6 +24,4 @@ params [
     ["_attacker", objNull]
 ];
 
-if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
-
 _victim setVariable ["lastAttacker", _attacker, false];
