@@ -26,6 +26,8 @@ params [
     ["_uid", ""]
 ];
 
+if !(GVAR(logEvents)) exitWith {};
+
 if (_uid == "") exitWith {};
 
 private _json = format['{"id": "%1"}', _uid];
