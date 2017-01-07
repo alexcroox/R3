@@ -47,7 +47,7 @@ if(vehicle _attacker == _attacker) then {
 };
 
 // Remove any rogue double quotes that mess with json
-private _attackerWeapon = _attackerWeapon splitString '"' joinString "";
+_attackerWeapon = (_attackerWeapon splitString """") joinString "";
 
 // Form JSON for saving
 private _json = format['
