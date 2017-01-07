@@ -28,6 +28,8 @@ params [
     ["_jip", false]
 ];
 
+if !(GVAR(logEvents)) exitWith {};
+
 if (_uid == "") exitWith {};
 
 // We only want to show notifications for JIP players

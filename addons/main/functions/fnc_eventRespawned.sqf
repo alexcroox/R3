@@ -23,7 +23,7 @@ params [
     ["_oldEntity", objNull]
 ];
 
-if (GVAR(noPlayers)) exitWith {};
+if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
 
 // We only want to handle ai or players respawning
 if ( (_newEntity isEqualTo ObjNull) or !(getObjectType _newEntity isEqualTo 8) ) exitWith {};
