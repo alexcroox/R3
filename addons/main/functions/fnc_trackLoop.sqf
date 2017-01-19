@@ -19,16 +19,10 @@ private _functionLogName = "AAR > trackLoop";
 
 DBUG("Starting track loop", _functionLogName);
 
-GVAR(timeSinceLastInfantryInsert) = time;
-GVAR(timeSinceLastGroundVehicleInsert) = time;
-GVAR(timeSinceLastAirVehicleInsert) = time;
-GVAR(timeSinceLastMarkerInsert) = time;
-
 // Just log markers once (for now)
 call FUNC(trackMarkers);
 
 [{
-
     if (GVAR(logEvents)) then {
 
         // We only want to log movements if there are players in the map
@@ -45,24 +39,11 @@ call FUNC(trackMarkers);
 
             GVAR(noPlayers) = false;
 
-            // We save unit positions at different frequencies depending on their vehicle
-            if (time >= GVAR(timeSinceLastInfantryInsert) + GVAR(insertFrequencyInfantry)) then {
-                call FUNC(trackInfantry);
-                GVAR(timeSinceLastInfantryInsert) = time;
-            };
-
-            if (time >= GVAR(timeSinceLastGroundVehicleInsert) + GVAR(insertFrequencyGroundVehicle)) then {
-                ["ground"] call FUNC(trackVehicles);
-                GVAR(timeSinceLastGroundVehicleInsert) = time;
-            };
-
-            if (time >= GVAR(timeSinceLastAirVehicleInsert) + GVAR(insertFrequencyAirVehicle)) then {
-                ["air"] call FUNC(trackVehicles);
-                GVAR(timeSinceLastAirVehicleInsert) = time;
-            };
+            call FUNC(trackInfantry);
+            call FUNC(trackVehicles);
 
         } else {
             GVAR(noPlayers) = true;
         };
     };
-}, 0.2] call CBA_fnc_addPerFrameHandler;
+}, 1] call CBA_fnc_addPerFrameHandler;
