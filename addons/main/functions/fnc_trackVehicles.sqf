@@ -3,7 +3,7 @@
  * Loops through all vehicles on the map and saves to db event buffer
  *
  * Arguments:
- * 0: vehicleType <STRING>
+ * None
  *
  * Return Value:
  * None
@@ -16,10 +16,6 @@
 
 #include "script_component.hpp"
 private _functionLogName = "AAR > trackVehicles";
-
-params [
-    ["_trackVehicleType", "ground"]
-];
 
 // We have a string length limit with our database extension so we need to break up
 // large amounts of units into multiple calls
@@ -36,12 +32,6 @@ private _movementData = "";
 
         // Is there anyone inside the vehicle? We don't want to track empty vehicles
         if (count crew _x > 0) then {
-
-            // Are we asking for ground vehicles and does this vehicle drive?
-            if ( _trackVehicleType == "ground" && !(_x isKindOf "Car" || _x isKindOf "Tank" || _x isKindOf "Boat_F" || _x isKindOf "Ship_F" || _x isKindOf "StaticWeapon") ) exitWith {};
-
-            // Are we tracking air vehicles and does this vehicle fly?
-            if ( _trackVehicleType == "air" && !(_x isKindOf "Helicopter" || _x isKindOf "Plane") ) exitWith {};
 
             private _vehicleUid = getPlayerUID _x;
             private _vehiclePos = getPos _x;
