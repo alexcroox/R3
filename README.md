@@ -21,7 +21,13 @@
 
 Server Side addon for capturing unit movement and behaviour to a database for After Action Replays on a website. 
 
+No modifications to your missions required, nothing for clients to download.
+
 Being built along side the [web component](https://github.com/alexcroox/R3-Web) and [tile generation component](https://github.com/alexcroox/R3-Tile-Generator)
+
+### Demo
+
+An exact mirror of this repo [can be viewed here](https://titanmods.xyz/r3/ark/) which contains replays from [ARK Group](http://ark-group.org/)
 
 ### Install
 
