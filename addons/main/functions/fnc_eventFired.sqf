@@ -56,7 +56,6 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
             _type = "grenade";
         };
 
-        diag_log _grenadePos;
         private _json = format['
             {
                 "unit": "%1",
