@@ -20,6 +20,7 @@ PREP(eventUnconscious);
 PREP(shotTemplate);
 PREP(eventIncomingMissile);
 PREP(eventHit);
+PREP(eventFired);
 
 PREP(calcSideInt);
 PREP(trackLoop);

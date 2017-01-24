@@ -30,5 +30,7 @@ if !(_isSetupAlready) then {
     _unit addMPEventHandler ["MPHit", FUNC(eventHit)];
     _unit addEventHandler ["IncomingMissile", FUNC(eventIncomingMissile)];
 
+    _unit addEventHandler ["Fired", FUNC(eventFired)];
+
     [_unit] call FUNC(addInfantryACEEventHandlers);
 };
