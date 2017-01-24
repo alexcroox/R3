@@ -42,6 +42,9 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
         // Track the protectile and wait until it's stopped moving
         waitUntil { (getPos _projectile select 2) < 0.1 };
         private _grenadePos = getPos _projectile;
+        
+        // Is the position invalid?
+        if ((_grenadePos select 0) == 0) exitWith {};
 
         private _uid = getPlayerUID _unit;
 
