@@ -25,11 +25,13 @@ No modifications to your missions required, nothing for clients to download.
 
 Being built along side the [web component](https://github.com/alexcroox/R3-Web) and [tile generation component](https://github.com/alexcroox/R3-Tile-Generator)
 
+Built for Windows or Linux game servers.
+
 ### Demo
 
 An exact mirror of this repo [can be viewed here](https://titanmods.xyz/r3/ark/) which contains replays from [ARK Group](http://ark-group.org/)
 
-### Install
+### Install Windows Server
 
 1. Download the [latest release](https://github.com/alexcroox/R3/releases/latest) to your Windows game server
 2. Create a folder `/R3Extension/` in `/%appdata%/local/` and create a `config.properties` file with [this template](https://github.com/alexcroox/R3/blob/master/extension/config.properties)
@@ -38,12 +40,20 @@ An exact mirror of this repo [can be viewed here](https://titanmods.xyz/r3/ark/)
 5. Add @R3 to your server startup mod list
 6. Host the [web component, follow instructions here](https://github.com/alexcroox/R3-Web)
 
+### Install Linux Server
+
+1. Download the [latest release](https://github.com/alexcroox/R3/releases/latest) to your Linux game server
+2. Create a folder `/home/<user>/R3Extension` where `<user>` is the same user that is used to run the Arma server. Create a `config.properties` file with [this template](https://github.com/alexcroox/R3/blob/master/extension/config.properties) inside that folder.
+3. Create a MySQL database (on your web hosting) with [this structure](https://github.com/alexcroox/R3-Web/blob/master/db-template.sql)
+4. Enter your db details into `config.properties`
+5. Add @r3 to your server startup mod list (make sure it's lower case for Linux servers)
+6. Host the [web component, follow instructions here](https://github.com/alexcroox/R3-Web)
 
 ### Special thanks
 
-ACE3 dev team for providing [coding guidelines](http://ace3mod.com/wiki/development/coding-guidelines.html) and the [project template](https://github.com/acemod/arma-project-template) this was created from.
+[ARK] Kami for building the custom db extension and allowing me to ditch extdb!
 
-[ARK] Kami for building the custom db extension
+ACE3 dev team for providing [coding guidelines](http://ace3mod.com/wiki/development/coding-guidelines.html) and the [project template](https://github.com/acemod/arma-project-template) this was created from.
 
 [ARK] Chairbourne for providing CUP source for the vehicle icons
 
