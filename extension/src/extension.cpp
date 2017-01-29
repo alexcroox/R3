@@ -2,10 +2,14 @@
 
 #include <fstream>
 #include <regex>
+
+#ifdef _WIN32
 #include "shlobj.h"
+#endif
 
 #include "log.h"
 
+#include "Poco/Environment.h"
 #include "Poco/Path.h"
 #include "Poco/File.h"
 #include "Poco/StringTokenizer.h"
@@ -39,15 +43,19 @@ namespace {
     }
 
     std::string getExtensionFolder() {
+#ifdef _WIN32
+        std::string extensionFolder = fmt::format(".{}", Poco::Path::separator());
         wchar_t wpath[MAX_PATH];
-        std::string localAppData = ".";
-        if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, wpath))) {
-            Poco::UnicodeConverter::toUTF8(wpath, localAppData);
-            Poco::File file(fmt::format("{}{}{}", localAppData, Poco::Path::separator(), EXTENSION_FOLDER));
-            file.createDirectories();
-            return file.path();
+        if (!SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, wpath))) {
+            return extensionFolder;
         }
-        return localAppData;
+        Poco::UnicodeConverter::toUTF8(wpath, extensionFolder);
+#else
+        std::string extensionFolder = Poco::Environment::get("HOME", ".");
+#endif
+        Poco::File file(fmt::format("{}{}{}", extensionFolder, Poco::Path::separator(), EXTENSION_FOLDER));
+        file.createDirectories();
+        return file.path();
     }
 
     std::string getStringProperty(Poco::AutoPtr<Poco::Util::PropertyFileConfiguration> config, const std::string& key) {
@@ -164,7 +172,7 @@ namespace {
         else if (request.command == "player" || request.command == "event") {
             requests.push(request);
             respond(output, RESPONSE_TYPE_OK, EMPTY_SQF_DATA);
-            return;            
+            return;
         }
         respond(output, RESPONSE_TYPE_ERROR, "\"Unkown command\"");
     }
