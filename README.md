@@ -43,12 +43,11 @@ An exact mirror of this repo [can be viewed here](https://titanmods.xyz/r3/ark/)
 ### Install Linux Server
 
 1. Download the [latest release](https://github.com/alexcroox/R3/releases/latest) to your Linux game server
-2. Create a folder `/home/<user>/R3Extension` where `<user>` is the same user that is used to run the Arma server. 
-3. Create a `config.properties` file with [this template](https://github.com/alexcroox/R3/blob/master/extension/config.properties) inside that folder.
-4. Create a MySQL database (on your web hosting) with [this structure](https://github.com/alexcroox/R3-Web/blob/master/db-template.sql)
-5. Enter your db details into `config.properties`
-6. Add @r3 to your server startup mod list (make sure it's lower case for Linux servers)
-7. Host the [web component, follow instructions here](https://github.com/alexcroox/R3-Web)
+2. Create a folder `/home/<User running Arma>/R3Extension` and create a `config.properties` file with [this template](https://github.com/alexcroox/R3/blob/master/extension/config.properties) inside that folder.
+3. Create a MySQL database (on your web hosting) with [this structure](https://github.com/alexcroox/R3-Web/blob/master/db-template.sql)
+4. Enter your db details into `config.properties`
+5. Add @r3 to your server startup mod list (make sure it's lower case for Linux servers)
+6. Host the [web component, follow instructions here](https://github.com/alexcroox/R3-Web)
 
 ### Special thanks
 
