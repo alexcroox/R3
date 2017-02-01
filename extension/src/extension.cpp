@@ -21,6 +21,7 @@ namespace r3 {
 namespace extension {
 
 namespace {
+    const std::string EXTENSION_FOLDER_ENV_VAR = "R3_EXTENSION_HOME";
     const std::string EXTENSION_FOLDER = "R3Extension";
     const std::string CONFIG_FILE = "config.properties";
     const std::string DEFAULT_REQUEST_PARAM_SEPARATOR = "`";
@@ -43,6 +44,9 @@ namespace {
     }
 
     std::string getExtensionFolder() {
+        if (Poco::Environment::has(EXTENSION_FOLDER_ENV_VAR)) {
+            return Poco::Environment::get(EXTENSION_FOLDER_ENV_VAR);
+        }
 #ifdef _WIN32
         std::string extensionFolder = fmt::format(".{}", Poco::Path::separator());
         wchar_t wpath[MAX_PATH];
