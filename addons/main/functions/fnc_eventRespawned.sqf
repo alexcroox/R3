@@ -26,7 +26,7 @@ params [
 if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
 
 // We only want to handle ai or players respawning
-if ( (_newEntity isEqualTo ObjNull) or !(getObjectType _newEntity isEqualTo 8) ) exitWith {};
+if ( (_newEntity isEqualTo ObjNull) || !(getObjectType _newEntity isEqualTo 8) ) exitWith {};
 
 // Reset eventsSetup flag for infantry only (vehicles lose their EH's on respawn, units do not)
 if (_newEntity isKindOf "Man") then {
@@ -38,5 +38,3 @@ if (_newEntity isKindOf "Man") then {
     // ACE unconcious EH gets overwritten on respawn so we need to re-assign it
     [_newEntity] call FUNC(addInfantryACEEventHandlers);
 };
-
-DBUG("Unit respawned", _functionLogName);

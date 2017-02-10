@@ -29,10 +29,12 @@ if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
 
 if (_victim isEqualTo objNull) exitWith {};
 
-private _victimUid = getPlayerUID _victim;
-private _attackerUid = getPlayerUID _attacker;
-private _attackerPos = getPos _attacker;
+private _attackerPos = getPosWorld _attacker;
+
 private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName");
+// Remove any rogue double quotes that mess with json
+_attackerWeapon = (_attackerWeapon splitString """") joinString "";
+
 private _attackerAmmoType = (
     _ammo call {
         private _type = getText (configFile >> "CfgAmmo" >> _this >> "simulation");
@@ -45,30 +47,14 @@ private _attackerAmmoType = (
 );
 
 // Form JSON for saving
-private _json = format['
-    {
-        "victim": {
-            "unit": "%1",
-            "id": "%2"
-        },
-        "attacker": {
-            "unit": "%3",
-            "id": "%4",
-            "pos": %5,
-            "weapon": "%6",
-            "ammoType": "%7"
-        }
-    }',
-    _victim,
-    _victimUid,
-    _attacker,
-    _attackerUid,
+private _json = format['{"pos":%1,"weapon":"%2","ammoType":"%3"}',
     _attackerPos,
     _attackerWeapon,
     _attackerAmmoType
 ];
 
+private _entityA = _victim getVariable ["r3_entity_id", 0];
+private _entityB = _attacker getVariable ["r3_entity_id", 0];
+
 // Send the json to our extension for saving to the db
-["incoming_missile", _json, _victimUid] call FUNC(dbInsertEvent);
-
-
+["incoming_missile", _entityA, _entityB, _attackerAmmoType, _json] call FUNC(dbInsertEvent);

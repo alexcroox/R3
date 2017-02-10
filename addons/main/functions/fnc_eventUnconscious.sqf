@@ -32,11 +32,6 @@ if (_lastUnconsciousTime > (time - 10)) exitWith {};
 
 private _attacker = _unit getVariable ["lastAttacker", _unit];
 
-private _formatedShotData = [_unit, _attacker] call FUNC(shotTemplate);
-
-private _victimUid = _formatedShotData select 0;
-private _json = _formatedShotData select 1;
-
 private _eventType = switch(_state) do {
     case TRUE : { "unit_unconscious" };
     case FALSE : { "unit_awake" };
@@ -44,5 +39,14 @@ private _eventType = switch(_state) do {
 
 _unit setVariable ["lastUnconscious", time, false];
 
+private _formatedShotData = [_unit, _attacker] call FUNC(shotTemplate);
+
+private _attackerWeapon = _formatedShotData select 0;
+private _attackerDistance = _formatedShotData select 1;
+
+
+private _entityA = _unit getVariable ["r3_entity_id", 0];
+private _entityB = _attacker getVariable ["r3_entity_id", 0];
+
 // Send the json to our extension for saving to the db
-[_eventType, _json, _victimUid] call FUNC(dbInsertEvent);
+[_eventType, _entityA, _entityB, _attackerWeapon, _attackerDistance] call FUNC(dbInsertEvent);

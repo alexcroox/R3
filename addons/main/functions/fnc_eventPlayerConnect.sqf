@@ -34,20 +34,7 @@ if (_uid == "") exitWith {};
 
 // We only want to show notifications for JIP players
 if (_jip) then {
-
-    private _json = format['
-        {
-            "id": "%1",
-            "name": "%2"
-        }',
-        _uid,
-        _name
-    ];
-
+    
     // Send the json to our extension for saving to the db
-    ["player_connected", _json, _uid] call FUNC(dbInsertEvent);
-
-    //DBUG(format[ARR_2("Player connected: %1", _name)], _functionLogName);
+    ["player_connected", 0, 0, _uid, _name] call FUNC(dbInsertEvent);
 };
-
-

@@ -30,18 +30,7 @@ if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
 
 if (_unit isEqualTo objNull) exitWith {};
 
-private _uid = getPlayerUID _unit;
-
-private _json = format['
-    {
-        "unit": "%1",
-        "id": "%2"
-    }',
-    _unit,
-    _uid
-];
+private _entityA = _unit getVariable ["r3_entity_id", 0];
 
 // Send the json to our extension for saving to the db
-["get_in", _json, _uid] call FUNC(dbInsertEvent);
-
-
+["get_in", _entityA] call FUNC(dbInsertEvent);

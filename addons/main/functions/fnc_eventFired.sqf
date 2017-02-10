@@ -40,38 +40,23 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
         private ["_grenadePos"];
 
         // Track the protectile and wait until it's stopped moving
-        waitUntil { 
+        waitUntil {
             ((getPos _projectile select 2) < 0.1 || !alive _projectile)
         };
         private _grenadePos = getPos _projectile;
-        
+
         // Is the position invalid?
         if ((_grenadePos select 0) == 0) exitWith {};
 
-        private _uid = getPlayerUID _unit;
-
-        private _type = "smoke";
+        private _grenadeType = "smoke";
 
         if (_ammo find "HE" > -1) then {
-            _type = "grenade";
+            _grenadeType = "grenade";
         };
 
-        private _json = format['
-            {
-                "unit": "%1",
-                "id": "%2",
-                "type": "%3",
-                "ammo": "%4",
-                "position": %5
-            }',
-            _unit,
-            _uid,
-            _type,
-            _ammo,
-            _grenadePos
-        ];
+        private _entityA = _unit getVariable ["r3_entity_id", 0];
 
         // Send the json to our extension for saving to the db
-        ["projectile", _json, _uid] call FUNC(dbInsertEvent);
+        ["projectile", _entityA, 0, _grenadeType, _grenadePos] call FUNC(dbInsertEvent);
     };
 };

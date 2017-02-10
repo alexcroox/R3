@@ -2,7 +2,11 @@
 PREP(dbInit);
 PREP(dbInsertEvent);
 PREP(dbCreateMissionEntry);
-PREP(dbSaveInfantry);
+
+PREP(dbInsertInfantry);
+PREP(dbInsertInfantryPosition);
+PREP(dbInsertVehicle);
+PREP(dbInsertVehiclePosition);
 
 PREP(addMissionEventHandlers);
 PREP(addInfantryEventHandlers);
@@ -24,6 +28,5 @@ PREP(eventFired);
 
 PREP(calcSideInt);
 PREP(trackLoop);
-PREP(trackInfantry);
-PREP(trackVehicles);
+PREP(trackInfantryAndVehicles);
 PREP(trackMarkers);
