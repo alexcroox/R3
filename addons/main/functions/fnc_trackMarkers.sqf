@@ -29,7 +29,7 @@ private _markerData = "";
 
     if (_markerType == "Empty") exitWith {};
 
-    private _markerName = _x;
+    private _markerName = (_x splitString """") joinString "";
     private _markerPosition = markerPos _x;
     private _markerText = markerText _x;
     private _markerDirection = markerDir _x;

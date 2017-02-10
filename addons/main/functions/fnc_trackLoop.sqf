@@ -1,6 +1,6 @@
 /*
  * Author: Titan
- * Handle throttling of positional update logging
+ * Main loop for positional logging
  *
  * Arguments:
  * None
@@ -39,8 +39,7 @@ call FUNC(trackMarkers);
 
             GVAR(noPlayers) = false;
 
-            call FUNC(trackInfantry);
-            call FUNC(trackVehicles);
+            call FUNC(trackInfantryAndVehicles);
 
         } else {
             GVAR(noPlayers) = true;

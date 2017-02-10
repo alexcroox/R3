@@ -4,14 +4,13 @@
  *
  * Arguments:
  * 0: type <STRING>
- * 1: data <STRING>
- * 2: playerId <INT>
+ * 1: entityA <INT>
+ * 2: entityB <INT>
+ * 3: keyData <STRING>
+ * 4: extraData <STRING>
  *
  * Return Value:
  * none
- *
- * Example:
- * ["positions_vehicles", _json] call FUNC(dbInsertEvent);
  *
  * Public: No
  */
@@ -21,10 +20,14 @@ private _functionLogName = "AAR > dbInsertEvent";
 
 params [
     ["_type", ""],
-    ["_data", ""],
-    ["_playerId", 0]
+    ["_entityA", 0],
+    ["_entityB", 0],
+    ["_keyData", ""],
+    ["_extraData", ""]
 ];
 
+if(_type == "") exitWith {};
+
 // Send the query to the extension
-private _query = [["event", GVAR(replayId), _playerId, _type, _data, time], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [["event", GVAR(missionId), _type, _entityA, _entityB, _keyData, _extraData, time], GVAR(extensionSeparator)] call CBA_fnc_join;
 call compile (GVAR(extensionName) callExtension _query);

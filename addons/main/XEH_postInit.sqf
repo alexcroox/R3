@@ -12,11 +12,11 @@ if !(isServer) exitWith { ERROR_WITH_TITLE("AAR - ERROR", "Addon must be run ser
 // Wait until our database is created before inserting new replay entry
 ["dbSetup", {
 
-    [] spawn FUNC(dbCreateReplayEntry);
+    [] spawn FUNC(dbCreateMissionEntry);
 
 }] call CBA_fnc_addEventHandler;
 
-// Capture when dbCreateReplayEntry has finished
+// Capture when dbCreateMissionEntry has finished
 ["replaySetup", {
 
     // Start event saving buffer
