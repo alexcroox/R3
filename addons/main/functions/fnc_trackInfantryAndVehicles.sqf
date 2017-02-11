@@ -33,7 +33,7 @@ private _all = allUnits + vehicles;
 
         // This is the first time we've seen this unit,
         // lets do some one time calculations
-        if !(_entityId) {
+        if !(_entityId) then {
 
             // This is an infantry unit
             if (_x isKindOf "CaManBase") then {

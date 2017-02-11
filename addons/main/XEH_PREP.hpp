@@ -1,8 +1,8 @@
 // FUNCTION PREPS
 PREP(dbInit);
-PREP(dbInsertEvent);
 PREP(dbCreateMissionEntry);
 
+PREP(dbInsertEvent);
 PREP(dbInsertInfantry);
 PREP(dbInsertInfantryPosition);
 PREP(dbInsertVehicle);

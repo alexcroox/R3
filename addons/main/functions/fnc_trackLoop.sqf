@@ -20,7 +20,7 @@ private _functionLogName = "AAR > trackLoop";
 DBUG("Starting track loop", _functionLogName);
 
 // Just log markers once (for now)
-call FUNC(trackMarkers);
+//call FUNC(trackMarkers);
 
 [{
     if (GVAR(logEvents)) then {

@@ -27,7 +27,7 @@ private _attackerDistance = round (getPos _victim distance getPos _attacker);
 private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName");
 
 if(vehicle _attacker == _attacker) then {
-    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName")
+    _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon _attacker) >> "DisplayName");
 };
 
 // Remove any rogue double quotes that mess with json
