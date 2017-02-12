@@ -17,7 +17,7 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > trackInfantryAndVehicles";
 
-private _all = allUnits + vehicles;
+private _allUnitsAndVehicles = allUnits + vehicles;
 
 // Loop through all units and vehicles on the map
 {
@@ -80,4 +80,4 @@ private _all = allUnits + vehicles;
             };
         };
     }; // do not track
-} forEach _all;
+} forEach _allUnitsAndVehicles;

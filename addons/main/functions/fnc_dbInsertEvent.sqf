@@ -29,5 +29,5 @@ params [
 if(_type == "") exitWith {};
 
 // Send the query to the extension
-private _query = [["event", GVAR(missionId), _type, _entityA, _entityB, _keyData, _extraData, time], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [["events", GVAR(missionId), _type, _entityA, _entityB, _keyData, _extraData, time], GVAR(extensionSeparator)] call CBA_fnc_join;
 call compile (GVAR(extensionName) callExtension _query);

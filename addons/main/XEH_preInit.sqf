@@ -10,10 +10,9 @@ GVAR(missionId) = 0;
 GVAR(extensionName) = "r3_extension";
 GVAR(extensionSeparator) = "";
 GVAR(entityCount) = 0;
-GVAR(maxUnitCountPerEvent) = 25;
-GVAR(maxMarkerCountPerEvent) = 10;
+GVAR(secondsBetweenKeyFrames) = 60;
 
-// Frequency of unit movement logging (seconds)
+GVAR(maxMarkerCountPerEvent) = 10;
 GVAR(insertFrequencyMarkers) = 10;
 GVAR(timeSinceLastMarkerInsert) = 0;
 
