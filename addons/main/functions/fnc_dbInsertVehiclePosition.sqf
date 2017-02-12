@@ -77,7 +77,7 @@ if (
     _previousCrew != _vehicleCrew ||
     _previousCargo != _vehicleCargo
 ) then {
-
+    
     _vehicle setVariable ["r3_pos_x", _vehiclePosX];
     _vehicle setVariable ["r3_pos_y", _vehiclePosY];
     _vehicle setVariable ["r3_heading", _vehicleHeading];
