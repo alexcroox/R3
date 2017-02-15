@@ -28,13 +28,13 @@ params [
     ["_jip", false]
 ];
 
-if !(GVAR(logEvents)) exitWith {};
+if ( !GVAR(logEvents) && !(GVAR(forceLogEvents)) ) exitWith {};
 
 if (_uid == "") exitWith {};
 
 // We only want to show notifications for JIP players
 if (_jip) then {
-    
+
     // Send the json to our extension for saving to the db
     ["player_connected", 0, 0, _uid, _name] call FUNC(dbInsertEvent);
 };

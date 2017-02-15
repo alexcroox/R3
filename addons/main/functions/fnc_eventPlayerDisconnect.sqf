@@ -27,7 +27,7 @@ params [
     ["_name", ""]
 ];
 
-if !(GVAR(logEvents)) exitWith {};
+if ( !GVAR(logEvents) && !(GVAR(forceLogEvents)) ) exitWith {};
 
 if (_uid == "") exitWith {};
 

@@ -125,7 +125,7 @@ namespace r3 {
                     double dayTime = getNumericValue(request.params, 4);
                     std::string addonVersion = request.params[5];
                     //log::logger->debug("Inserting into 'missions' values missionName '{}', terrain '{}', dayTime '{}', addonVersion '{}'.", missionName, map, dayTime, addonVersion);
-                    *session << "INSERT INTO missions(name, display_name, terrain, day_time, created_at, addonVersion) VALUES(?, ?, ?, ?, UTC_TIMESTAMP(), ?)",
+                    *session << "INSERT INTO missions(name, display_name, terrain, day_time, created_at, addon_version) VALUES(?, ?, ?, ?, UTC_TIMESTAMP(), ?)",
                         Poco::Data::Keywords::use(missionName),
                         Poco::Data::Keywords::use(missionDisplayName),
                         Poco::Data::Keywords::use(map),
@@ -151,8 +151,8 @@ namespace r3 {
                     std::string unitIcon = request.params[9];
                     std::string unitData = request.params[10];
                     double missionTime = parseFloat(request.params[11]);
-                    //log::logger->debug("Inserting into 'infantry' values id '{}', name '{}'.", id, name);
-                    *session << "INSERT INTO infantry(mission, player_id, entity_id, name, faction, class, group, leader, icon, data, mission_time) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    log::logger->debug("Inserting into 'infantry'");
+                    *session << "INSERT INTO infantry(mission, player_id, entity_id, name, faction, class, `group`, leader, icon, data, mission_time) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                         Poco::Data::Keywords::use(replayId),
                         Poco::Data::Keywords::use(playerId),
                         Poco::Data::Keywords::use(entityId),

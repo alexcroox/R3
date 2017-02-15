@@ -23,7 +23,7 @@ params [
     ["_attacker", objNull]
 ];
 
-if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
+if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith {};
 
 // Handle respawnOnStart
 if (_victim == objNull) exitWith {};
@@ -43,6 +43,10 @@ private _attackerDistance = _formatedShotData select 1;
 
 private _entityA = _victim getVariable ["r3_entity_id", 0];
 private _entityB = _attacker getVariable ["r3_entity_id", 0];
+
+if (_entityA == 0) then {
+    diag_log format["Invalid victim %1", _victim];
+};
 
 // Send the json to our extension for saving to the db
 ["unit_killed", _entityA, _entityB, _attackerWeapon, _attackerDistance] call FUNC(dbInsertEvent);

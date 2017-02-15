@@ -3,7 +3,7 @@
 # Linux: `cmake . -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32`
 
 # Set this to where the POCO sources are and built
-SET(POCO_HOME "c:/dev/c++/poco-poco-1.7.5-release")
+SET(POCO_HOME "C:\Users\vdsvwgfweg\Downloads\poco-1.7.5-all\poco-1.7.5-all")
 
 # Set this to where the MySQL C Connecter was installed 
 SET(MYSQL_HOME "c:/Program Files (x86)/MySQL/MySQL Connector C 6.1")

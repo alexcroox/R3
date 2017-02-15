@@ -49,6 +49,13 @@ private _vehicleCrew = (
     }
 );
 
+private _vehicleCrewString = "";
+
+if (count _vehicleCrew > 0) then {
+
+    _vehicleCrewString = format["{%1}", _vehicleCrew];
+};
+
 private _vehicleCargo = (
     _x call {
         private _cargo = [];
@@ -63,6 +70,13 @@ private _vehicleCargo = (
     }
 );
 
+private _vehicleCargoString = "";
+
+if (count _vehicleCargo > 0) then {
+
+    _vehicleCargoString = format["{%1}", _vehicleCargo];
+};
+
 private _previousVehiclePosX = _vehicle getVariable ["r3_pos_x", 0];
 private _previousVehiclePosY = _vehicle getVariable ["r3_pos_y", 0];
 private _previousVehicleHeading = _vehicle getVariable ["r3_heading", 0];
@@ -70,19 +84,16 @@ private _previousCrew = _vehicle getVariable ["r3_crew", ""];
 private _previousCargo = _vehicle getVariable ["r3_cargo", ""];
 
 // If the vehicle's position has changed lets log it
-if (
-    _previousVehiclePosX != _vehiclePosX ||
-    _previousVehiclePosY != _vehiclePosY ||
-    _previousVehicleHeading != _vehicleHeading ||
-    _previousCrew != _vehicleCrew ||
-    _previousCargo != _vehicleCargo
-) then {
-    
+if (_previousVehiclePosX != _vehiclePosX || _previousVehiclePosY != _vehiclePosY || _previousVehicleHeading != _vehicleHeading || _previousCrew != _vehicleCrewString || _previousCargo != _vehicleCargoString) then {
+
     _vehicle setVariable ["r3_pos_x", _vehiclePosX];
     _vehicle setVariable ["r3_pos_y", _vehiclePosY];
     _vehicle setVariable ["r3_heading", _vehicleHeading];
 
+    _vehicle setVariable ["r3_crew", _vehicleCrewString];
+    _vehicle setVariable ["r3_cargo", _vehicleCargoString];
+
     // Send infantry position to the extension
-    private _query = [["vehicle_positions", GVAR(missionId), _entityId, _vehiclePosX, _vehiclePosY, _vehiclePosZ, _vehicleHeading, _isKeyFrame, _vehicleDriver, _vehicleCrew, _vehicleCargo, time], GVAR(extensionSeparator)] call CBA_fnc_join;
+    private _query = [["vehicle_positions", GVAR(missionId), _entityId, _vehiclePosX, _vehiclePosY, _vehiclePosZ, _vehicleHeading, _isKeyFrame, _vehicleDriver, _vehicleCrewString, _vehicleCargoString, time], GVAR(extensionSeparator)] call CBA_fnc_join;
     call compile (GVAR(extensionName) callExtension _query);
 };

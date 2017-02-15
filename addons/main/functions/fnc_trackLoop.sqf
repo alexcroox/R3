@@ -35,7 +35,9 @@ DBUG("Starting track loop", _functionLogName);
 
         } forEach playableUnits;
 
-        if (_playerCount > 0) then {
+        // For single player testing we can force the events despite there
+        // only being 1 player by setting aar_main_forceLogEvents = true in the debug console
+        if (_playerCount > 0 || GVAR(forceLogEvents)) then {
 
             GVAR(noPlayers) = false;
 

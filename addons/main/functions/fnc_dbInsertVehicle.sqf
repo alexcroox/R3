@@ -23,10 +23,10 @@ params [
     ["_vehicle", ""]
 ];
 
-private _vehicleClass = typeOf _x;
+private _vehicleClass = typeOf _vehicle;
 
 // We want the iconpathname (without the .paa and without the full path) just the name of the icon
-private _vehicleIconPathRaw = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "icon");
+private _vehicleIconPathRaw = getText (configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "icon");
 private _splitIconPath = _vehicleIconPathRaw splitString "\.";
 private _vehicleIconName = _vehicleIconPathRaw;
 
@@ -35,7 +35,7 @@ if (count _splitIconPath > 2) then {
 };
 
 private _vehicleIcon = (
-    _x call {
+    _vehicle call {
 
         if (_this isKindOf "Heli_Attack_01_base_F" || _this isKindOf "Heli_Attack_02_base_F" || _this isKindOf "Heli_Attack_03_base_F") exitWith { "iconHelicopterAttack" };
         if (_this isKindOf "Heli_Transport_01_base_F" || _this isKindOf "Heli_Transport_02_base_F" || _this isKindOf "Heli_Transport_03_base_F") exitWith { "iconHelicopterTransport" };

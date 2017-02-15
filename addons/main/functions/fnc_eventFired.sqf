@@ -30,7 +30,7 @@ params [
     ["_projectile", objNull]
 ];
 
-if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
+if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith {};
 
 if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" > -1) then {
 

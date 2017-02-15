@@ -26,7 +26,7 @@ params [
     ["_unit", objNull]
 ];
 
-if (GVAR(noPlayers) || !GVAR(logEvents)) exitWith {};
+if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith {};
 
 if (_unit isEqualTo objNull) exitWith {};
 

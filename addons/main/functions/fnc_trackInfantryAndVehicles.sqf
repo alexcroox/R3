@@ -23,7 +23,7 @@ private _allUnitsAndVehicles = allUnits + vehicles;
 {
     private _doNotTrack = _x getVariable ["r3_do_not_track", false];
 
-    if !(_doNotTrack) then {
+    if ( !(_doNotTrack) && (!(GVAR(noPlayers)) || GVAR(forceLogEvents)) ) then {
 
         // Store unique entity id against the unit to identify them in playback
         private _entityId = _x getVariable ["r3_entity_id", false];
@@ -33,7 +33,7 @@ private _allUnitsAndVehicles = allUnits + vehicles;
 
         // This is the first time we've seen this unit,
         // lets do some one time calculations
-        if !(_entityId) then {
+        if (_entityId isEqualTo false) then {
 
             // This is an infantry unit
             if (_x isKindOf "CaManBase") then {
