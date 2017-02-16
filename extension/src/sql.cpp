@@ -175,7 +175,7 @@ namespace r3 {
                     uint32_t keyFrame = parseUnsigned(request.params[6]);
                     double missionTime = parseFloat(request.params[7]);
                     //log::logger->debug("Inserting into 'infantry' values id '{}', name '{}'.", id, name);
-                    *session << "INSERT INTO infantry_positions(mission, entity_id, x, y, direction, key_frame, mission_time) VALUES (?,?,?,?,?,?,?)",
+                    *session << "INSERT INTO infantry_positions(mission, entity_id, x, y, direction, key_frame, mission_time, added_on) VALUES (?,?,?,?,?,?,?,UTC_TIMESTAMP())",
                         Poco::Data::Keywords::use(replayId),
                         Poco::Data::Keywords::use(entityId),
                         Poco::Data::Keywords::use(posX),
@@ -215,7 +215,7 @@ namespace r3 {
                     std::string cargo = request.params[10];
                     double missionTime = parseFloat(request.params[11]);
                     //log::logger->debug("Inserting into 'infantry' values id '{}', name '{}'.", id, name);
-                    *session << "INSERT INTO vehicle_positions(mission, entity_id, x, y, z, direction, key_frame, driver, crew, cargo, mission_time) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    *session << "INSERT INTO vehicle_positions(mission, entity_id, x, y, z, direction, key_frame, driver, crew, cargo, mission_time, added_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,UTC_TIMESTAMP())",
                         Poco::Data::Keywords::use(replayId),
                         Poco::Data::Keywords::use(entityId),
                         Poco::Data::Keywords::use(posX),
