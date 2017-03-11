@@ -114,17 +114,23 @@ namespace r3 {
         }
 
         Response processRequest(const Request& request) {
+
             Response response{ RESPONSE_TYPE_OK, EMPTY_SQF_DATA };
             auto realParamsSize = request.params.size() - 1;
+
             log::logger->trace("Request command '{}' params size '{}'!", request.command, request.params.size());
+
             try {
                 if (request.command == "replay" && realParamsSize == 5) {
+
                     std::string missionName = request.params[1];
                     std::string missionDisplayName = request.params[2];
                     std::string map = request.params[3];
                     double dayTime = getNumericValue(request.params, 4);
                     std::string addonVersion = request.params[5];
+
                     //log::logger->debug("Inserting into 'missions' values missionName '{}', terrain '{}', dayTime '{}', addonVersion '{}'.", missionName, map, dayTime, addonVersion);
+
                     *session << "INSERT INTO missions(name, display_name, terrain, day_time, created_at, addon_version) VALUES(?, ?, ?, ?, UTC_TIMESTAMP(), ?)",
                         Poco::Data::Keywords::use(missionName),
                         Poco::Data::Keywords::use(missionDisplayName),
@@ -132,14 +138,19 @@ namespace r3 {
                         Poco::Data::Keywords::use(dayTime),
                         Poco::Data::Keywords::use(addonVersion),
                         Poco::Data::Keywords::now;
+
                     uint32_t replayId = 0;
+
                     *session << "SELECT LAST_INSERT_ID()",
                         Poco::Data::Keywords::into(replayId),
                         Poco::Data::Keywords::now;
+
                     log::logger->debug("New mission id is '{}'.", replayId);
+
                     response.data = std::to_string(replayId);
                 }
                 else if (request.command == "infantry" && realParamsSize == 11) {
+
                     uint32_t replayId = parseUnsigned(request.params[1]);
                     std::string playerId = request.params[2];
                     uint32_t entityId = parseUnsigned(request.params[3]);
@@ -151,7 +162,9 @@ namespace r3 {
                     std::string unitIcon = request.params[9];
                     std::string unitData = request.params[10];
                     double missionTime = parseFloat(request.params[11]);
+
                     log::logger->debug("Inserting into 'infantry'");
+
                     *session << "INSERT INTO infantry(mission, player_id, entity_id, name, faction, class, `group`, leader, icon, data, mission_time) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
                         Poco::Data::Keywords::use(replayId),
                         Poco::Data::Keywords::use(playerId),
@@ -167,6 +180,7 @@ namespace r3 {
                         Poco::Data::Keywords::now;
                 }
                 else if (request.command == "infantry_positions" && realParamsSize == 7) {
+
                     uint32_t replayId = parseUnsigned(request.params[1]);
                     uint32_t entityId = parseUnsigned(request.params[2]);
                     double posX = parseFloat(request.params[3]);
@@ -174,6 +188,7 @@ namespace r3 {
                     uint32_t direction = parseUnsigned(request.params[5]);
                     uint32_t keyFrame = parseUnsigned(request.params[6]);
                     double missionTime = parseFloat(request.params[7]);
+
                     //log::logger->debug("Inserting into 'infantry' values id '{}', name '{}'.", id, name);
                     *session << "INSERT INTO infantry_positions(mission, entity_id, x, y, direction, key_frame, mission_time, added_on) VALUES (?,?,?,?,?,?,?,UTC_TIMESTAMP())",
                         Poco::Data::Keywords::use(replayId),
@@ -186,12 +201,14 @@ namespace r3 {
                         Poco::Data::Keywords::now;
                 }
                 else if (request.command == "vehicles" && realParamsSize == 6) {
+
                     uint32_t replayId = parseUnsigned(request.params[1]);
                     uint32_t entityId = parseUnsigned(request.params[2]);
                     std::string vehicleClass = request.params[3];
                     std::string vehicleIcon = request.params[4];
                     std::string vehicleIconPath = request.params[5];
                     double missionTime = parseFloat(request.params[6]);
+
                     //log::logger->debug("Inserting into 'infantry' values id '{}', name '{}'.", id, name);
                     *session << "INSERT INTO vehicles(mission, entity_id, class, icon, icon_path, mission_time) VALUES (?,?,?,?,?,?)",
                         Poco::Data::Keywords::use(replayId),
@@ -203,6 +220,7 @@ namespace r3 {
                         Poco::Data::Keywords::now;
                 }
                 else if (request.command == "vehicle_positions" && realParamsSize == 11) {
+
                     uint32_t replayId = parseUnsigned(request.params[1]);
                     uint32_t entityId = parseUnsigned(request.params[2]);
                     double posX = parseFloat(request.params[3]);
@@ -214,6 +232,7 @@ namespace r3 {
                     std::string crew = request.params[9];
                     std::string cargo = request.params[10];
                     double missionTime = parseFloat(request.params[11]);
+
                     //log::logger->debug("Inserting into 'infantry' values id '{}', name '{}'.", id, name);
                     *session << "INSERT INTO vehicle_positions(mission, entity_id, x, y, z, direction, key_frame, driver, crew, cargo, mission_time, added_on) VALUES (?,?,?,?,?,?,?,?,?,?,?,UTC_TIMESTAMP())",
                         Poco::Data::Keywords::use(replayId),
@@ -229,23 +248,60 @@ namespace r3 {
                         Poco::Data::Keywords::use(missionTime),
                         Poco::Data::Keywords::now;
                 }
-                else if (request.command == "events" && realParamsSize == 7) {
+                else if (request.command == "events_connections" && realParamsSize == 5) {
+
                     uint32_t replayId = parseUnsigned(request.params[1]);
-                    std::string type = request.params[2];
-                    std::string entityA = request.params[3];
-                    std::string entityB = request.params[4];
-                    std::string keyData = request.params[5];
-                    std::string extraData = request.params[6];
-                    double missionTime = parseFloat(request.params[7]);
+                    double missionTime = parseFloat(request.params[2]);
+                    std::string type = request.params[3];
+                    std::string playerId = request.params[4];
+                    std::string name = request.params[5];
+
                     //log::logger->debug("Inserting into 'events' values replayId '{}', playerId '{}', type '{}', value '{}', missionTime '{}'.", replayId, playerId, type, value, missionTime);
-                    *session << "INSERT INTO events(mission, type, entity_a, entity_b, key_data, extra_data, mission_time) VALUES (?, ?, ?, ?, ?, ?, ?)",
+
+                    *session << "INSERT INTO events_connections(mission, mission_time, type, player_id, player_name) VALUES (?, ?, ?, ?, ?)",
                         Poco::Data::Keywords::use(replayId),
-                        Poco::Data::Keywords::use(type),
-                        Poco::Data::Keywords::use(entityA),
-                        Poco::Data::Keywords::use(entityB),
-                        Poco::Data::Keywords::use(keyData),
-                        Poco::Data::Keywords::use(extraData),
                         Poco::Data::Keywords::use(missionTime),
+                        Poco::Data::Keywords::use(type),
+                        Poco::Data::Keywords::use(playerId),
+                        Poco::Data::Keywords::use(name),
+                        Poco::Data::Keywords::now;
+                }
+                else if (request.command == "events_get_in_out" && realParamsSize == 5) {
+
+                    uint32_t replayId = parseUnsigned(request.params[1]);
+                    double missionTime = parseFloat(request.params[2]);
+                    std::string type = request.params[3];
+                    uint32_t entityUnit = request.params[4];
+                    uint32_t entityVehicle = request.params[5];
+
+                    //log::logger->debug("Inserting into 'events' values replayId '{}', playerId '{}', type '{}', value '{}', missionTime '{}'.", replayId, playerId, type, value, missionTime);
+
+                    *session << "INSERT INTO events_get_in_out(mission, mission_time, type, entity_unit, entity_vehicle) VALUES (?, ?, ?, ?, ?)",
+                        Poco::Data::Keywords::use(replayId),
+                        Poco::Data::Keywords::use(missionTime),
+                        Poco::Data::Keywords::use(type),
+                        Poco::Data::Keywords::use(entityUnit),
+                        Poco::Data::Keywords::use(entityVehicle),
+                        Poco::Data::Keywords::now;
+                }
+                else if (request.command == "events_missile" && realParamsSize == 6) {
+
+                    uint32_t replayId = parseUnsigned(request.params[1]);
+                    double missionTime = parseFloat(request.params[2]);
+                    std::string type = request.params[3];
+                    uint32_t entitAttacker = request.params[4];
+                    uint32_t entityVictim = request.params[5];
+                    std::string weapon = request.params[6];
+
+                    //log::logger->debug("Inserting into 'events' values replayId '{}', playerId '{}', type '{}', value '{}', missionTime '{}'.", replayId, playerId, type, value, missionTime);
+
+                    *session << "INSERT INTO events_missile(mission, mission_time, type, entity_attacker, entity_victim, weapon) VALUES (?, ?, ?, ?, ?, ?)",
+                        Poco::Data::Keywords::use(replayId),
+                        Poco::Data::Keywords::use(missionTime),
+                        Poco::Data::Keywords::use(type),
+                        Poco::Data::Keywords::use(entitAttacker),
+                        Poco::Data::Keywords::use(entityVictim),
+                        Poco::Data::Keywords::use(weapon),
                         Poco::Data::Keywords::now;
                 }
                 else {
@@ -255,6 +311,7 @@ namespace r3 {
                 }
             }
             catch (Poco::Data::MySQL::MySQLException& e) {
+
                 log::logger->error("Error executing prepared statement! Error code: '{}', Error message: {}", e.code(), e.displayText());
                 response.type = RESPONSE_TYPE_ERROR;
                 response.data = fmt::format("\"Error executing prepared statement! {}\"", e.displayText());
