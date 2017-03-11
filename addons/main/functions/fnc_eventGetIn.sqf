@@ -30,7 +30,11 @@ if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith
 
 if (_unit isEqualTo objNull) exitWith {};
 
-private _entityA = _unit getVariable ["r3_entity_id", 0];
+private _entityUnit = _unit getVariable ["r3_entity_id", 0];
+private _entityVehicle = _vehicle getVariable ["r3_entity_id", 0];
 
-// Send the json to our extension for saving to the db
-["get_in", _entityA] call FUNC(dbInsertEvent);
+private _type = "get_in";
+
+// Send the query to the extension
+private _query = [["events_get_in_out", GVAR(missionId), time, _entityId, _type, _entityUnit, _entityVehicle], GVAR(extensionSeparator)] call CBA_fnc_join;
+call compile (GVAR(extensionName) callExtension _query);

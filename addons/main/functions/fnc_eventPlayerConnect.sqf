@@ -30,11 +30,15 @@ params [
 
 if ( !GVAR(logEvents) && !(GVAR(forceLogEvents)) ) exitWith {};
 
+// If we don't have the player's UID lets exit
 if (_uid == "") exitWith {};
 
 // We only want to show notifications for JIP players
 if (_jip) then {
 
-    // Send the json to our extension for saving to the db
-    ["player_connected", 0, 0, _uid, _name] call FUNC(dbInsertEvent);
+    private _eventType = "connect";
+
+    // Send the query to the extension
+    private _query = [["events_connections", GVAR(missionId), time, _eventType, _uid, _name], GVAR(extensionSeparator)] call CBA_fnc_join;
+    call compile (GVAR(extensionName) callExtension _query);
 };

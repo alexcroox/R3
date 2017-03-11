@@ -31,5 +31,8 @@ if ( !GVAR(logEvents) && !(GVAR(forceLogEvents)) ) exitWith {};
 
 if (_uid == "") exitWith {};
 
-// Send the json to our extension for saving to the db
-["player_disconnected", 0, 0, _uid, _name] call FUNC(dbInsertEvent);
+private _eventType = "disconnect";
+
+// Send the query to the extension
+private _query = [["events_connections", GVAR(missionId), time, _eventType, _uid, _name], GVAR(extensionSeparator)] call CBA_fnc_join;
+call compile (GVAR(extensionName) callExtension _query);

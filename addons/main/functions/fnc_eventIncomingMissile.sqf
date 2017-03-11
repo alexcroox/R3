@@ -29,8 +29,6 @@ if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith
 
 if (_victim isEqualTo objNull) exitWith {};
 
-private _attackerPos = getPosWorld _attacker;
-
 private _attackerWeapon = getText (configFile >> "CfgWeapons" >> (currentWeapon vehicle _attacker) >> "DisplayName");
 // Remove any rogue double quotes that mess with json
 _attackerWeapon = (_attackerWeapon splitString """") joinString "";
@@ -46,15 +44,9 @@ private _attackerAmmoType = (
     }
 );
 
-// Form JSON for saving
-private _json = format['{"pos":%1,"weapon":"%2","ammoType":"%3"}',
-    _attackerPos,
-    _attackerWeapon,
-    _attackerAmmoType
-];
+private _entityVictim = _victim getVariable ["r3_entity_id", 0];
+private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
-private _entityA = _victim getVariable ["r3_entity_id", 0];
-private _entityB = _attacker getVariable ["r3_entity_id", 0];
-
-// Send the json to our extension for saving to the db
-["incoming_missile", _entityA, _entityB, _attackerAmmoType, _json] call FUNC(dbInsertEvent);
+// Send the query to the extension
+private _query = [["events_missile", GVAR(missionId), time, _attackerAmmoType, _entityAttacker, _entityVictim, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
+call compile (GVAR(extensionName) callExtension _query);

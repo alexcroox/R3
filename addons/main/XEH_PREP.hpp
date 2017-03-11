@@ -2,7 +2,6 @@
 PREP(dbInit);
 PREP(dbCreateMissionEntry);
 
-PREP(dbInsertEvent);
 PREP(dbInsertInfantry);
 PREP(dbInsertInfantryPosition);
 PREP(dbInsertVehicle);

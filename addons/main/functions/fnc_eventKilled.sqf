@@ -40,13 +40,15 @@ private _formatedShotData = [_victim, _attacker] call FUNC(shotTemplate);
 private _attackerWeapon = _formatedShotData select 0;
 private _attackerDistance = _formatedShotData select 1;
 
+private _entityVictim = _victim getVariable ["r3_entity_id", 0];
+private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
-private _entityA = _victim getVariable ["r3_entity_id", 0];
-private _entityB = _attacker getVariable ["r3_entity_id", 0];
-
-if (_entityA == 0) then {
+if (_entityVictim == 0) then {
     diag_log format["Invalid victim %1", _victim];
 };
 
-// Send the json to our extension for saving to the db
-["unit_killed", _entityA, _entityB, _attackerWeapon, _attackerDistance] call FUNC(dbInsertEvent);
+private _eventType = "killed";
+
+// Send the query to the extension
+private _query = [["events_downed", GVAR(missionId), time, _eventType, _entityAttacker, _entityVictim, _attackerDistance, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
+call compile (GVAR(extensionName) callExtension _query);
