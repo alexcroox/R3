@@ -173,7 +173,7 @@ namespace {
             respond(output, RESPONSE_TYPE_OK, response.data);
             return;
         }
-		else if (request.command == "infantry" || request.command == "infantry_positions" || request.command == "vehicles" || request.command == "vehicle_positions" || request.command == "events") {
+        else if (request.command == "infantry" || request.command == "infantry_positions" || request.command == "vehicles" || request.command == "vehicle_positions" || request.command == "events_connections" || request.command == "events_get_in_out" || request.command == "events_projectile" || request.command == "events_downed" || request.command == "events_missile") {
             requests.push(request);
             respond(output, RESPONSE_TYPE_OK, EMPTY_SQF_DATA);
             return;

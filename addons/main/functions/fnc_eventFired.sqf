@@ -76,7 +76,7 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
         private _entityId = _unit getVariable ["r3_entity_id", 0];
 
         // Send the query to the extension
-        private _query = [["events_projectile", GVAR(missionId), time, _entityId, _grenadeType, _posX, _posY, _ammo], GVAR(extensionSeparator)] call CBA_fnc_join;
+        private _query = [["events_projectile", GVAR(missionId), time, _grenadeType, _entityId, _posX, _posY, _ammo], GVAR(extensionSeparator)] call CBA_fnc_join;
         call compile (GVAR(extensionName) callExtension _query);
     };
 };

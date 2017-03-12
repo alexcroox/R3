@@ -32,4 +32,4 @@ GVAR(missionId) = _insertResult select 1;
 ["replaySetup"] call CBA_fnc_localEvent;
 
 //ERROR_SYSTEM_CHAT("R3 is recording this mission");
-DBUG(format[ARR_2("Replay db entry setup 11 %1", GVAR(missionId))], _functionLogName);
+DBUG(format[ARR_2("Replay db entry setup %1", GVAR(missionId))], _functionLogName);
