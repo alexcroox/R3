@@ -5,7 +5,11 @@
     <a href="https://github.com/alexcroox/R3/releases/latest">
         <img src="https://img.shields.io/github/release/alexcroox/r3.svg" alt="Project Version">
     </a>    
-
+    
+    <a href="https://github.com/alexcroox/R3/releases/latest">
+        <img src="https://img.shields.io/badge/32--bit-64--bit-orange.svg" alt="Supports 64-bit">
+    </a>
+    
     <a href="https://travis-ci.org/alexcroox/R3">    
         <img src="https://travis-ci.org/alexcroox/R3.svg?branch=master&style=flat-square" alt="Travis build testing">
     </a>
