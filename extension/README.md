@@ -57,9 +57,10 @@ This has been tested on Ubuntu 16.04 LTS with GCC 5.4.0
 
 ## Dependecies
 
-#### MySQL C Connector 32 bit
-Download and extract the 32 bit C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
+#### MySQL C Connector
+Download the correct architecture you want to build for and extract the C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
 Extract the archive somewhere, we will be referencing this folder as `MYSQL_HOME`.
+
 
 #### CMake
 Download and install version `3.5` or higher from https://cmake.org/download/ or just run `sudo apt-get install cmake`
@@ -70,7 +71,7 @@ Extract the archive somewhere, we will be referencing this folder as `POCO_HOME`
 
 Install 32bit and 64bit libraries for GCC with `sudo apt-get install gcc-multilib g++-multilib`
 
-Create file `$POCO_HOME/build/config/Linux32-gcc` with the content below
+Only for 32 bit, create file `$POCO_HOME/build/config/Linux32-gcc` with the content below
 ```
 #
 # $Id: //poco/1.4/build/config/Linux#2 $
@@ -103,8 +104,11 @@ SHLIBFLAGS32    += -m32
 LINKFLAGS32 += -m32
 ```
 
-Replace `$MYSQL_HOME` in `--include-path` and `--library-path` options below where you have extracted the MySQL C Connector and run the command
+Replace `$MYSQL_HOME` in `--include-path` and `--library-path` options below where you have extracted the MySQL C Connector 
+and run the command for 32bit
 `./configure --config=Linux32-gcc --static --shared --no-samples --no-tests --include-path=$MYSQL_HOME/include --library-path=$MYSQL_HOME/lib --omit=CppUnit,CppUnit/WinTestRunner,Net,Crypto,NetSSL_OpenSSL,NetSSL_Win,Data/SQLite,Data/ODBC,Zip,PageCompiler,PageCompiler/File2Page,PDF,CppParser,MongoDB,PocoDoc,ProGen`
+or for 64 bit
+`./configure --config=Linux --static --shared --no-samples --no-tests --cflags=-fPIC --include-path=$MYSQL_HOME/include --library-path=$MYSQL_HOME/lib --omit=CppUnit,CppUnit/WinTestRunner,Net,Crypto,NetSSL_OpenSSL,NetSSL_Win,Data/SQLite,Data/ODBC,Zip,PageCompiler,PageCompiler/File2Page,PDF,CppParser,MongoDB,PocoDoc,ProGen`
 
 Now you can build with `make`
 
@@ -129,7 +133,8 @@ is not part of the tutorial :P .
 
 ### Linux
 
-Run `cmake . -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32` in extension/build directory.
+For 32bit run `cmake . -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32`, 
+for 64bit run `cmake . -DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64` in extension/build directory.
 
 Now you can run make to build the extension with `make`.
 
