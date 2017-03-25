@@ -2,15 +2,17 @@
 
 ## Dependecies
 
-#### Visual Studio 2013 Express
-Download from https://www.microsoft.com/en-us/download/details.aspx?id=44914 . 
-Using 2013, becasue build the MySQL C connector with 2015.
+#### Visual Studio 2015 Express
+Download from https://www.microsoft.com/en-us/download/details.aspx?id=48146 . 
 
-#### Visual C++ Redistributable for Visual Studio 2015 x86
-Download and install https://www.microsoft.com/en-us/download/details.aspx?id=48145 .
+#### MySQL C Connector
+Download and install the C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
+Tested with version 6.1 .
 
-#### MySQL C Connector 32 bit
-Download and install the 32 bit C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
+Choose the architecture you want to build, you can only install one. To have both 32 and 64 bit 
+installed, you will have to install the 64 bit using the MSI and install the 32 bit using the zip 
+distribution.
+
 
 #### POCO C++
 Download version `1.7.5` source from https://pocoproject.org/releases/poco-1.7.5/poco-1.7.5-all.zip .
@@ -28,9 +30,13 @@ Edit `POCO_HOME/components` file and overwrite it with the code above.
 
 Next we need to tell POCO where to find the MySQL includes in `POCOHOME/buildwin.cmd`. Find the 
 line that looks like `set MYSQL_DIR=C:\PROGRA~1\MySQL\MYSQLS~1.5` and replace the path with 
-where you've installed the MySQL Connector. Default install directory is `C:\Program Files (x86)\MySQL\MySQL Connector C 6.1`.
+where you've installed the MySQL Connector. Default install directory 
+for 32 bit is `C:\Program Files (x86)\MySQL\MySQL Connector C 6.1`, 
+for 64 bit it's `C:\Program Files\MySQL\MySQL Connector C 6.1`.
+You must use the same MySQL architecture you are building POCO in!
 
-Now you should be able build POCO with `.\buildwin.cmd 120 build static_mt both Win32 nosamples notests`.
+Now you should be able build POCO for 32bit with `.\buildwin.cmd 140 build static_mt both Win32 nosamples notests`.
+For 64bit with `.\buildwin.cmd 140 build static_mt both x64 nosamples notests`.
 
 
 #### spdlog
@@ -115,7 +121,8 @@ Update and set `POCO_HOME` and `MYSQL_HOME` in `extension/build/CMakeLists.txt` 
 
 ### Windows
 
-Run `cmake . -T "v120"` in `extension/build` directory. Open `r3_extension.sln` in Visual Studio.
+For 32bit run `cmake . -G "Visual Studio 14 2015"`, for 64bit run `cmake . -G "Visual Studio 14 2015 Win64"` 
+in `extension/build` directory. Open `r3_extension.sln` in Visual Studio.
 
 You will have to build with `Release` configuration and `Win32` platform. `Debug` configuration 
 is not part of the tutorial :P .
