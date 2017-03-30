@@ -5,9 +5,9 @@
 # Linux 64bit: `cmake . -DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64`
 
 # Set this to where the POCO sources are and built
-SET(POCO_HOME "C:\Users\vdsvwgfweg\Downloads\poco-1.7.5-all\poco-1.7.5-all")
+SET(POCO_HOME "c:/dev/c++/poco-poco-1.7.5-release")
 
-# Set this to where the MySQL 32 bit C Connecter was installed 
+# Set this to where the MySQL 32 bit C Connecter was installed
 SET(MYSQL_HOME "c:/Program Files (x86)/MySQL/MySQL Connector C 6.1")
 # Set this to where the MySQL 64 bit C Connecter was installed
 SET(MYSQL64_HOME "c:/Program Files/MySQL/MySQL Connector C 6.1")
