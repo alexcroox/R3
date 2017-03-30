@@ -1,19 +1,25 @@
 
 # Arma 3 After Action Replay *Addon* Component
 
-<p>
-    <a href="https://github.com/alexcroox/R3/releases/latest">
-        <img src="https://img.shields.io/github/release/alexcroox/r3.svg" alt="Project Version">
-    </a>    
+<a href="https://github.com/alexcroox/R3/releases/latest">
+    <img src="https://img.shields.io/github/release/alexcroox/r3.svg" alt="Project Version" />
+</a>    
 
-    <a href="https://travis-ci.org/alexcroox/R3">    
-        <img src="https://travis-ci.org/alexcroox/R3.svg?branch=master&style=flat-square" alt="Travis build testing">
-    </a>
-    
-    <a href="https://raw.githubusercontent.com/alexcroox/R3/master/LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-red.svg" alt="Project License">
-    </a>
-</p>
+<a href="https://github.com/alexcroox/R3/releases/latest">
+    <img src="https://img.shields.io/badge/32--bit-64--bit-orange.svg" alt="Supports 64-bit" />
+</a>
+
+<a href="https://github.com/alexcroox/R3/releases/latest">
+    <img src="https://img.shields.io/badge/Windows-Linux-lightgrey.svg" alt="Support for both Windows and Linux" />
+</a>
+
+<a href="https://travis-ci.org/alexcroox/R3">    
+    <img src="https://travis-ci.org/alexcroox/R3.svg?branch=master&style=flat-square" alt="Travis build testing" />
+</a>
+
+<a href="https://raw.githubusercontent.com/alexcroox/R3/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-red.svg" alt="Project License" />
+</a>
 
 <p>
     <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a><br/></strong></sup>

@@ -2,15 +2,17 @@
 
 ## Dependecies
 
-#### Visual Studio 2013 Express
-Download from https://www.microsoft.com/en-us/download/details.aspx?id=44914 . 
-Using 2013, becasue build the MySQL C connector with 2015.
+#### Visual Studio 2015 Express
+Download from https://www.microsoft.com/en-us/download/details.aspx?id=48146 . 
 
-#### Visual C++ Redistributable for Visual Studio 2015 x86
-Download and install https://www.microsoft.com/en-us/download/details.aspx?id=48145 .
+#### MySQL C Connector
+Download and install the C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
+Tested with version 6.1 .
 
-#### MySQL C Connector 32 bit
-Download and install the 32 bit C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
+Choose the architecture you want to build, you can only install one. To have both 32 and 64 bit 
+installed, you will have to install the 64 bit using the MSI and install the 32 bit using the zip 
+distribution.
+
 
 #### POCO C++
 Download version `1.7.5` source from https://pocoproject.org/releases/poco-1.7.5/poco-1.7.5-all.zip .
@@ -28,9 +30,13 @@ Edit `POCO_HOME/components` file and overwrite it with the code above.
 
 Next we need to tell POCO where to find the MySQL includes in `POCOHOME/buildwin.cmd`. Find the 
 line that looks like `set MYSQL_DIR=C:\PROGRA~1\MySQL\MYSQLS~1.5` and replace the path with 
-where you've installed the MySQL Connector. Default install directory is `C:\Program Files (x86)\MySQL\MySQL Connector C 6.1`.
+where you've installed the MySQL Connector. Default install directory 
+for 32 bit is `C:\Program Files (x86)\MySQL\MySQL Connector C 6.1`, 
+for 64 bit it's `C:\Program Files\MySQL\MySQL Connector C 6.1`.
+You must use the same MySQL architecture you are building POCO in!
 
-Now you should be able build POCO with `.\buildwin.cmd 120 build static_mt both Win32 nosamples notests`.
+Now you should be able build POCO for 32bit with `.\buildwin.cmd 140 build static_mt both Win32 nosamples notests`.
+For 64bit with `.\buildwin.cmd 140 build static_mt both x64 nosamples notests`.
 
 
 #### spdlog
@@ -51,9 +57,10 @@ This has been tested on Ubuntu 16.04 LTS with GCC 5.4.0
 
 ## Dependecies
 
-#### MySQL C Connector 32 bit
-Download and extract the 32 bit C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
+#### MySQL C Connector
+Download the correct architecture you want to build for and extract the C connector for MySQL from https://dev.mysql.com/downloads/connector/c/ .
 Extract the archive somewhere, we will be referencing this folder as `MYSQL_HOME`.
+
 
 #### CMake
 Download and install version `3.5` or higher from https://cmake.org/download/ or just run `sudo apt-get install cmake`
@@ -64,7 +71,7 @@ Extract the archive somewhere, we will be referencing this folder as `POCO_HOME`
 
 Install 32bit and 64bit libraries for GCC with `sudo apt-get install gcc-multilib g++-multilib`
 
-Create file `$POCO_HOME/build/config/Linux32-gcc` with the content below
+Only for 32 bit, create file `$POCO_HOME/build/config/Linux32-gcc` with the content below
 ```
 #
 # $Id: //poco/1.4/build/config/Linux#2 $
@@ -97,8 +104,11 @@ SHLIBFLAGS32    += -m32
 LINKFLAGS32 += -m32
 ```
 
-Replace `$MYSQL_HOME` in `--include-path` and `--library-path` options below where you have extracted the MySQL C Connector and run the command
+Replace `$MYSQL_HOME` in `--include-path` and `--library-path` options below where you have extracted the MySQL C Connector 
+and run the command for 32bit
 `./configure --config=Linux32-gcc --static --shared --no-samples --no-tests --include-path=$MYSQL_HOME/include --library-path=$MYSQL_HOME/lib --omit=CppUnit,CppUnit/WinTestRunner,Net,Crypto,NetSSL_OpenSSL,NetSSL_Win,Data/SQLite,Data/ODBC,Zip,PageCompiler,PageCompiler/File2Page,PDF,CppParser,MongoDB,PocoDoc,ProGen`
+or for 64 bit
+`./configure --config=Linux --static --shared --no-samples --no-tests --cflags=-fPIC --include-path=$MYSQL_HOME/include --library-path=$MYSQL_HOME/lib --omit=CppUnit,CppUnit/WinTestRunner,Net,Crypto,NetSSL_OpenSSL,NetSSL_Win,Data/SQLite,Data/ODBC,Zip,PageCompiler,PageCompiler/File2Page,PDF,CppParser,MongoDB,PocoDoc,ProGen`
 
 Now you can build with `make`
 
@@ -115,14 +125,16 @@ Update and set `POCO_HOME` and `MYSQL_HOME` in `extension/build/CMakeLists.txt` 
 
 ### Windows
 
-Run `cmake . -T "v120"` in `extension/build` directory. Open `r3_extension.sln` in Visual Studio.
+For 32bit run `cmake . -G "Visual Studio 14 2015"`, for 64bit run `cmake . -G "Visual Studio 14 2015 Win64"` 
+in `extension/build` directory. Open `r3_extension.sln` in Visual Studio.
 
 You will have to build with `Release` configuration and `Win32` platform. `Debug` configuration 
 is not part of the tutorial :P .
 
 ### Linux
 
-Run `cmake . -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32` in extension/build directory.
+For 32bit run `cmake . -DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32`, 
+for 64bit run `cmake . -DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64` in extension/build directory.
 
 Now you can run make to build the extension with `make`.
 
