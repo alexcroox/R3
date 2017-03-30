@@ -74,7 +74,12 @@ private _allUnitsAndVehicles = allUnits + vehicles;
         if (_isValid) then {
 
             if !(_isVehicle) then {
-                [_entityId, _x, _isKeyFrame] call FUNC(dbInsertInfantryPosition);
+
+                // We don't want to track units when they are in a vehicle
+                if (isNull objectParent _x) then {
+                    [_entityId, _x, _isKeyFrame] call FUNC(dbInsertInfantryPosition);
+                }
+
             } else {
                 [_entityId, _x, _isKeyFrame] call FUNC(dbInsertVehiclePosition);
             };
