@@ -32,7 +32,7 @@ private _vehiclePosZ = _vehiclePos select 2;
 private _vehicleHeading = round getDir _vehicle;
 
 private _getVehicleDriver = driver _vehicle;
-private _vehicleDriver = _vehicle getVariable ["r3_entity_id", 0];
+private _vehicleDriver = _getVehicleDriver getVariable ["r3_entity_id", 0];
 
 // We only care about logging human crew and cargo
 private _vehicleCrew = (
