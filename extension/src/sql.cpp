@@ -228,7 +228,7 @@ namespace r3 {
                     double posZ = parseFloat(request.params[5]);
                     uint32_t direction = parseUnsigned(request.params[6]);
                     uint32_t keyFrame = parseUnsigned(request.params[7]);
-                    std::string driver = request.params[8];
+                    uint32_t driver = request.params[8];
                     std::string crew = request.params[9];
                     std::string cargo = request.params[10];
                     double missionTime = parseFloat(request.params[11]);
