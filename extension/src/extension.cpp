@@ -47,19 +47,22 @@ namespace {
         if (Poco::Environment::has(EXTENSION_FOLDER_ENV_VAR)) {
             return Poco::Environment::get(EXTENSION_FOLDER_ENV_VAR);
         }
-#ifdef _WIN32
-        std::string extensionFolder = fmt::format(".{}", Poco::Path::separator());
-        wchar_t wpath[MAX_PATH];
-        if (!SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, wpath))) {
-            return extensionFolder;
+        Poco::File home(fmt::format("{}{}", Poco::Path::home(), EXTENSION_FOLDER));
+        if (home.exists() && home.isDirectory()) {
+            return home.path();
         }
-        Poco::UnicodeConverter::toUTF8(wpath, extensionFolder);
-#else
-        std::string extensionFolder = Poco::Environment::get("HOME", ".");
+#ifdef _WIN32
+        wchar_t wpath[MAX_PATH];
+        if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, wpath))) {
+            std::string localAppData;
+            Poco::UnicodeConverter::toUTF8(wpath, localAppData);
+            Poco::File extensionFolder(fmt::format("{}{}{}", localAppData, Poco::Path::separator(), EXTENSION_FOLDER));
+            if (extensionFolder.exists() && extensionFolder.isDirectory()) {
+                return extensionFolder.path();
+            }
+        }
 #endif
-        Poco::File file(fmt::format("{}{}{}", extensionFolder, Poco::Path::separator(), EXTENSION_FOLDER));
-        file.createDirectories();
-        return file.path();
+        return fmt::format("{}{}", Poco::Path::current(), EXTENSION_FOLDER);
     }
 
     std::string getStringProperty(Poco::AutoPtr<Poco::Util::PropertyFileConfiguration> config, const std::string& key) {
