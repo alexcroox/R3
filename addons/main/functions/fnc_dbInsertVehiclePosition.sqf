@@ -84,7 +84,7 @@ private _previousCrew = _vehicle getVariable ["r3_crew", ""];
 private _previousCargo = _vehicle getVariable ["r3_cargo", ""];
 
 // If the vehicle's position has changed lets log it
-if (_previousVehiclePosX != _vehiclePosX || _previousVehiclePosY != _vehiclePosY || _previousVehicleHeading != _vehicleHeading || _previousCrew != _vehicleCrewString || _previousCargo != _vehicleCargoString) then {
+if (_isKeyFrame || _previousVehiclePosX != _vehiclePosX || _previousVehiclePosY != _vehiclePosY || _previousVehicleHeading != _vehicleHeading || _previousCrew != _vehicleCrewString || _previousCargo != _vehicleCargoString) then {
 
     _vehicle setVariable ["r3_pos_x", _vehiclePosX];
     _vehicle setVariable ["r3_pos_y", _vehiclePosY];

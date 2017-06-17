@@ -35,7 +35,7 @@ private _previousUnitPosY = _x getVariable ["r3_pos_y", 0];
 private _previousUnitHeading = _x getVariable ["r3_heading", 0];
 
 // If the unit's position has changed lets log it
-if (_previousUnitPosX != _unitPosX || _previousUnitPosY != _unitPosY || _previousUnitHeading != _unitHeading) then {
+if (_isKeyFrame || _previousUnitPosX != _unitPosX || _previousUnitPosY != _unitPosY || _previousUnitHeading != _unitHeading) then {
 
     _x setVariable ["r3_pos_x", _unitPosX];
     _x setVariable ["r3_pos_y", _unitPosY];
