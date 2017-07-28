@@ -18,7 +18,7 @@
 private _functionLogName = "AAR > dbCreateMissionEntry";
 
 // Send the query to the extension
-private _query = [["replay", missionName, getText (missionConfigFile >> "onLoadName"), worldName, daytime, QUOTE(VERSION)], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [["replay", missionName, getText (missionConfigFile >> "onLoadName"), worldName, getText (missionConfigFile >> "author"), daytime, QUOTE(VERSION)], GVAR(extensionSeparator)] call CBA_fnc_join;
 private _insertResult = call compile (GVAR(extensionName) callExtension _query);
 
 if ((_insertResult select 0) isEqualTo "error") exitWith {

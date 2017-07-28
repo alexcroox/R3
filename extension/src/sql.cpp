@@ -121,20 +121,22 @@ namespace r3 {
             log::logger->trace("Request command '{}' params size '{}'!", request.command, request.params.size());
 
             try {
-                if (request.command == "replay" && realParamsSize == 5) {
+                if (request.command == "replay" && realParamsSize == 6) {
 
                     std::string missionName = request.params[1];
                     std::string missionDisplayName = request.params[2];
                     std::string map = request.params[3];
-                    double dayTime = getNumericValue(request.params, 4);
-                    std::string addonVersion = request.params[5];
+                    std::string author = request.params[4];
+                    double dayTime = getNumericValue(request.params, 5);
+                    std::string addonVersion = request.params[6];
 
-                    //log::logger->debug("Inserting into 'missions' values missionName '{}', terrain '{}', dayTime '{}', addonVersion '{}'.", missionName, map, dayTime, addonVersion);
+                    log::logger->debug("Inserting into 'missions' values missionName '{}', terrain '{}', dayTime '{}', author '{}', addonVersion '{}'.", missionName, map, dayTime, author, addonVersion);
 
-                    *session << "INSERT INTO missions(name, display_name, terrain, day_time, created_at, addon_version) VALUES(?, ?, ?, ?, UTC_TIMESTAMP(), ?)",
+                    *session << "INSERT INTO missions(name, display_name, terrain, author, day_time, created_at, addon_version) VALUES(?, ?, ?, ?, ?, UTC_TIMESTAMP(), ?)",
                         Poco::Data::Keywords::use(missionName),
                         Poco::Data::Keywords::use(missionDisplayName),
                         Poco::Data::Keywords::use(map),
+                        Poco::Data::Keywords::use(author),
                         Poco::Data::Keywords::use(dayTime),
                         Poco::Data::Keywords::use(addonVersion),
                         Poco::Data::Keywords::now;
@@ -228,7 +230,7 @@ namespace r3 {
                     double posZ = parseFloat(request.params[5]);
                     uint32_t direction = parseUnsigned(request.params[6]);
                     uint32_t keyFrame = parseUnsigned(request.params[7]);
-                    uint32_t driver = request.params[8];
+                    std::string driver = request.params[8];
                     std::string crew = request.params[9];
                     std::string cargo = request.params[10];
                     double missionTime = parseFloat(request.params[11]);
