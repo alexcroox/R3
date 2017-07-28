@@ -42,7 +42,14 @@ An exact mirror of this repo [can be viewed here](https://titanmods.xyz/r3/ark/)
 ### Install Windows Server
 
 1. Download the [latest release](https://github.com/alexcroox/R3/releases/latest) to your Windows game server
-2. Create a folder `/R3Extension/` in `/%appdata%/local/` or set environment variable `R3_EXTENSION_HOME` to a folder of your choice
+2. You have 3 options for storing the config file depending on your needs:
+
+    a. Create a folder `/R3Extension/` in `/%appdata%/local/`
+    
+    b. Set environment variable `R3_EXTENSION_HOME` to a folder of your choice
+    
+    c. Add config.properties to your Arma server working directory
+    
 3. Create a `config.properties` in the previous created folder with [this template](https://github.com/alexcroox/R3/blob/master/extension/config.properties)
 4. Create a MySQL database (on your web hosting) with [this structure](https://github.com/alexcroox/R3-Web/blob/master/db-template.sql)
 5. Enter your db details into `config.properties`
