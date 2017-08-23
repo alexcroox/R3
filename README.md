@@ -25,11 +25,11 @@
     <sup><strong>Requires the latest version of <a href="https://github.com/CBATeam/CBA_A3/releases">CBA A3</a><br/></strong></sup>
 </p>
 
-Server Side addon for capturing unit movement and behaviour to a database for After Action Replays on a website. 
+Server Side addon for capturing unit movement and behaviour to a database for After Action Replays on a website.
 
 No modifications to your missions required, nothing for clients to download.
 
-Being built along side the [web component](https://github.com/alexcroox/R3-Web) and [tile generation component](https://titanmods.xyz/r3/tiler/)
+Being built along side the [web component](https://github.com/alexcroox/R3-Web), [extension component](https://github.com/alexcroox/R3-Extension) and the [tile generation component](https://titanmods.xyz/r3/tiler/)
 
 Built for Windows or Linux game servers.
 
@@ -74,4 +74,3 @@ ACE3 dev team for providing [coding guidelines](http://ace3mod.com/wiki/developm
 [ARK] Chairbourne for providing CUP source for the vehicle icons
 
 [NRF1] Crazy for working with me on the original AAR as part of the old 5th Rifles mission framework.
-
