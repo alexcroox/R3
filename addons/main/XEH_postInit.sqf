@@ -21,6 +21,7 @@ if !(isServer) exitWith { ERROR_WITH_TITLE("AAR - ERROR", "Addon must be run ser
 
     // Start event saving buffer
     call FUNC(trackLoop);
+    call FUNC(missionUpdateLoop);
 
     call FUNC(addMissionEventHandlers);
 

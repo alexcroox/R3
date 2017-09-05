@@ -27,5 +27,6 @@ PREP(eventFired);
 
 PREP(calcSideInt);
 PREP(trackLoop);
+PREP(missionUpdateLoop);
 PREP(trackInfantryAndVehicles);
 PREP(trackMarkers);

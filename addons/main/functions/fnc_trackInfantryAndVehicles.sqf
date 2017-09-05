@@ -46,11 +46,6 @@ private _allUnitsAndVehicles = allUnits + vehicles;
                 _isValid = false;
             };
 
-            // We don't want to touch empty vehicles until they are used
-            if (_isVehicle && count crew _x == 0) then {
-                _isValid = false;
-            };
-
             if (_isValid) then {
 
                 // Set an incrementing unique ID against each unit to be used as
@@ -79,7 +74,6 @@ private _allUnitsAndVehicles = allUnits + vehicles;
                 if (isNull objectParent _x) then {
                     [_entityId, _x, _isKeyFrame] call FUNC(dbInsertInfantryPosition);
                 }
-
             } else {
                 [_entityId, _x, _isKeyFrame] call FUNC(dbInsertVehiclePosition);
             };
