@@ -43,6 +43,14 @@ private _attackerDistance = _formatedShotData select 1;
 private _entityVictim = _victim getVariable ["r3_entity_id", 0];
 private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
+private _victimFaction = _victim call FUNC(calcSideInt);
+private _attackerFaction = _attacker call FUNC(calcSideInt);
+private _sameFaction = false;
+
+if (_victimFaction isEqualTo _attackerFaction) then {
+    _sameFaction = true;
+};
+
 if (_entityVictim == 0) then {
     diag_log format["Invalid victim %1", _victim];
 };
@@ -50,5 +58,5 @@ if (_entityVictim == 0) then {
 private _eventType = "killed";
 
 // Send the query to the extension
-private _query = [["events_downed", GVAR(missionId), time, _eventType, _entityAttacker, _entityVictim, _attackerDistance, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [["events_downed", GVAR(missionId), time, _eventType, _entityAttacker, _entityVictim, _sameFaction, _attackerDistance, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
 call compile (GVAR(extensionName) callExtension _query);

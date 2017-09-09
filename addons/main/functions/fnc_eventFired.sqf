@@ -37,7 +37,7 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
     _findFinalPosition = [_projectile, _ammo, _unit] spawn {
 
         params ["_projectile", "_ammo", "_unit"];
-        private ["_grenadePos"];
+        private _grenadePos = [];
 
         private _grenadeType = "smoke";
 
@@ -61,14 +61,17 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
 
             // Track the protectile and wait until it's stopped moving (smoke)
             waitUntil {
+
+                if (!isNull (_projectile)) then {
+                    _grenadePos = getPos _projectile;
+                };
+
                 ((getPos _projectile select 2) < 0.1 || !alive _projectile)
             };
-
-            _grenadePos = getPos _projectile;
         };
 
         // Is the position invalid?
-        if ((_grenadePos select 0) == 0) exitWith {};
+        if ((_grenadePos select 0) == 0 || count _grenadePos == 0) exitWith {};
 
         private _posX = _grenadePos select 0;
         private _posY = _grenadePos select 1;

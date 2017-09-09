@@ -53,7 +53,7 @@ private _vehicleCrewString = "";
 
 if (count _vehicleCrew > 0) then {
 
-    _vehicleCrewString = format["{%1}", _vehicleCrew];
+    _vehicleCrewString = format["%1", _vehicleCrew];
 };
 
 private _vehicleCargo = (
@@ -74,7 +74,7 @@ private _vehicleCargoString = "";
 
 if (count _vehicleCargo > 0) then {
 
-    _vehicleCargoString = format["{%1}", _vehicleCargo];
+    _vehicleCargoString = format["%1", _vehicleCargo];
 };
 
 private _previousVehiclePosX = _vehicle getVariable ["r3_pos_x", 0];

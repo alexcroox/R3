@@ -29,7 +29,9 @@ private _allUnitsAndVehicles = allUnits + vehicles;
         private _entityId = _x getVariable ["r3_entity_id", false];
         private _isVehicle = _x getVariable ["r3_is_vehicle", true];
         private _isValid = true;
-        private _isKeyFrame = (time % GVAR(secondsBetweenKeyFrames) == 0);
+        private _isKeyFrame = (round time % GVAR(secondsBetweenKeyFrames) == 0);
+
+        DBUG(format[ARR_2("time:%1 between:%2 calculated:%3", time, GVAR(secondsBetweenKeyFrames), (time % GVAR(secondsBetweenKeyFrames) == 0))], _functionLogName);
 
         // This is the first time we've seen this unit,
         // lets do some one time calculations
