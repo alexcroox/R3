@@ -32,17 +32,17 @@ params [
 
 if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith {};
 
-if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" > -1) then {
+if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1) then {
 
     _findFinalPosition = [_projectile, _ammo, _unit] spawn {
 
         params ["_projectile", "_ammo", "_unit"];
         private _grenadePos = [];
 
-        private _grenadeType = "smoke";
+        private _grenadeType = "grenade";
 
-        if (_ammo find "HE" > -1) then {
-            _grenadeType = "grenade";
+        if (_ammo find "Smoke" > -1) then {
+            _grenadeType = "smoke";
         };
 
         if (_grenadeType == "grenade") then {
@@ -71,7 +71,7 @@ if (_ammo isEqualTo "GrenadeHand" || _ammo find "Smoke" > -1 || _ammo find "HE" 
         };
 
         // Is the position invalid?
-        if ((_grenadePos select 0) == 0 || count _grenadePos == 0) exitWith {};
+        if ((_grenadePos select 0) == 0 || count _grenadePos < 2) exitWith {};
 
         private _posX = _grenadePos select 0;
         private _posY = _grenadePos select 1;

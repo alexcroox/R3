@@ -45,10 +45,10 @@ private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
 private _victimFaction = _victim call FUNC(calcSideInt);
 private _attackerFaction = _attacker call FUNC(calcSideInt);
-private _sameFaction = false;
+private _sameFaction = 0;
 
 if (_victimFaction isEqualTo _attackerFaction) then {
-    _sameFaction = true;
+    _sameFaction = 1;
 };
 
 if (_entityVictim == 0) then {
