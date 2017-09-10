@@ -32,6 +32,9 @@ params [
 
 if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith {};
 
+//private _isNade = (_weapon == "Throw" || _ammo isKindOf "GrenadeCore");
+//diag_log format["is nade? %1", _isNade];
+
 if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1) then {
 
     _findFinalPosition = [_projectile, _ammo, _unit] spawn {
