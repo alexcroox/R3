@@ -24,7 +24,6 @@ PREP(shotTemplate);
 PREP(eventIncomingMissile);
 PREP(eventHit);
 PREP(eventFired);
-PREP(updateMission);
 
 PREP(calcSideInt);
 PREP(trackLoop);
