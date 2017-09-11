@@ -42,8 +42,7 @@ if (!isPlayer && _distanceMoved < 2) then {
 };
 
 private _hasLookedAroundEnough = true;
-private _headingDifference = _unitHeading - _previousUnitHeading;
-_headingDifference = abs _headingDifference;
+private _headingDifference = abs (_unitHeading - _previousUnitHeading);
 
 if (!isPlayer && _headingDifference < 30) then {
     _hasLookedAroundEnough = false;
