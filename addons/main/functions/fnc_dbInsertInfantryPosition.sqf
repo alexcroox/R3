@@ -35,21 +35,21 @@ private _previousUnitPosY = _x getVariable ["r3_pos_y", 0];
 private _previousUnitHeading = _x getVariable ["r3_heading", 0];
 
 private _hasMovedEnough = true;
-private _distanceMoved = [_unitPosX, _unitPosY] distance2D [_previousUnitPosX, _previousUnitPosY];
+private _distanceMoved = round ([_previousUnitPosX, _previousUnitPosY] distance2D [_unitPosX, _unitPosY]);
 
-if (!isPlayer && _distanceMoved < 2) then {
+if (_distanceMoved < 2) then {
     _hasMovedEnough = false;
 };
 
 private _hasLookedAroundEnough = true;
 private _headingDifference = abs (_unitHeading - _previousUnitHeading);
 
-if (!isPlayer && _headingDifference < 30) then {
+if (_headingDifference < 30) then {
     _hasLookedAroundEnough = false;
 };
 
 // If the unit's position has changed lets log it
-if (_isKeyFrame isEqualTo 1 || (_hasMovedEnough && _hasLookedAroundEnough)) then {
+if (_isKeyFrame isEqualTo 1 || _hasMovedEnough || _hasLookedAroundEnough) then {
 
     _x setVariable ["r3_pos_x", _unitPosX];
     _x setVariable ["r3_pos_y", _unitPosY];
