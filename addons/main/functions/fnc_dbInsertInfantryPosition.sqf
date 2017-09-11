@@ -39,7 +39,7 @@ private _distanceMoved = [_unitPosX, _unitPosY] distance2D [_previousUnitPosX, _
 
 if (!isPlayer && _distanceMoved < 2) then {
     _hasMovedEnough = false;
-}
+};
 
 private _hasLookedAroundEnough = true;
 private _headingDifference = _unitHeading - _previousUnitHeading;
@@ -47,7 +47,7 @@ _headingDifference = abs _headingDifference;
 
 if (!isPlayer && _headingDifference < 30) then {
     _hasLookedAroundEnough = false;
-}
+};
 
 // If the unit's position has changed lets log it
 if (_isKeyFrame isEqualTo 1 || (_hasMovedEnough && _hasLookedAroundEnough)) then {
