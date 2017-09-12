@@ -46,7 +46,11 @@ private _allUnitsAndVehicles = allUnits + vehicles;
             };
 
             // Let's never touch objects that aren't living or a drivable vehicle
-            if (_x isKindOf "Logic" || (_isVehicle && _x isKindOf "WeaponHolderSimulated")) then {
+            if (
+                _x isKindOf "Logic" ||
+                _x isKindOf "WeaponHolderSimulated" ||
+                _x isKindOf "Thing"
+            ) then {
                 _x setVariable ["r3_do_not_track", true];
                 _isValid = false;
             };
