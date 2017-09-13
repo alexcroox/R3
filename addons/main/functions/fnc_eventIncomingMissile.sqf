@@ -37,8 +37,8 @@ private _attackerAmmoType = (
     _ammo call {
         private _type = getText (configFile >> "CfgAmmo" >> _this >> "simulation");
         _type = switch (_type) do {
-            case "shotRocket" : {"Rocket"};
-            case "shotMissile" : {"Missile"};
+            case "shotRocket" : {"rocket"};
+            case "shotMissile" : {"missile"};
         };
         _type
     }
