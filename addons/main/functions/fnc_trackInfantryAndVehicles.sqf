@@ -17,7 +17,7 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > trackInfantryAndVehicles";
 
-private _allUnitsAndVehicles = allUnits + vehicles;
+private _allUnitsAndVehicles = (allUnits + vehicles) select {!(fullCrew _x isEqualTo [])};
 
 // Loop through all units and vehicles on the map
 {
@@ -43,16 +43,6 @@ private _allUnitsAndVehicles = allUnits + vehicles;
             // This is an infantry unit
             if (_x isKindOf "CaManBase") then {
                 _isVehicle = false;
-            };
-
-            // Let's never touch objects that aren't living or a drivable vehicle
-            if (
-                _x isKindOf "Logic" ||
-                _x isKindOf "WeaponHolderSimulated" ||
-                _x isKindOf "Thing"
-            ) then {
-                _x setVariable ["r3_do_not_track", true];
-                _isValid = false;
             };
 
             if (_isValid) then {
