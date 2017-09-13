@@ -17,7 +17,8 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > trackInfantryAndVehicles";
 
-private _allUnitsAndVehicles = (allUnits + vehicles) select {!(fullCrew _x isEqualTo [])};
+// Get all units and vehicles with a driver slot (includes turrets and parachutes etc)
+private _allUnitsAndVehicles = (allUnits + vehicles) select {!(fullCrew [_x, "driver", true] isEqualTo [])};
 
 // Loop through all units and vehicles on the map
 {
