@@ -46,6 +46,13 @@ private _allUnitsAndVehicles = (allUnits + vehicles) select {!(fullCrew [_x, "dr
                 _isVehicle = false;
             };
 
+            // Avoid logging ejection seats
+            if ((typeOf _x) find "Ejection" > -1) then {
+                _x setVariable ["r3_do_not_track", true];
+                _isValid = false;
+            };
+
+
             if (_isValid) then {
 
                 // Set an incrementing unique ID against each unit to be used as
