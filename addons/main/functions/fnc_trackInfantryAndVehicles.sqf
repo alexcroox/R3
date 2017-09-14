@@ -19,7 +19,7 @@ private _functionLogName = "AAR > trackInfantryAndVehicles";
 
 // Get all units and vehicles with a driver slot (includes turrets and parachutes etc)
 private _allDrivableVehicles = vehicles select {!(fullCrew [_x, "driver", true] isEqualTo [])};
-private _allUnitsAndVehicles = allUnits + _allDrivableVehicles;
+private _allUnitsAndVehicles = allUnits + allDeadMen + _allDrivableVehicles;
 
 // Loop through all units and vehicles on the map
 {

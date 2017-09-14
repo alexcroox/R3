@@ -29,7 +29,16 @@ if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith
 if (_victim == objNull) exitWith {};
 
 // We only want to log ai or players being killed, not fences being run over!
-if ( (_attacker isEqualTo ObjNull) || !(_victim isKindOf "CaManBase" || _victim isKindOf "LandVehicle" || _victim isKindOf "Air" || _victim isKindOf "Ship" || _victim isKindOf "Boat") ) exitWith {};
+if (
+    (_attacker isEqualTo ObjNull) ||
+    !(
+        _victim isKindOf "CaManBase" ||
+        _victim isKindOf "LandVehicle" ||
+        _victim isKindOf "Air" ||
+        _victim isKindOf "Ship" ||
+        _victim isKindOf "Boat"
+    )
+) exitWith {};
 
 if (_victim == _attacker) then {
     _attacker = _victim getVariable ["lastAttacker", _victim];
