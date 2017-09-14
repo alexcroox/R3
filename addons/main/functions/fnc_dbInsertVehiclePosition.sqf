@@ -90,6 +90,11 @@ if (
     _previousCrew != _vehicleCrewString ||
     _previousCargo != _vehicleCargoString) then {
 
+    private _isDead = 0;
+    if (!alive _vehicle) then {
+        _isDead = 1;
+    };
+
     _vehicle setVariable ["r3_pos_x", _vehiclePosX];
     _vehicle setVariable ["r3_pos_y", _vehiclePosY];
     _vehicle setVariable ["r3_heading", _vehicleHeading];
@@ -98,6 +103,6 @@ if (
     _vehicle setVariable ["r3_cargo", _vehicleCargoString];
 
     // Send infantry position to the extension
-    private _query = [["vehicle_positions", GVAR(missionId), _entityId, _vehiclePosX, _vehiclePosY, _vehiclePosZ, _vehicleHeading, _isKeyFrame, _vehicleDriver, _vehicleCrewString, _vehicleCargoString, time], GVAR(extensionSeparator)] call CBA_fnc_join;
+    private _query = [["vehicle_positions", GVAR(missionId), _entityId, _vehiclePosX, _vehiclePosY, _vehiclePosZ, _vehicleHeading, _isKeyFrame, _vehicleDriver, _vehicleCrewString, _vehicleCargoString, _isDead, time], GVAR(extensionSeparator)] call CBA_fnc_join;
     call compile (GVAR(extensionName) callExtension _query);
 };
