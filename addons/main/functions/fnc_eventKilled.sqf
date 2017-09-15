@@ -40,28 +40,42 @@ if (
     )
 ) exitWith {};
 
-if (_victim == _attacker) then {
-    _attacker = _victim getVariable ["lastAttacker", _victim];
-};
-
-private _formatedShotData = [_victim, _attacker] call FUNC(shotTemplate);
-
-private _attackerWeapon = _formatedShotData select 0;
-private _attackerDistance = _formatedShotData select 1;
-
 private _entityVictim = _victim getVariable ["r3_entity_id", 0];
-private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
-
-private _victimFaction = _victim call FUNC(calcSideInt);
-private _attackerFaction = _attacker call FUNC(calcSideInt);
-private _sameFaction = 0;
-
-if (_victimFaction isEqualTo _attackerFaction) then {
-    _sameFaction = 1;
-};
 
 if (_entityVictim == 0) then {
     diag_log format["Invalid victim %1", _victim];
+};
+
+// Do we have the previous attacker stored against this unit from when they were
+// knocked unconcious?
+private unconciousAttackerEntity = _victim getVariable ["attackerEntity", false];
+
+if (unconciousAttackerEntity) then {
+
+    private _entityAttacker = _victim getVariable ["attackerEntity", 0];
+    private _attackerWeapon = _victim getVariable ["attackerWeapon", ''];
+    private _attackerDistance = _victim getVariable ["attackerDistance", ''];
+    private _sameFaction = _victim getVariable ["attackerSameFaction", ''];
+
+} else {
+
+    if (_victim == _attacker) then {
+        _attacker = _victim getVariable ["lastAttacker", _victim];
+    };
+
+    private _formatedShotData = [_victim, _attacker] call FUNC(shotTemplate);
+
+    private _attackerWeapon = _formatedShotData select 0;
+    private _attackerDistance = _formatedShotData select 1;
+    private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
+
+    private _victimFaction = _victim call FUNC(calcSideInt);
+    private _attackerFaction = _attacker call FUNC(calcSideInt);
+    private _sameFaction = 0;
+
+    if (_victimFaction isEqualTo _attackerFaction) then {
+        _sameFaction = 1;
+    };
 };
 
 private _eventType = "killed";

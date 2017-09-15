@@ -39,20 +39,40 @@ private _eventType = switch(_state) do {
 
 _unit setVariable ["lastUnconscious", time, false];
 
-private _formatedShotData = [_unit, _attacker] call FUNC(shotTemplate);
-
-private _attackerWeapon = _formatedShotData select 0;
-private _attackerDistance = _formatedShotData select 1;
+private _sameFaction = false;
 
 private _entityVictim = _unit getVariable ["r3_entity_id", 0];
 private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
-private _victimFaction = _victim call FUNC(calcSideInt);
-private _attackerFaction = _attacker call FUNC(calcSideInt);
-private _sameFaction = false;
+// Let's only log weapons when they are downed, not when they awake
+if (_state) then {
+    private _formatedShotData = [_unit, _attacker] call FUNC(shotTemplate);
 
-if (_victimFaction isEqualTo _attackerFaction) then {
-    _sameFaction = true;
+    private _attackerWeapon = _formatedShotData select 0;
+    private _attackerDistance = _formatedShotData select 1;
+
+    private _victimFaction = _victim call FUNC(calcSideInt);
+    private _attackerFaction = _attacker call FUNC(calcSideInt);
+
+    if (_victimFaction isEqualTo _attackerFaction) then {
+        _sameFaction = true;
+    };
+
+    // Store the weapons used to down this unit for later killed events
+    _unit setVariable ["attackerWeapon", _attackerWeapon, false];
+    _unit setVariable ["attackerDistance", _attackerDistance, false];
+    _unit setVariable ["attackerEntity", _entityAttacker, false];
+    _unit setVariable ["attackerSameFaction", _sameFaction, false];
+
+} else {
+    private _attackerWeapon = "";
+    private _attackerDistance = 0;
+
+    // Unset our previous variables
+    _unit setVariable ["attackerWeapon", nil, false];
+    _unit setVariable ["attackerDistance", nil, false];
+    _unit setVariable ["attackerEntity", nil, false];
+    _unit setVariable ["attackerSameFaction", nil, false];
 };
 
 // Send the query to the extension
