@@ -48,16 +48,14 @@ if (_entityVictim == 0) then {
 
 // Do we have the previous attacker stored against this unit from when they were
 // knocked unconcious?
-private unconciousAttackerEntity = _victim getVariable ["attackerEntity", false];
+private _unconciousAttackerEntity = _victim getVariable ["attackerEntity", false];
 
-if (unconciousAttackerEntity) then {
+private _entityAttacker = _victim getVariable ["attackerEntity", 0];
+private _attackerWeapon = _victim getVariable ["attackerWeapon", ''];
+private _attackerDistance = _victim getVariable ["attackerDistance", ''];
+private _sameFaction = _victim getVariable ["attackerSameFaction", ''];
 
-    private _entityAttacker = _victim getVariable ["attackerEntity", 0];
-    private _attackerWeapon = _victim getVariable ["attackerWeapon", ''];
-    private _attackerDistance = _victim getVariable ["attackerDistance", ''];
-    private _sameFaction = _victim getVariable ["attackerSameFaction", ''];
-
-} else {
+if !(_unconciousAttackerEntity) then {
 
     if (_victim == _attacker) then {
         _attacker = _victim getVariable ["lastAttacker", _victim];
@@ -65,13 +63,13 @@ if (unconciousAttackerEntity) then {
 
     private _formatedShotData = [_victim, _attacker] call FUNC(shotTemplate);
 
-    private _attackerWeapon = _formatedShotData select 0;
-    private _attackerDistance = _formatedShotData select 1;
-    private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
+    _attackerWeapon = _formatedShotData select 0;
+    _attackerDistance = _formatedShotData select 1;
+    _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
     private _victimFaction = _victim call FUNC(calcSideInt);
     private _attackerFaction = _attacker call FUNC(calcSideInt);
-    private _sameFaction = 0;
+    _sameFaction = 0;
 
     if (_victimFaction isEqualTo _attackerFaction) then {
         _sameFaction = 1;
