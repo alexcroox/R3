@@ -11,7 +11,7 @@ GVAR(missionId) = 0;
 GVAR(extensionName) = "r3_extension";
 GVAR(extensionSeparator) = "";
 GVAR(entityCount) = 0;
-GVAR(secondsBetweenKeyFrames) = 20;
+GVAR(secondsBetweenKeyFrames) = 30;
 
 GVAR(maxMarkerCountPerEvent) = 10;
 GVAR(insertFrequencyMarkers) = 10;
