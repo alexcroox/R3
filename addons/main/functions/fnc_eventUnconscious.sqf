@@ -64,6 +64,8 @@ if (_state) then {
     _unit setVariable ["attackerEntity", _entityAttacker, false];
     _unit setVariable ["attackerSameFaction", _sameFaction, false];
 
+    _unit setVariable ["isUnconscious", true, false];
+
 } else {
     private _attackerWeapon = "";
     private _attackerDistance = 0;
@@ -73,6 +75,8 @@ if (_state) then {
     _unit setVariable ["attackerDistance", nil, false];
     _unit setVariable ["attackerEntity", nil, false];
     _unit setVariable ["attackerSameFaction", nil, false];
+
+    _unit setVariable ["isUnconscious", false, false];
 };
 
 // Send the query to the extension

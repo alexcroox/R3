@@ -52,7 +52,9 @@ if (_headingDifference < 30) then {
 if (_isKeyFrame isEqualTo 1 || _hasMovedEnough || _hasLookedAroundEnough) then {
 
     private _isDead = 0;
-    if (!alive _unit) then {
+    private _isUnconcious = _unit getVariable ["isUnconscious", false];
+
+    if (!alive _unit || _isUnconcious) then {
         _isDead = 1;
     };
 
