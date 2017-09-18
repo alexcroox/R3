@@ -47,12 +47,16 @@ private _allUnitsAndVehicles = allUnits + allDeadMen + _allDrivableVehicles;
                 _isVehicle = false;
             };
 
-            // Avoid logging ejection seats
-            if ((typeOf _x) find "Ejection" > -1) then {
+            // Let's never touch objects that aren't living or a drivable vehicle
+            if (
+                _x isKindOf "Logic" ||
+                _x isKindOf "WeaponHolderSimulated" ||
+                _x isKindOf "Thing" ||
+                (typeOf _x) find "Ejection" > -1
+            ) then {
                 _x setVariable ["r3_do_not_track", true];
                 _isValid = false;
             };
-
 
             if (_isValid) then {
 
