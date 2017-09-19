@@ -17,8 +17,25 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > dbCreateMissionEntry";
 
+private _missionName = missionName;
+private _displayName = getText (missionConfigFile >> "onLoadName");
+private _terrainName = worldName;
+private _author = getText (missionConfigFile >> "author");
+private _dayTime = daytime;
+private _addonVersion = QUOTE(VERSION);
+private _fileName = format["%1.%2.pbo", _missionName, _terrainName];
+
 // Send the query to the extension
-private _query = [["replay", missionName, getText (missionConfigFile >> "onLoadName"), worldName, getText (missionConfigFile >> "author"), daytime, QUOTE(VERSION)], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [[
+    "replay",
+    _missionName,
+    _displayName,
+    _terrainName,
+    _author,
+    _dayTime,
+    _addonVersion,
+    _fileName
+], GVAR(extensionSeparator)] call CBA_fnc_join;
 private _insertResult = call compile (GVAR(extensionName) callExtension _query);
 
 if ((_insertResult select 0) isEqualTo "error") exitWith {
