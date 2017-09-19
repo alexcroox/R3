@@ -40,6 +40,7 @@ private _eventType = switch(_state) do {
 _unit setVariable ["lastUnconscious", time, false];
 
 private _sameFaction = false;
+private _attackerVehicle = 0;
 
 private _entityVictim = _unit getVariable ["r3_entity_id", 0];
 private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
@@ -54,6 +55,10 @@ if (_state) then {
     private _victimFaction = _victim call FUNC(calcSideInt);
     private _attackerFaction = _attacker call FUNC(calcSideInt);
 
+    if !(vehicle _attacker isEqualTo _attacker) then {
+        _attackerVehicle = (vehicle _attacker) getVariable ["r3_entity_id", 0];
+    };
+
     if (_victimFaction isEqualTo _attackerFaction) then {
         _sameFaction = true;
     };
@@ -63,6 +68,7 @@ if (_state) then {
     _unit setVariable ["attackerDistance", _attackerDistance, false];
     _unit setVariable ["attackerEntity", _entityAttacker, false];
     _unit setVariable ["attackerSameFaction", _sameFaction, false];
+    _unit setVariable ["attackerVehicle", _attackerVehicle, false];
 
     _unit setVariable ["isUnconscious", true, false];
 

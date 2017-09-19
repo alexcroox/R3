@@ -5,6 +5,7 @@
  * Arguments:
  * 0: victim <OBJECT>
  * 1: attacker <OBJECT>
+ * 2: instigator <OBJECT>
  *
  * Return Value:
  * None
@@ -20,6 +21,7 @@ private _functionLogName = "AAR > eventKilled";
 
 params [
     ["_victim", objNull],
+    ["_killer", objNull]
     ["_attacker", objNull]
 ];
 
@@ -27,6 +29,11 @@ if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith
 
 // Handle respawnOnStart
 if (_victim == objNull) exitWith {};
+
+// UAV/UGV player operated road kill
+if (isNull _attacker) then { _attacker = UAVControl vehicle _killer select 0 };
+// Player driven vehicle road kill
+if (isNull _attacker) then { _attacker = _killer };
 
 // We only want to log ai or players being killed, not fences being run over!
 if (
@@ -53,7 +60,8 @@ private _unconciousAttackerEntity = _victim getVariable ["attackerEntity", false
 private _entityAttacker = _victim getVariable ["attackerEntity", 0];
 private _attackerWeapon = _victim getVariable ["attackerWeapon", ''];
 private _attackerDistance = _victim getVariable ["attackerDistance", ''];
-private _sameFaction = _victim getVariable ["attackerSameFaction", ''];
+private _sameFaction = _victim getVariable ["attackerSameFaction", 0];
+private _attackerVehicle = _victim getVariable ["attackerVehicle", 0];
 
 if !(_unconciousAttackerEntity) then {
 
@@ -67,6 +75,11 @@ if !(_unconciousAttackerEntity) then {
     _attackerDistance = _formatedShotData select 1;
     _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
+    _attackerVehicle = 0;
+    if !(vehicle _attacker isEqualTo _attacker) then {
+        _attackerVehicle = (vehicle _attacker) getVariable ["r3_entity_id", 0];
+    };
+
     private _victimFaction = _victim call FUNC(calcSideInt);
     private _attackerFaction = _attacker call FUNC(calcSideInt);
     _sameFaction = 0;
@@ -79,5 +92,5 @@ if !(_unconciousAttackerEntity) then {
 private _eventType = "killed";
 
 // Send the query to the extension
-private _query = [["events_downed", GVAR(missionId), time, _eventType, _entityAttacker, _entityVictim, _sameFaction, _attackerDistance, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
+private _query = [["events_downed", GVAR(missionId), time, _eventType, _entityAttacker, _entityVictim, _attackerVehicle, _sameFaction, _attackerDistance, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
 call compile (GVAR(extensionName) callExtension _query);
