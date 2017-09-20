@@ -55,7 +55,7 @@ if (_entityVictim == 0) then {
 
 // Do we have the previous attacker stored against this unit from when they were
 // knocked unconcious?
-private _unconciousAttackerEntity = _victim getVariable ["attackerEntity", false];
+private _unconciousAttackerEntity = _victim getVariable ["attackerEntity", 0];
 
 private _entityAttacker = _victim getVariable ["attackerEntity", 0];
 private _attackerWeapon = _victim getVariable ["attackerWeapon", ''];
@@ -63,7 +63,7 @@ private _attackerDistance = _victim getVariable ["attackerDistance", ''];
 private _sameFaction = _victim getVariable ["attackerSameFaction", 0];
 private _attackerVehicle = _victim getVariable ["attackerVehicle", 0];
 
-if !(_unconciousAttackerEntity) then {
+if !(_unconciousAttackerEntity isEqualTo 0) then {
 
     if (_victim == _attacker) then {
         _attacker = _victim getVariable ["lastAttacker", _victim];
