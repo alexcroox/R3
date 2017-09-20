@@ -21,7 +21,7 @@ private _functionLogName = "AAR > eventKilled";
 
 params [
     ["_victim", objNull],
-    ["_killer", objNull]
+    ["_killer", objNull],
     ["_attacker", objNull]
 ];
 
