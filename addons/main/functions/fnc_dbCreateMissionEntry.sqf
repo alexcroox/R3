@@ -41,12 +41,12 @@ private _createMission = GVAR(extensionName) callExtension ["create_mission", _m
 if ((_createMission select 0) isEqualTo -1) exitWith {
 
     ERROR_SYSTEM_CHAT("The AAR tool (R3) failed to add this mission to your database, this mission will not be captured");
-    DBUG(format[ARR_2("Failed to get replay ID: %1", _insertResult select 1)], _functionLogName);
+    DBUG(format[ARR_2("Failed to get replay ID: %1", _createMission select 2)], _functionLogName);
 };
 
-GVAR(missionId) = _insertResult select 1;
+GVAR(missionId) = _createMission select 1;
 
 ["replaySetup"] call CBA_fnc_localEvent;
 
 //ERROR_SYSTEM_CHAT("R3 is recording this mission");
-DBUG(format[ARR_2("Replay db entry setup %1", GVAR(missionId))], _functionLogName);
+DBUG(format[ARR_2("Mission db entry created: %1", GVAR(missionId))], _functionLogName);
