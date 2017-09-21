@@ -23,8 +23,12 @@ DBUG("Starting mission update loop", _functionLogName);
 [{
     if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith {};
 
-    // Send the query to the extension
-    private _query = [["update_replay", GVAR(missionId), round time], GVAR(extensionSeparator)] call CBA_fnc_join;
-    call compile (GVAR(extensionName) callExtension _query);
+    private _data = [
+        GVAR(missionId),
+        round time
+    ];
+
+    // Send the data to the extension
+    private _saveData = GVAR(extensionName) callExtension ["update_mission", _data];
 
 }, 10] call CBA_fnc_addPerFrameHandler;

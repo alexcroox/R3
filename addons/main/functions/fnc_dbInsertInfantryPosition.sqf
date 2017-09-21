@@ -62,7 +62,17 @@ if (_isKeyFrame isEqualTo 1 || _hasMovedEnough || _hasLookedAroundEnough) then {
     _unit setVariable ["r3_pos_y", _unitPosY];
     _unit setVariable ["r3_heading", _unitHeading];
 
-    // Send infantry position to the extension
-    private _query = [["infantry_positions", GVAR(missionId), _entityId, _unitPosX, _unitPosY, _unitHeading, _isKeyFrame, _isDead, time], GVAR(extensionSeparator)] call CBA_fnc_join;
-    call compile (GVAR(extensionName) callExtension _query);
+    private _data = [
+        GVAR(missionId),
+       _entityId,
+       _unitPosX,
+       _unitPosY,
+       _unitHeading,
+       _isKeyFrame,
+       _isDead,
+       time
+    ];
+
+    // Send the data to the extension
+    private _saveData = GVAR(extensionName) callExtension ["infantry_positions", _data];
 };

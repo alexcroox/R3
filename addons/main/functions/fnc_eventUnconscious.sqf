@@ -85,6 +85,16 @@ if (_state) then {
     _unit setVariable ["isUnconscious", false, false];
 };
 
-// Send the query to the extension
-private _query = [["events_downed", GVAR(missionId), time, _eventType, _entityAttacker, _entityVictim, _sameFaction, _attackerDistance, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
-call compile (GVAR(extensionName) callExtension _query);
+private _data = [
+    GVAR(missionId),
+    time,
+    _eventType,
+    _entityAttacker,
+    _entityVictim,
+    _sameFaction,
+    _attackerDistance,
+    _attackerWeapon
+];
+
+// Send the data to the extension
+private _saveData = GVAR(extensionName) callExtension ["events_downed", _data];

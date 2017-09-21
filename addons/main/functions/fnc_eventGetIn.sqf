@@ -35,6 +35,13 @@ private _entityVehicle = _vehicle getVariable ["r3_entity_id", 0];
 
 private _type = "get_in";
 
-// Send the query to the extension
-private _query = [["events_get_in_out", GVAR(missionId), time, _type, _entityUnit, _entityVehicle], GVAR(extensionSeparator)] call CBA_fnc_join;
-call compile (GVAR(extensionName) callExtension _query);
+private _data = [
+    GVAR(missionId),
+    time,
+    _type,
+    _entityUnit,
+    _entityVehicle
+];
+
+// Send the data to the extension
+private _saveData = GVAR(extensionName) callExtension ["events_get_in_out", _data];

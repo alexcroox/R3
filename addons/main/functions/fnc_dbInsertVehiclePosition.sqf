@@ -102,7 +102,21 @@ if (
     _vehicle setVariable ["r3_crew", _vehicleCrewString];
     _vehicle setVariable ["r3_cargo", _vehicleCargoString];
 
-    // Send infantry position to the extension
-    private _query = [["vehicle_positions", GVAR(missionId), _entityId, _vehiclePosX, _vehiclePosY, _vehiclePosZ, _vehicleHeading, _isKeyFrame, _vehicleDriver, _vehicleCrewString, _vehicleCargoString, _isDead, time], GVAR(extensionSeparator)] call CBA_fnc_join;
-    call compile (GVAR(extensionName) callExtension _query);
+    private _data = [
+        GVAR(missionId),
+        _entityId,
+        _vehiclePosX,
+        _vehiclePosY,
+        _vehiclePosZ,
+        _vehicleHeading,
+        _isKeyFrame,
+        _vehicleDriver,
+        _vehicleCrewString,
+        _vehicleCargoString,
+        _isDead,
+        time
+    ];
+
+    // Send the data to the extension
+    private _saveData = GVAR(extensionName) callExtension ["vehicle_positions", _data];
 };

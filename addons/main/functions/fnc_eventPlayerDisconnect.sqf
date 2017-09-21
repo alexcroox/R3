@@ -33,6 +33,13 @@ if (_uid == "") exitWith {};
 
 private _eventType = "disconnect";
 
-// Send the query to the extension
-private _query = [["events_connections", GVAR(missionId), time, _eventType, _uid, _name], GVAR(extensionSeparator)] call CBA_fnc_join;
-call compile (GVAR(extensionName) callExtension _query);
+private _data = [
+    GVAR(missionId),
+    time,
+    _eventType,
+    _uid,
+    _name
+];
+
+// Send the data to the extension
+private _saveData = GVAR(extensionName) callExtension ["events_connections", _data];

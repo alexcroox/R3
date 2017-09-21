@@ -35,6 +35,21 @@ private _unitData = "";
 private _unitWeapon = primaryWeapon _unit;
 private _unitLauncher = secondaryWeapon _unit;
 
-// Send the query to the extension
-private _query = [["infantry", GVAR(missionId), _unitUid, _entityId, _unitName, _unitFaction, _unitClass, _unitGroupId, _unitIsLeader, _unitIcon, _unitWeapon, _unitLauncher, _unitData, time], GVAR(extensionSeparator)] call CBA_fnc_join;
-call compile (GVAR(extensionName) callExtension _query);
+private _data = [
+    GVAR(missionId),
+    _unitUid,
+    _entityId,
+    _unitName,
+    _unitFaction,
+    _unitClass,
+    _unitGroupId,
+    _unitIsLeader,
+    _unitIcon,
+    _unitWeapon,
+    _unitLauncher,
+    _unitData,
+    time
+];
+
+// Send the data to the extension
+private _saveData = GVAR(extensionName) callExtension ["infantry", _data];

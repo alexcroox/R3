@@ -47,6 +47,14 @@ private _attackerAmmoType = (
 private _entityVictim = _victim getVariable ["r3_entity_id", 0];
 private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
-// Send the query to the extension
-private _query = [["events_missile", GVAR(missionId), time, _attackerAmmoType, _entityAttacker, _entityVictim, _attackerWeapon], GVAR(extensionSeparator)] call CBA_fnc_join;
-call compile (GVAR(extensionName) callExtension _query);
+private _data = [
+    GVAR(missionId),
+    time,
+    _attackerAmmoType,
+    _entityAttacker,
+    _entityVictim,
+    _attackerWeapon
+];
+
+// Send the data to the extension
+private _saveData = GVAR(extensionName) callExtension ["events_missile", _data];

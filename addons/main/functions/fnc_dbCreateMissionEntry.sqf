@@ -26,8 +26,7 @@ private _addonVersion = QUOTE(VERSION);
 private _fileName = format["%1.%2.pbo", _missionName, _terrainName];
 
 // Send the query to the extension
-private _query = [[
-    "replay",
+private _missionInfo = [
     _missionName,
     _displayName,
     _terrainName,
@@ -35,10 +34,11 @@ private _query = [[
     _dayTime,
     _addonVersion,
     _fileName
-], GVAR(extensionSeparator)] call CBA_fnc_join;
-private _insertResult = call compile (GVAR(extensionName) callExtension _query);
+];
 
-if ((_insertResult select 0) isEqualTo "error") exitWith {
+private _createMission = GVAR(extensionName) callExtension ["create_mission", _missionInfo];
+
+if ((_createMission select 0) isEqualTo -1) exitWith {
 
     ERROR_SYSTEM_CHAT("The AAR tool (R3) failed to add this mission to your database, this mission will not be captured");
     DBUG(format[ARR_2("Failed to get replay ID: %1", _insertResult select 1)], _functionLogName);
