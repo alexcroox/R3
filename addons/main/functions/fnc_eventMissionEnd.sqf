@@ -18,3 +18,5 @@
 private _functionLogName = "AAR > eventMissionEnd";
 
 DBUG("Mission ended", _functionLogName);
+
+GVAR(logEvents) = false;
