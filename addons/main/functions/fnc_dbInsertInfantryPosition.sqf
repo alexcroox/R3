@@ -70,7 +70,7 @@ if (_isKeyFrame isEqualTo 1 || _hasMovedEnough || _hasLookedAroundEnough) then {
        _unitHeading,
        _isKeyFrame,
        _isDead,
-       time
+       round time
     ];
 
     // Send the data to the extension

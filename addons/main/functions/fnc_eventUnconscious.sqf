@@ -87,7 +87,7 @@ if (_state) then {
 
 private _data = [
     GVAR(missionId),
-    time,
+    round time,
     _eventType,
     _entityAttacker,
     _entityVictim,

@@ -72,7 +72,7 @@ private _data = [
    _vehicleClass,
    _vehicleIcon,
    _vehicleIconName,
-   time
+   round time
 ];
 
 // Send the data to the extension

@@ -83,7 +83,7 @@ if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1
 
         private _data = [
             GVAR(missionId),
-            time,
+            round time,
             _grenadeType,
             _entityId,
             _posX,

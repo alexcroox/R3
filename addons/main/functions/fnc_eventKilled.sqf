@@ -93,7 +93,7 @@ private _eventType = "killed";
 
 private _data = [
     GVAR(missionId),
-    time,
+    round time,
     _eventType,
     _entityAttacker,
     _entityVictim,

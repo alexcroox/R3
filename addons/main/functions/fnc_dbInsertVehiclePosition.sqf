@@ -114,7 +114,7 @@ if (
         _vehicleCrewString,
         _vehicleCargoString,
         _isDead,
-        time
+        round time
     ];
 
     // Send the data to the extension

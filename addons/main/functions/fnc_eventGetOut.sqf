@@ -37,7 +37,7 @@ private _type = "get_out";
 
 private _data = [
     GVAR(missionId),
-    time,
+    round time,
     _type,
     _entityUnit,
     _entityVehicle

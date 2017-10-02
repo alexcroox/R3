@@ -40,7 +40,7 @@ if (_jip) then {
 
     private _data = [
         GVAR(missionId),
-        time,
+        round time,
         _eventType,
         _uid,
         _name

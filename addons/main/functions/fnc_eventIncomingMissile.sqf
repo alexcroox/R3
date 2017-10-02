@@ -49,7 +49,7 @@ private _entityAttacker = _attacker getVariable ["r3_entity_id", 0];
 
 private _data = [
     GVAR(missionId),
-    time,
+    round time,
     _attackerAmmoType,
     _entityAttacker,
     _entityVictim,

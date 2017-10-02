@@ -48,7 +48,7 @@ private _data = [
     _unitWeapon,
     _unitLauncher,
     _unitData,
-    time
+    round time
 ];
 
 // Send the data to the extension
