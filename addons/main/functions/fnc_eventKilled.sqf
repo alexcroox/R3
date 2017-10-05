@@ -50,7 +50,7 @@ if (
 private _entityVictim = _victim getVariable ["r3_entity_id", 0];
 
 if (_entityVictim == 0) then {
-    diag_log format["Invalid victim %1", _victim];
+    DBUG(format[ARR_2("Invalid victim: %1", _victim)], _functionLogName);
 };
 
 // Do we have the previous attacker stored against this unit from when they were
