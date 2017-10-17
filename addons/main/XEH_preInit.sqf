@@ -7,6 +7,7 @@ ADDON = false;
 GVAR(logEvents) = true;
 GVAR(forceLogEvents) = false;
 GVAR(noPlayers) = false;
+GVAR(playerCount) = 0;
 GVAR(missionId) = 0;
 GVAR(extensionName) = "r3_extension";
 GVAR(entityCount) = 0;

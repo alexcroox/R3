@@ -37,10 +37,14 @@ if ( (GVAR(noPlayers) || !GVAR(logEvents)) && !(GVAR(forceLogEvents)) ) exitWith
 
 if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1) then {
 
-    _findFinalPosition = [_projectile, _ammo, _unit] spawn {
+    private _findFinalPosition = [_projectile, _ammo, _unit] spawn {
 
         params ["_projectile", "_ammo", "_unit"];
         private _grenadePos = [];
+
+        if (isNull _projectile) then {
+            _projectile = nearestObject [_unit, _ammo];
+        };
 
         private _grenadeType = "grenade";
 
@@ -48,7 +52,7 @@ if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1
             _grenadeType = "smoke";
         };
 
-        if (_grenadeType == "grenade") then {
+        if (_grenadeType isEqualTo "grenade") then {
 
             // Track the protectile and wait until it explodes (grenade)
             waitUntil {
@@ -74,7 +78,7 @@ if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1
         };
 
         // Is the position invalid?
-        if ((_grenadePos select 0) == 0 || count _grenadePos < 2) exitWith {};
+        if ((count _grenadePos) isEqualTo 0 || (_grenadePos select 0) isEqualTo 0) exitWith {};
 
         private _posX = _grenadePos select 0;
         private _posY = _grenadePos select 1;

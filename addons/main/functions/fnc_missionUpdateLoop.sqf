@@ -28,6 +28,8 @@ DBUG("Starting mission update loop", _functionLogName);
         round time
     ];
 
+    DBUG(format[ARR_2("Players: %1", GVAR(playerCount))], _functionLogName);
+
     // Send the data to the extension
     private _saveData = GVAR(extensionName) callExtension ["update_mission", _data];
 

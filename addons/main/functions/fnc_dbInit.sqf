@@ -17,6 +17,17 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > dbInit";
 
+private _init = GVAR(extensionName) callExtension ["init", []];
+
+if ((_init select 0) isEqualTo -1) then {
+
+    private _initErrorArray = _init select 1;
+    private _initErrorMessage = _initErrorArray select 1;
+
+    ERROR_SYSTEM_CHAT(format["The AAR tool (R3) failed to initialise, %1", _initErrorMessage]);
+    DBUG(format[ARR_2("Failed to initialise: %1", _initErrorMessage)], _functionLogName);
+};
+
 private _connect = GVAR(extensionName) callExtension ["connect", []];
 
 if ((_connect select 0) isEqualTo -1) exitWith {

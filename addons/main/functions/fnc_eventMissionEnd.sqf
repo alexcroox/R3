@@ -17,4 +17,6 @@
 #include "script_component.hpp"
 private _functionLogName = "AAR > eventMissionEnd";
 
+GVAR(logEvents) = false;
+
 DBUG("Mission ended", _functionLogName);
