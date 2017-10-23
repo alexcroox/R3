@@ -30,6 +30,9 @@ private _allUnitsAndVehicles = allUnits + allDeadMen + _allDrivableVehicles;
         // Store unique entity id against the unit to identify them in playback
         private _entityId = _x getVariable ["r3_entity_id", false];
         private _isVehicle = _x getVariable ["r3_is_vehicle", true];
+        private _unitPreviousUID = _x getVariable ["r3_entity_uid", ""];
+        private _unitUID = getPlayerUID _x;
+        private _playerSpawnedIntoAIUnit = !(_unitUID isEqualTo _unitPreviousUID);
         private _isValid = true;
         private _roundedTime = round time;
         private _isKeyFrame = 0;
@@ -38,9 +41,9 @@ private _allUnitsAndVehicles = allUnits + allDeadMen + _allDrivableVehicles;
             _isKeyFrame = 1;
         };
 
-        // This is the first time we've seen this unit,
+        // This is the first time we've seen this unit, or if a player has spawned into an AI unit,
         // lets do some one time calculations
-        if (_entityId isEqualTo false) then {
+        if (_entityId isEqualTo false || _playerSpawnedIntoAIUnit) then {
 
             // This is an infantry unit
             if (_x isKindOf "CaManBase") then {
@@ -60,21 +63,33 @@ private _allUnitsAndVehicles = allUnits + allDeadMen + _allDrivableVehicles;
 
             if (_isValid) then {
 
-                // Set an incrementing unique ID against each unit to be used as
-                // a unique index on the web server
-                GVAR(entityCount) = GVAR(entityCount) + 1;
-                _entityId = GVAR(entityCount);
+                if !(_playerSpawnedIntoAIUnit) then {
 
-                _x setVariable ["r3_is_vehicle", _isVehicle];
-                _x setVariable ["r3_entity_id", _entityId];
+                    // Set an incrementing unique ID against each unit to be used as
+                    // a unique index on the web server
+                    GVAR(entityCount) = GVAR(entityCount) + 1;
+                    _entityId = GVAR(entityCount);
 
-                if (_isVehicle) then {
-                    [_entityId, _x] spawn FUNC(dbInsertVehicle);
-                    [_x] call FUNC(addVehicleEventHandlers);
+                    _x setVariable ["r3_is_vehicle", _isVehicle];
+                    _x setVariable ["r3_entity_id", _entityId];
+
+                    if (_isVehicle) then {
+                        [_entityId, _x] spawn FUNC(dbInsertVehicle);
+                        [_x] call FUNC(addVehicleEventHandlers);
+                    } else {
+                        [_entityId, _x] spawn FUNC(dbInsertInfantry);
+                        [_x] call FUNC(addInfantryEventHandlers);
+                    };
                 } else {
-                    [_entityId, _x] spawn FUNC(dbInsertInfantry);
-                    [_x] call FUNC(addInfantryEventHandlers);
+
+                    // If a player has just assumed control of an AI infantry unit
+                    // we need to update our infantry entry in the db with the player details
+                    if !(_isVehicle && _entityId) then {
+                        [_entityId, _x] spawn FUNC(dbInsertInfantry);
+                    };
                 };
+
+                _x setVariable ["r3_entity_uid", _unitUID];
             };
         };
 
