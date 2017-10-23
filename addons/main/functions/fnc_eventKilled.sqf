@@ -63,7 +63,9 @@ private _attackerDistance = _victim getVariable ["attackerDistance", ''];
 private _sameFaction = _victim getVariable ["attackerSameFaction", 0];
 private _attackerVehicle = _victim getVariable ["attackerVehicle", 0];
 
-if !(_unconciousAttackerEntity isEqualTo 0) then {
+// If we don't have previous attacker data for this unit then lets find out
+// who just killed us outright
+if (_unconciousAttackerEntity isEqualTo 0) then {
 
     if (_victim == _attacker) then {
         _attacker = _victim getVariable ["lastAttacker", _victim];
