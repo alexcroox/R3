@@ -84,7 +84,7 @@ private _allUnitsAndVehicles = allUnits + allDeadMen + _allDrivableVehicles;
 
                     // If a player has just assumed control of an AI infantry unit
                     // we need to update our infantry entry in the db with the player details
-                    if !(_isVehicle && _entityId) then {
+                    if (!(_isVehicle) && !(_entityId isEqualTo false)) then {
                         [_entityId, _x] spawn FUNC(dbInsertInfantry);
                     };
                 };
