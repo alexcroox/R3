@@ -58,7 +58,7 @@ if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1
             waitUntil {
 
                 if (!isNull (_projectile)) then {
-                    _grenadePos = getPos _projectile;
+                    _grenadePos = getPosWorld _projectile;
                 };
 
                 isNull _projectile;
@@ -70,10 +70,10 @@ if (_ammo find "Grenade" > -1 || _ammo find "Smoke" > -1 || _ammo find "HE" > -1
             waitUntil {
 
                 if (!isNull (_projectile)) then {
-                    _grenadePos = getPos _projectile;
+                    _grenadePos = getPosWorld _projectile;
                 };
 
-                ((getPos _projectile select 2) < 0.1 || !alive _projectile)
+                ((getPosWorld _projectile select 2) < 0.1 || !alive _projectile)
             };
         };
 
